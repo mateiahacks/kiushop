@@ -1,24 +1,64 @@
 import './Header.css';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../images/logo.png';
-import book from '../images/book.png';
+import { FiSearch, FiMenu } from 'react-icons/fi';
+import { CgProfile } from 'react-icons/cg';
+import { BsHeart, BsCart } from 'react-icons/bs';
+import { useEffect } from 'react';
 
-const Header = ({toggleLang, lang}) => {
-    const loc = useLocation().pathname;
+const Header = () => {
+    const lang = useLocation().pathname.substring(1, 3);
+
+    const removeDropdown = () => {
+        const temp = document.querySelector('.header__right__resp');
+        window.addEventListener('resize', () => {
+            if(window.innerWidth > 1200) {
+                temp.style.display = 'none';
+            }
+        });
+    }
+
+    useEffect(()=> {
+        removeDropdown();
+    }, []);
+
+
+    const toggleDropdown = () => {
+        const temp = document.querySelector('.header__right__resp');
+        if(temp.style.display === 'flex') {
+            temp.style.display = 'none';
+        } else {
+            temp.style.display = 'flex';
+        }
+    }
 
     return (
         <nav className="header">
             <div className="header__inner">
-                <Link style={{cursor: 'pointer', marginLeft: '-60px'}} to={loc.substring(0, 3)}><img width={300} src={logo} alt="logo" /></Link>
-                <div className='navbar__left d-flex'>
-                    <div className="langs d-flex">
-                        <Link className='text-link' to={"ka" + loc.substring(3)}><div onClick={toggleLang} className="lang">KA</div></Link>
-                        <Link className='text-link' to={"en" + loc.substring(3)}><div onClick={toggleLang} className="lang">EN</div></Link>
+                <div className="header__left">
+                    <Link className='text-link' to={'/' + lang}><h1 className='logo'>KIUSoft</h1></Link>
+                    <Link className='text-link' to='/ka'><div className='lang'>KA</div></Link>
+                    <Link className='text-link' to='/en'><div className='lang'>EN</div></Link>
+                    <div className='searchbar__container'>
+                        <input type="text" className="searchbar" placeholder='Search . . .'/>
+                        <FiSearch id='search__icon' size={30}/>
                     </div>
-                    <div className="btn book">
-                        <img style={{marginRight: '15px'}} d='bell' src={book} alt="booking" />
-                        <h3>Book Now</h3>
-                    </div>
+                </div>
+                <FiMenu onClick={toggleDropdown} className='menu__icon' size={30} />
+                <div className="header__right">
+                    <Link className='text-link' to={lang + '/login'}><div className="profile">
+                        <CgProfile size={35}/>  
+                        <p id='login'>Login</p>
+                    </div></Link>
+                    <BsHeart size={30}/>
+                    <BsCart size={30}/>
+                </div>
+                <div className="header__right__resp">
+                    <Link className='text-link' to={lang + '/login'}><div className="profile">
+                        <CgProfile size={35}/>  
+                        <p id='login'>Login</p>
+                    </div></Link>
+                    <BsHeart size={30}/>
+                    <BsCart size={30}/>
                 </div>
             </div>
         </nav>

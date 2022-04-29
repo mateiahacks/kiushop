@@ -1,61 +1,145 @@
-html,
-body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
 
 nav {
-    background-color: var(--background);
-    color: var(--main);
+    box-shadow: 5px 5px 12px rgb(94, 94, 94);
+    background-color: white;
+    z-index: 5;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
 }
 
 .header__inner {
     margin: auto;
-    max-width: 1400px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    max-width: 1200px;
 }
 
-.book {
-    display: flex;
-    align-items: center;
-    background-color: var(--main);
-    color: var(--background);
+.header__left > h1 {
+    padding: 10px;
+    border: 1px solid black;
     cursor: pointer;
-    height: 70px;
-    padding: 5px 30px 5px 10px;
+    font-size: 34px;
 }
 
-.book:hover {
-    background-color: #ab8356;
-}
+.header__left > *, .header__right > * {
+    margin-right: 20px;
+} 
 
-.d-flex {
-    display: flex;
-    align-items: center;
-}
-.langs {margin-right: 50px;}
 .lang {
-    margin-left: 20px;
-    border: 1px solid var(--main);
-    padding: 10px 13px;
+    padding: 5px 8px;
+    border: 1px solid black;
     border-radius: 50%;
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.57);
-    text-decoration: none;
-    
-}
-.book > h3 {font-weight: 400;}
-
-.book:hover > h3 {
-    animation: bookAnimation 0.5s;
 }
 
-@keyframes bookAnimation {
-    from {margin-bottom: -50px;} 
-    to {align-self: center;}
+.header__left, .header__right {
+    display: flex;
+    align-items: center;
 }
+
+.searchbar__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchbar {
+    align-items: center;
+    border: 1px solid gray;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-right: 5px;
+    outline: none;
+}
+
+.profile {
+    text-align: center;
+}
+
+.profile:hover > p {
+    text-decoration: underline;
+}
+
+.header__right {
+    margin-top: 20px;
+    align-items: baseline;
+}
+.header__right > * {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#login {
+    margin-top: -5px;
+}
+
+#seach__icon {
+    display: block;
+}
+
+.menu__icon {
+    display: none;
+    cursor: pointer;
+}
+
+.logo {
+    font-family: 'Italiana', serif;
+    font-size: 36px;
+}
+
+.header__right__resp {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    padding: 50px;
+    right: 0;
+    top: 110px;
+    animation: dropAnimation 0.3s ease-out;
+}
+
+.header__right__resp > * {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+@keyframes dropAnimation {
+    from {
+        right: -150px;
+    } to {
+        right: 0;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .header__right {
+        display: none;
+    }
+
+    .menu__icon {
+        display: block;
+    }
+
+    .searchbar {
+        display: none;
+    }
+
+    .header__right__resp {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #search__icon {
+        display: none;
+    }
+
+}
+
+
 
 

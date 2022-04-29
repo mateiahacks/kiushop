@@ -5,14 +5,11 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-}
-
-:root {
-  --main: #AB773D;
-  --background: #272526;
+  background-color: var(--background);
 }
 
 .text-link {
   color: inherit;
   text-decoration: inherit;
 }
+

@@ -1,36 +1,34 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import Header from './components/Header.js';
-import { useState, useEffect } from 'react';
+import HomeEn from './components/HomeEn.js';
+import LoginEn from './components/LoginEn.js';
+import RegisterEn from './components/RegisterEn.js';
 
 function App() {
-  const [lang, setLang] = useState('en');
-
-  const toggleLang = () => {
-    if (lang === "en") {
-      setLang("ka");
-    } else {
-      setLang("en");
-    }
-  }
 
   return (
     <Router>
       <div className="app">
-        <Header lang={lang} toggleLang={toggleLang}/>
-        
+        <Header/>
           <Routes>
             <Route path='/' element={
               <Navigate to='/en' />
+              
             } />
             <Route path='/en' element={
-              <h1>Home</h1>
+              <HomeEn />
+            } />
+            <Route path='/en/login' element={ 
+              <LoginEn /> 
+            } />
+            <Route path='/en/register' element={ 
+              <RegisterEn /> 
             } />      
             <Route path="/ka" element={
-              <h1>სახლი</h1>
+              <HomeEn />
             } />
-          </Routes>
-        
+          </Routes>  
       </div>
 
     </Router>

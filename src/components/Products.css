@@ -1,0 +1,29 @@
+
+.products__inner {
+    max-width: 1200px;
+    margin: auto;
+    margin-bottom: 500px;
+    margin-top: 50px;
+}
+
+.prod__types {
+    display: flex;
+    justify-content: space-between;
+}
+
+.prod__type {
+    font-family: 'Italiana', serif;
+    font-size: 26px;
+    padding: 5px 0;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.prod__type:hover {
+    border-bottom: 1px solid black;
+}
+
+.prod-type-selected {
+    border-bottom: 1px solid black;
+}
