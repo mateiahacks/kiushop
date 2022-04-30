@@ -2,7 +2,6 @@
 .products__inner {
     max-width: 1200px;
     margin: auto;
-    margin-bottom: 500px;
     margin-top: 50px;
 }
 
@@ -26,4 +25,9 @@
 
 .prod-type-selected {
     border-bottom: 1px solid black;
+}
+
+.products__list {
+    display: flex;
+    justify-content: space-between;
 }

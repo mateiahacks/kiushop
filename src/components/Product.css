@@ -1,0 +1,24 @@
+.product {
+    display: inline-block;
+    padding: 50px 0px;
+    margin-bottom: 300px;
+}
+
+.product__inner > p {
+    font-size: 18px;
+}
+
+.add-cart {
+    font-size: 18px;
+    display: inline-block;
+    background-color: black;
+    color: white;
+    padding: 5px 40px;
+    cursor: pointer;
+}
+
+.prod__action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
