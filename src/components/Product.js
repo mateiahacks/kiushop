@@ -5,7 +5,12 @@ const Product = ({image, name, price}) => {
     return (
         <div className="product">
             <div className="product__inner">
-                <img src={image} alt="product" height={450} width={320}/>
+                <div className="prod__img">
+                    <img id='product' src={image} alt="product"/>
+                    <div className="bg">
+                        <div className="view">View Plant</div>
+                    </div>
+                </div>
                 <p>{name}</p>
                 <p>{"$" + price + ".00"}</p>
                 <div className="prod__action">

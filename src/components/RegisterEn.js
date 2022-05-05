@@ -1,5 +1,5 @@
 import HomeEn from "./HomeEn";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Register.css';
 
@@ -10,13 +10,47 @@ const RegisterEn = () => {
     const [password, setPassword] = useState('');
     const [r_password, set_r_password] = useState('');
 
+    const preventScroll = () => {
+        const temp =  document.getElementsByTagName('body')[0];
+        temp.style.margin = '0';
+        temp.style.height = '100%';
+        temp.style.overflow = 'hidden';
+    }
+
+    useEffect(()=>{
+        preventScroll();
+    }, []);
+
+    const register = async () => {
+        const postData = {
+            name: firstName,
+            surname: lastName,
+            email: email,
+            password: password,
+        }
+
+        const link = "http://35.234.126.239:5002/register";
+        const response = await fetch(link, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(postData)
+        });
+        const data = await response.json();
+        console.log(data);
+    }
+
+    const submit = (e) => {
+        e.preventDefault();
+        register();
+    }
+
     return (
         <div className="register">
             <HomeEn />
             <Link style={{cursor: 'default'}} to='/'><div className="modal__bg"></div></Link> 
             <div className="register__modal">
                 <h1>My Account</h1>
-                <form>
+                <form onSubmit={submit}>
                     <div className="names">
                         <div>
                             <label>FIRST NAME</label>

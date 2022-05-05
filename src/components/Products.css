@@ -1,3 +1,6 @@
+.products {
+    margin-bottom: 300px;
+}
 
 .products__inner {
     max-width: 1200px;
@@ -30,4 +33,18 @@
 .products__list {
     display: flex;
     justify-content: space-between;
+}
+
+.prod__dots {
+    position: relative;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    z-index: 5;
 }

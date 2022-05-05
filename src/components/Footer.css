@@ -1,0 +1,93 @@
+.footer {
+    background-color: #030B03;
+    color: white;
+}
+
+.footer__left > h1 {
+    font-size: 46px;
+    border: 1px solid white;
+    padding: 5px 10px;
+}
+
+.footer__inner {
+    margin: auto;
+    max-width: 1400px;
+    padding: 20px;
+}
+
+.footer__main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    border-bottom: 1px solid gray;
+}
+
+.footer__left > h3{
+    font-weight: 100;
+}
+
+.footer__left {
+    text-align: center;
+}
+
+.footer__right > h1 {
+    text-align: center;
+}
+
+.subscribe {
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+    margin-bottom: 50px;
+}
+
+.subscribe > input {
+    background-color: rgba(196, 196, 196, 0.13)    ;
+    color: #c4c4c4;
+    padding: 15px 30px;
+    border: none;
+    outline: none;
+    width: 350px;
+    border-radius: 15px;
+}
+
+.sub__btn {
+    background-color: #107500;
+    padding: 10px 20px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.contacts {
+    line-height: 10px;
+}
+
+.footer__right > p {
+    text-align: center;
+    width: 600px;
+    font-weight: 100;
+}
+
+.footer__right > * {
+    font-weight: 100;
+}
+
+.copyright {
+    font-weight: 100;
+    text-align: center;
+}
+
+.socials > * {
+    margin: 5px;
+    cursor: pointer;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+}
+
+.contact > * {
+    margin-right: 10px;
+}

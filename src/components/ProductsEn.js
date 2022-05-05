@@ -1,4 +1,5 @@
 import './Products.css';
+import './Carousel.css';
 import { useState } from 'react';
 import Product from './Product';
 import getProducts from './ProductService';
@@ -8,7 +9,7 @@ const ProductsEn = () => {
     const [products, setProducts] = useState(getProducts);
 
     return (
-        <div className=".products">
+        <div className="products">
             <div className="products__inner">
                 <div className="prod__types">
                     <div onClick={() => setType("new")} className={type==="new" ? "prod__type prod-type-selected":"prod__type"}>New Products</div>
@@ -18,10 +19,15 @@ const ProductsEn = () => {
                 <div className="products__list">
                     {
                         products.map((prod) => (
-                            <Product image={prod.image} name={prod.name} price={prod.price}/>
+                            <Product key={products.indexOf(prod)} image={prod.image} name={prod.name} price={prod.price}/>
                         ))
                     }
                 </div>
+            </div>
+            <div className="prod__dots">
+                    <div className="dot dot__selected"></div>
+                    <div className="dot"></div>
+                    <div className="dot"></div>
             </div>
         </div>
     );
