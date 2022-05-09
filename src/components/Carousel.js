@@ -2,10 +2,11 @@ import carousel1 from '../images/carousel1.png';
 import carousel2 from '../images/carousel2.png';
 import carousel3 from '../images/carousel3.png';
 import './Carousel.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Carousel = () => {
     const [counter, setCounter] = useState(1);
+    const [seconds, setSeconds] = useState(0);
 
     const next = () => {
         const size = document.querySelector('.carousel__image').clientWidth;
@@ -38,6 +39,23 @@ const Carousel = () => {
         slide.classList.add('slided');
         setCounter(counter+2);
     }
+
+    useEffect(()=>{
+        let interval = setInterval(()=>{
+            setSeconds(seconds+1);
+            if(seconds === 3 && counter !== 3) {
+                next();
+                setSeconds(0);
+            }
+            if(seconds === 3 && counter === 3) {
+                prev2();
+                setSeconds(0);
+            }
+        }, 1000);
+        return () => {
+            clearInterval(interval);
+        }
+    }, [seconds]);
 
     return (
         <div>
