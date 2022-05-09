@@ -28,6 +28,12 @@ function App() {
             <Route path="/ka" element={
               <HomeEn />
             } />
+
+            <Route path='/kiushop/verify' element={
+              <h1>Verified</h1>
+            }>
+            </Route>
+
           </Routes>  
       </div>
 
