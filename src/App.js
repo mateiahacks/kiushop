@@ -29,10 +29,10 @@ function App() {
               <HomeEn />
             } />
 
-            <Route path='/kiushop/verify' element={
-              <h1>Verified</h1>
-            }>
-            </Route>
+            <Route path='en/kiushop/verify' element={
+              <h1 style={{marginTop: "500px"}}>Verified</h1>
+            }
+            />
 
           </Routes>  
       </div>
