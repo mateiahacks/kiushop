@@ -1,6 +1,7 @@
 import HomeEn from "./HomeEn";
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import server from "./ServerURL";
 import './Register.css';
 
 const RegisterEn = () => {
@@ -29,7 +30,7 @@ const RegisterEn = () => {
             password: password,
         }
 
-        const link = "http://35.234.126.239:5002/register";
+        const link = server + "register";
         const response = await fetch(link, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},

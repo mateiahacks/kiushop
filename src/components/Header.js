@@ -5,8 +5,8 @@ import { CgProfile } from 'react-icons/cg';
 import { BsHeart, BsCart } from 'react-icons/bs';
 import { useEffect } from 'react';
 
-const Header = () => {
-    const lang = useLocation().pathname.substring(1, 3);
+const Header = ({logged_in, toggleLogged}) => {
+    const lang = useLocation().pathname.substring(1, 3);    
 
     const removeDropdown = () => {
         const temp = document.querySelector('.header__right__resp');
@@ -45,15 +45,21 @@ const Header = () => {
                 </div>
                 <FiMenu onClick={toggleDropdown} className='menu__icon' size={30} />
                 <div className="header__right">
-                    <Link className='text-link' to={lang + '/login'}><div className="profile">
+                    {logged_in ?  
+                    <Link className='text-link' to='/'><div onClick={toggleLogged} className="profile">
+                        <CgProfile size={35}/>  
+                        <p id='login'>Logout</p>
+                    </div></Link>
+                    :
+                    <Link className='text-link' to='login'><div className="profile">
                         <CgProfile size={35}/>  
                         <p id='login'>Login</p>
-                    </div></Link>
+                    </div></Link>}
                     <BsHeart size={30}/>
                     <BsCart size={30}/>
                 </div>
                 <div className="header__right__resp">
-                    <Link className='text-link' to={lang + '/login'}><div className="profile">
+                    <Link className='text-link' to={'login'}><div className="profile">
                         <CgProfile size={35}/>  
                         <p id='login'>Login</p>
                     </div></Link>

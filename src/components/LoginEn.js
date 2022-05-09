@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './Login.css';
 
-const LoginEn = () => {
+const LoginEn = ({logged_in, toggleLogged}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -23,14 +23,21 @@ const LoginEn = () => {
             email: email,
             password: password
         }
-        const link = 'http://9f3e-2a0b-6204-29fc-4100-f424-7276-c95d-17bf.ngrok.io/login';
+        const link = 'http://35.234.126.239:5002/login';
         const response = await fetch(link, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(log)
         });
         const data = await response.json();
+        toggleLogged();
+
+        localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("refresh_token", data.refresh_token);
+
         console.log(data);
+        console.log(logged_in);
+
     }
     
 
@@ -42,7 +49,7 @@ const LoginEn = () => {
 
     return (
         <div className="login">
-            <HomeEn />
+            <HomeEn logged_in={logged_in} toggleLogged={toggleLogged}/>
             <Link style={{cursor: 'default'}} to='/en'><div className="modal__bg"></div></Link>
             <div className="login__modal">
                 <h1>My Account</h1>

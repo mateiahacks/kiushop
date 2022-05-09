@@ -1,26 +1,30 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
-import Header from './components/Header.js';
+import { useState } from 'react';
 import HomeEn from './components/HomeEn.js';
 import LoginEn from './components/LoginEn.js';
 import RegisterEn from './components/RegisterEn.js';
+import Verify from './components/Verify.js';
 
-function App() {
+const App = () => {
+  const [logged_in, set_logged_in] = useState(false);
+
+  const toggleLogged = () => {
+    set_logged_in(!logged_in);
+  }
 
   return (
     <Router>
       <div className="app">
-        <Header/>
           <Routes>
             <Route path='/' element={
               <Navigate to='/en' />
-              
             } />
             <Route path='/en' element={
-              <HomeEn />
+              <HomeEn logged_in={logged_in} toggleLogged={toggleLogged}/>
             } />
             <Route path='/en/login' element={ 
-              <LoginEn /> 
+              <LoginEn logged_in={logged_in} toggleLogged={toggleLogged}/> 
             } />
             <Route path='/en/register' element={ 
               <RegisterEn /> 
@@ -29,11 +33,7 @@ function App() {
               <HomeEn />
             } />
 
-            <Route path='en/kiushop/verify' element={
-              <h1 style={{marginTop: "500px"}}>Verified</h1>
-            }
-            />
-
+            <Route path={'en/kiushop/verify/:email/:token'} element={<Verify />}/>
           </Routes>  
       </div>
 
