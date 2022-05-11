@@ -5,7 +5,7 @@ import FooterEn from './FooterEn.js';
 import Header from './Header';
 import { useEffect } from 'react';
 
-const HomeEn = ({logged_in, toggleLogged}) => {
+const HomeEn = ({name, logged_in, toggleLogged}) => {
 
     const enableScroll = () => {
         const temp =  document.getElementsByTagName('body')[0];
@@ -20,7 +20,7 @@ const HomeEn = ({logged_in, toggleLogged}) => {
 
     return (
         <div className='home'>
-            <Header logged_in={logged_in} toggleLogged={toggleLogged}/>
+            <Header name={name} logged_in={logged_in} toggleLogged={toggleLogged}/>
             <Carousel />
             <ProductsEn />
             <FooterEn />

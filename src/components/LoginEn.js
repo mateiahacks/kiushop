@@ -1,11 +1,12 @@
 import HomeEn from "./HomeEn";
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import './Login.css';
 
 const LoginEn = ({logged_in, toggleLogged}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [userData, setUserData] = useState({});
 
     const preventScroll = () => {
         const temp =  document.getElementsByTagName('body')[0];
@@ -30,7 +31,10 @@ const LoginEn = ({logged_in, toggleLogged}) => {
             body: JSON.stringify(log)
         });
         const data = await response.json();
-        toggleLogged();
+        if (response.status === 200) {
+            toggleLogged();
+            setUserData(data.user);
+        }
 
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("refresh_token", data.refresh_token);
@@ -49,7 +53,7 @@ const LoginEn = ({logged_in, toggleLogged}) => {
 
     return (
         <div className="login">
-            <HomeEn logged_in={logged_in} toggleLogged={toggleLogged}/>
+            <HomeEn name={userData.name} logged_in={logged_in} toggleLogged={toggleLogged}/>
             <Link style={{cursor: 'default'}} to='/en'><div className="modal__bg"></div></Link>
             <div className="login__modal">
                 <h1>My Account</h1>
