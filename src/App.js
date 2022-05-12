@@ -84,7 +84,7 @@ const App = () => {
               <LoginEn userData={userData} login={login} logged_in={logged_in} toggleLogged={toggleLogged}/> 
             } />
             <Route path='/en/register' element={ 
-              <RegisterEn /> 
+              <RegisterEn userData={userData}/> 
             } />
             <Route path='/en/profile' element={<ProfileEN />}/>      
             <Route path="/ka" element={

@@ -4,23 +4,12 @@ import { Link } from 'react-router-dom';
 import server from "./ServerURL";
 import './Register.css';
 
-const RegisterEn = () => {
+const RegisterEn = ({userData}) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [r_password, set_r_password] = useState('');
-
-    const preventScroll = () => {
-        const temp =  document.getElementsByTagName('body')[0];
-        temp.style.margin = '0';
-        temp.style.height = '100%';
-        temp.style.overflow = 'hidden';
-    }
-
-    useEffect(()=>{
-        preventScroll();
-    }, []);
 
     const register = async () => {
         const postData = {
@@ -47,7 +36,7 @@ const RegisterEn = () => {
 
     return (
         <div className="register">
-            <HomeEn />
+            <HomeEn userData={userData}/>
             <Link style={{cursor: 'default'}} to='/'><div className="modal__bg"></div></Link> 
             <div className="register__modal">
                 <h1>My Account</h1>

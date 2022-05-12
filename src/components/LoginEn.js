@@ -7,17 +7,6 @@ import './Login.css';
 const LoginEn = ({ userData, login, logged_in, toggleLogged}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const preventScroll = () => {
-        const temp =  document.getElementsByTagName('body')[0];
-        temp.style.margin = '0';
-        temp.style.height = '100%';
-        temp.style.overflow = 'hidden';
-    }
-
-    useEffect(()=>{
-        preventScroll();
-    }, []);
     
 
     const onSubmit = (e) => {

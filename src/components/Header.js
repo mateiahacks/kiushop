@@ -57,7 +57,7 @@ const Header = ({logout, name, logged_in, toggleLogged}) => {
                         <p id='login'>{name}</p>
                     </div></Link>
                     :
-                    <Link className='text-link' to='login'><div className="profile">
+                    <Link className='text-link' to={"/" + lang + "/login"}><div className="profile">
                         <CgProfile size={35}/>  
                         <p id='login'>Login</p>
                     </div></Link>}
