@@ -5,7 +5,7 @@ import { CgProfile } from 'react-icons/cg';
 import { BsHeart, BsCart } from 'react-icons/bs';
 import { useEffect } from 'react';
 
-const Header = ({name, logged_in, toggleLogged}) => {
+const Header = ({logout, name, logged_in, toggleLogged}) => {
     const lang = useLocation().pathname.substring(1, 3);    
 
     const removeDropdown = () => {
@@ -20,6 +20,12 @@ const Header = ({name, logged_in, toggleLogged}) => {
     useEffect(()=> {
         removeDropdown();
     }, []);
+
+    const onLogout = () => {
+        toggleLogged();
+        logout();
+    }
+
 
 
     const toggleDropdown = () => {
@@ -46,7 +52,7 @@ const Header = ({name, logged_in, toggleLogged}) => {
                 <FiMenu onClick={toggleDropdown} className='menu__icon' size={30} />
                 <div className="header__right">
                     {logged_in ?  
-                    <Link className='text-link' to='/'><div onClick={toggleLogged} className="profile">
+                    <Link className='text-link' to='/'><div onClick={onLogout} className="profile">
                         <CgProfile size={35}/>  
                         <p id='login'>{name}</p>
                     </div></Link>
