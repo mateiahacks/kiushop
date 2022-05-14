@@ -20,8 +20,6 @@
 
 .register__modal {
     background-color: white;
-    border: 1px solid black;
-    padding: 0 30px 30px 30px;
     position: absolute;
     left: 0;
     right: 0;
@@ -57,3 +55,26 @@
     margin-top: 20px;
     margin-bottom: 80px;
 }
+
+.register__success {
+    color: white;
+    text-align: center;
+    padding: 50px 0;
+    background-color: #4bb543;
+    border-radius: 20px 20px 0 0;
+}
+
+.register__verify {
+    margin-top: 0px;
+    padding: 80px 30px;
+    border-radius: 0 0 20px 20px;
+}
+
+.btn-verify {
+    background-color: #4bb543;
+    display: inline-block;
+    padding: 8px 60px;
+    margin-top: 20px;
+    color: white;
+}
+

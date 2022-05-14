@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 import HomeEn from './components/HomeEn.js';
 import LoginEn from './components/LoginEn.js';
@@ -20,7 +20,7 @@ const App = () => {
     set_logged_in(!logged_in);
   }
 
-  const login = async (em, pass) => {
+  const login = async (em, pass, nav) => {
     const log = {
         email: em,
         password: pass
@@ -34,9 +34,10 @@ const App = () => {
         body: JSON.stringify(log)
     });
     const data = await response.json();
-    if(response.status === 200) {
+    if(response.status === 200 && logged_in !== true) {
       toggleLogged();
       setUserData(data.user);
+      nav("/en");
     }
     localStorage.setItem("access_token", data.access_token);
     localStorage.setItem("refresh_token", data.refresh_token);

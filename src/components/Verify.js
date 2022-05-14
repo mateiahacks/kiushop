@@ -1,5 +1,6 @@
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import server from './ServerURL';
 
 const Verify = () => {
     const { email, token } = useParams();
@@ -9,7 +10,7 @@ const Verify = () => {
             user_email: email,
             verification_code: token
         }
-        const link = 'http://35.234.126.239:5002/verify';
+        const link = server + 'verify';
         const response = await fetch(link, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},

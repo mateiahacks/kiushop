@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import server from "./ServerURL";
 import './Register.css';
+import { GoVerified } from 'react-icons/go';
 
 const RegisterEn = ({userData}) => {
     const [firstName, setFirstName] = useState('');
@@ -10,6 +11,7 @@ const RegisterEn = ({userData}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [r_password, set_r_password] = useState('');
+    const [success, setSuccess] = useState(false);
 
     const register = async () => {
         const postData = {
@@ -25,6 +27,9 @@ const RegisterEn = ({userData}) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(postData)
         });
+        if(response.status === 200) {
+            setSuccess(true);
+        }
         const data = await response.json();
         console.log(data);
     }
@@ -38,7 +43,7 @@ const RegisterEn = ({userData}) => {
         <div className="register">
             <HomeEn userData={userData}/>
             <Link style={{cursor: 'default'}} to='/'><div className="modal__bg"></div></Link> 
-            <div className="register__modal">
+            {!success && <div style={{padding: '0 30px 30px 30px'}} className="register__modal">
                 <h1>My Account</h1>
                 <form onSubmit={submit}>
                     <div className="names">
@@ -79,7 +84,17 @@ const RegisterEn = ({userData}) => {
                     />
                     <button id="register__submit" type="submit">Register</button>
                 </form>
-            </div>
+            </div>}
+            {success && <div style={{borderRadius: '20px'}} className="register__modal">
+                <div className="register__success">
+                    <GoVerified style={{marginBottom: '20px'}} size={50}/>
+                    <p style={{fontSize: "22px"}}>Success</p>
+                </div>
+                <div className="register__verify">
+                    <p>Check your email to verify account</p>
+                    <a target='_blank' href="https://mail.google.com/mail/u/0/#inbox"><div className="btn-verify">Go to mail</div></a>
+                </div>
+            </div>}
         </div>
     );
 }
