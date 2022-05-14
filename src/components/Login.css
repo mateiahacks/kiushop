@@ -5,13 +5,11 @@
     border: 1px solid black;
     padding: 0 30px 30px 30px;
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     z-index: 10;
-    max-width: 300px;
+    width: 300px;
 }
 
 .modal__bg {
@@ -55,9 +53,6 @@
 .login__modal > form > p > span:hover {
     text-decoration: underline;
 }
-
-
-
 
 #login__submit {
     padding: 10px;
