@@ -64,6 +64,16 @@ const Header = ({logout, name, logged_in, toggleLogged}) => {
                     <BsHeart size={30}/>
                     <BsCart size={30}/>
                 </div>
+                {logged_in ?
+                <div className="header__right__resp">
+                    <Link className='text-link' to={'login'}><div className="profile">
+                        <CgProfile size={35}/>  
+                        <p id='login'>{name}</p>
+                    </div></Link>
+                    <BsHeart size={30}/>
+                    <BsCart size={30}/>
+                </div>
+                :  
                 <div className="header__right__resp">
                     <Link className='text-link' to={'login'}><div className="profile">
                         <CgProfile size={35}/>  
@@ -71,7 +81,7 @@ const Header = ({logout, name, logged_in, toggleLogged}) => {
                     </div></Link>
                     <BsHeart size={30}/>
                     <BsCart size={30}/>
-                </div>
+                </div>}
             </div>
         </nav>
     );

@@ -1,5 +1,5 @@
-import Header from "./components/Header";
-import server from "./components/ServerURL";
+import Header from "./Header.js";
+import server from "./ServerURL.js";
 import { useState } from 'react';
 
 const ProfileEN = () => {
@@ -17,7 +17,6 @@ const ProfileEN = () => {
         setImage(data.image);
         console.log(data);
     }
-
 
 
     return (
