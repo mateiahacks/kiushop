@@ -38,12 +38,14 @@ const App = () => {
       toggleLogged();
       setUserData(data.user);
       nav("/en");
+      return true;
     }
     localStorage.setItem("access_token", data.access_token);
     localStorage.setItem("refresh_token", data.refresh_token);
 
     console.log(data);
     console.log(logged_in);
+    return false;
 
 }
   const logout2 = async () => {

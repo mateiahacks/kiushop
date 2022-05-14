@@ -7,11 +7,16 @@ import './Login.css';
 const LoginEn = ({ userData, login, logged_in, toggleLogged}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorFlag, setErrorFlag] = useState(false);
     const navigate = useNavigate();
 
     const onSubmit = (e) => {
         e.preventDefault();
-        login(email, password, navigate);
+        if (login(email, password, navigate)) {
+            setErrorFlag(true);
+        } else {
+            setErrorFlag(false);
+        }
     }
 
     return (
@@ -35,6 +40,7 @@ const LoginEn = ({ userData, login, logged_in, toggleLogged}) => {
                         type="password" 
                         required
                     />
+                    {errorFlag && <p style={{ marginBottom: '30px', color: 'red', textAlign:"center"}} className="error_message">*Invalid Credentials</p>}
                     <p>New customer? <span><Link to='/en/register'>register here</Link></span></p>
                     <button id="login__submit" type="submit">Login</button>
                 </form>

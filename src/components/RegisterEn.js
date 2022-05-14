@@ -12,6 +12,10 @@ const RegisterEn = ({userData}) => {
     const [password, setPassword] = useState('');
     const [r_password, set_r_password] = useState('');
     const [success, setSuccess] = useState(false);
+    const [data, setData] = useState({});
+    const [currentStatus, setCurrentStatus] = useState(0);
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
     const register = async () => {
         const postData = {
@@ -29,14 +33,24 @@ const RegisterEn = ({userData}) => {
         });
         if(response.status === 200) {
             setSuccess(true);
+            setCurrentStatus(200);
+            setEmailError('');
+            setPassword('');
         }
         const data = await response.json();
+        if(response.status === 400) {
+            setEmailError(data.email);
+            setPasswordError(data.password);
+        }
+        setData(data);
         console.log(data);
     }
 
     const submit = (e) => {
         e.preventDefault();
-        register();
+        if(password === r_password) {
+            register();
+        }
     }
 
     return (
@@ -53,7 +67,9 @@ const RegisterEn = ({userData}) => {
                                 type="text" 
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
+                                required
                             />
+                            <p></p>
                         </div>
                         <div style={{marginRight: '-40px'}}>
                             <label>LAST NAME</label>
@@ -61,6 +77,7 @@ const RegisterEn = ({userData}) => {
                                 type="text" 
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}    
+                                required
                             />
                         </div>
                     </div>
@@ -69,19 +86,24 @@ const RegisterEn = ({userData}) => {
                         type="email" 
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
                     />
                     <label>PASSWORD</label>
                     <input 
                         type="password" 
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        required
                     />
+                    {passwordError !== '' && <p style={{color: 'red', fontSize: '12px', marginTop: '-10px'}}>*{passwordError}</p>}
                     <label>CONFIRM PASSWORD</label>
                     <input 
                         type="password" 
                         value={r_password}
                         onChange={(e) => set_r_password(e.target.value)}
+                        required
                     />
+                    {r_password !==password && <p style={{color: 'red', fontSize: '12px', marginTop: '-10px'}}>*passwords don't match</p>}
                     <button id="register__submit" type="submit">Register</button>
                 </form>
             </div>}
