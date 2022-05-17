@@ -38,14 +38,17 @@ const App = () => {
       toggleLogged();
       setUserData(data.user);
       nav("/en");
-      return true;
-    }
-    localStorage.setItem("access_token", data.access_token);
-    localStorage.setItem("refresh_token", data.refresh_token);
+      document.getElementById("login_error").style.display = "none";
+    } else {
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("refresh_token", data.refresh_token);
 
-    console.log(data);
-    console.log(logged_in);
-    return false;
+      console.log(data.access_token + " <- access token");
+
+      console.log(data);
+      console.log(logged_in);
+      document.getElementById("login_error").style.display = "block";
+    }
 
 }
   const logout2 = async () => {
@@ -68,6 +71,7 @@ const App = () => {
                   'Authorization': 'Bearer ' + localStorage.getItem("access_token")            
         },    
     });
+    console.log(localStorage.getItem("refresh_token") + " : " + localStorage.getItem("access_token"));
     const data = await response.json();
     logout2();
     console.log(data);
