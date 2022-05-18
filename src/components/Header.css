@@ -4,10 +4,21 @@ nav {
     box-shadow: 5px 5px 12px rgb(94, 94, 94);
     background-color: white;
     z-index: 5;
+    display: flex;
+    align-items: center;
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
+}
+
+#logout {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+#logout:hover {
+    text-decoration: underline;
 }
 
 .header__inner {
@@ -17,6 +28,7 @@ nav {
     align-items: center;
     padding: 5px 10px;
     max-width: 1200px;
+    flex: 1;
 }
 
 .header__left > h1 {

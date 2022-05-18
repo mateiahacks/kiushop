@@ -52,7 +52,7 @@ const Header = ({logout, name, logged_in, toggleLogged}) => {
                 <FiMenu onClick={toggleDropdown} className='menu__icon' size={30} />
                 <div className="header__right">
                     {logged_in ?  
-                    <Link className='text-link' to='/'><div onClick={onLogout} className="profile">
+                    <Link className='text-link' to='/'><div className="profile">
                         <CgProfile size={35}/>  
                         <p id='login'>{name}</p>
                     </div></Link>
@@ -83,6 +83,7 @@ const Header = ({logout, name, logged_in, toggleLogged}) => {
                     <BsCart size={30}/>
                 </div>}
             </div>
+            {logged_in && <p id='logout' onClick={onLogout}>Logout</p>}
         </nav>
     );
 }

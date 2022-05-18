@@ -34,21 +34,18 @@ const App = () => {
         body: JSON.stringify(log)
     });
     const data = await response.json();
-    if(response.status === 200 && logged_in !== true) {
+    if(response.status === 200) {
       toggleLogged();
       setUserData(data.user);
       nav("/en");
       document.getElementById("login_error").style.display = "none";
     } else {
-      localStorage.setItem("access_token", data.access_token);
-      localStorage.setItem("refresh_token", data.refresh_token);
-
-      console.log(data.access_token + " <- access token");
-
-      console.log(data);
-      console.log(logged_in);
       document.getElementById("login_error").style.display = "block";
     }
+    localStorage.setItem("access_token", data.access_token);
+    localStorage.setItem("refresh_token", data.refresh_token);
+    console.log(data);
+    console.log(logged_in);
 
 }
   const logout2 = async () => {

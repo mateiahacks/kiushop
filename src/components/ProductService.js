@@ -5,7 +5,7 @@ const getProducts = [
         name: 'Monstera',
         price: 39,
         type: 'featured',
-        sale: 0
+        sale: 50
     },
     {
         image: 'https://s3-alpha-sig.figma.com/img/7f77/9e74/387e1535f72c92f17d2aa7e88ab50281?Expires=1653264000&Signature=e5azh8~W3Q8r9aEkvgUeK2cMrpAoEHKr1vGoUmYlJz-a5cGl2N6SEYThunsPOP8oXnUssoacJIpuzM2wACTOzzEMVxdIpN914qnBrMIXgrcYqMRemvHjBxkcF5fsLeJemcZuhkr1txELrnO~BE0~qJrbCfJbOgHDN9~SvfdmPx3su5eSceDf2uwygNafZjUN8gPAluVYAZdqqCMvgEUaVb5AT85LTQSGSTBV2lL5TQffQFSmzQx6cx6jttbmvF-csJx8nUWZVkqkzaVEipj3dxIM9Be7o~8~~REMqc2xMzQ9Kq~oYsjtSHQmJx~ZSzLyn-wPbSbEn2k-4rvR~Ljnxw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
@@ -21,6 +21,13 @@ const getProducts = [
         type: 'featured',
         sale: 0
     },
+    {
+        image: 'https://s3-alpha-sig.figma.com/img/248b/d175/00e5e77d419dc00fd88da602ea7de0e4?Expires=1653868800&Signature=Q8ZPJnOoTU8iue3rWUKXEQ1Ft4RDOBWhEM34~VJN-T3jI7-6EG0wkok6dVDwCCPTrtxKr15bJzIkBlBy0pHdZRQ3wnPm557RLr0OIiznEiQcdLfGGNCJrsuCKgf-d0ZsrZNis~qmlTpSLOJc2ahfanqlaxaxL~v~fkahjfukxnK7ECmRQEZrEs15pLFpzQPNwLfFcb1ydFS62cyoklQnorlY~QlvPoeZsMQsoXZd5eWACZOqhqYvZqypVG~L07SoRmX0ula~DRUsIMu3~oIw2lGu2EC1M-pZlYfyhJpQc7rKEpFftvRbHEfcFqhZQ04oXsv1iuR67x61BsMYLZF56g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
+        name: 'DIEFFENBACHIA',
+        price: 39,
+        type: 'new',
+        sale: 0
+    }
 ];
 
 export default getProducts;

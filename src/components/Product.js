@@ -1,9 +1,16 @@
 import './Product.css';
 import { BsHeart } from 'react-icons/bs';
+import { useEffect } from 'react';
 
-const Product = ({image, name, price}) => {
+const Product = ({sale, image, name, price}) => {
+    
+    useEffect(() => {
+        console.log(sale);
+    }, [])
+
     return (
         <div className="product">
+            {sale !== 0 && <div className="sale-pointer">{"-" + sale + "%"}</div>}
             <div className="product__inner">
                 <div className="prod__img">
                     <img id='product' src={image} alt="product"/>
