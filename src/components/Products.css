@@ -7,12 +7,23 @@
 
 .products__inner {
     margin: auto;
-    margin-top: 50px;
+    margin-top: 100px;
     overflow-x: auto;
 }
 
-.products__inner::-webkit-scrollbar{
-    width: 0;
+.products__inner::-webkit-scrollbar { 
+    background-color: red;
+    height: 10px;
+    width: 2px;
+}
+
+.products__inner::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.products__inner::-webkit-scrollbar-thumb {
+    background: #888; 
+    cursor: pointer;
 }
 
 .products__slide {

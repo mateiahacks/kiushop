@@ -60,7 +60,7 @@ const RegisterEn = ({userData}) => {
             {!success && <div style={{padding: '0 30px 30px 30px'}} className="register__modal">
                 <h1>My Account</h1>
                 <form onSubmit={submit}>
-                    <div className="names">
+                    <div className="names" style={{marginBottom: '-15px'}}>
                         <div>
                             <label>FIRST NAME</label>
                             <input 

@@ -17,13 +17,11 @@ const ProductsEn = () => {
                 </div>
             <div className="products__inner">
                 <div className="products__list">
-                    
-                        {
-                            products.map((prod) => (
-                                <Product key={products.indexOf(prod)} sale={prod.sale} image={prod.image} name={prod.name} price={prod.price}/>
-                            ))
-                        }
-                    
+                    {
+                        products.map((prod) => (type === prod.type || type === "all") && (
+                            <Product key={products.indexOf(prod)} sale={prod.sale} image={prod.image} name={prod.name} price={prod.price}/>
+                        ))
+                    }
                 </div>
             </div>
         </div>
