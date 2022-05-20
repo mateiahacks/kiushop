@@ -35,7 +35,7 @@ const LoginEn = ({ loading, userData, login, logged_in, toggleLogged}) => {
                         type="password" 
                         required
                     />
-                    {loading && <p style={{textAlign: 'center'}}>Loading...</p>}
+                    {loading && <div className="loading-spinner"></div>}
                     <p id="login_error" style={{ display: 'none', marginBottom: '30px', color: 'red', textAlign:"center", fontSize: '12px'}} className="error_message">*Invalid Credentials</p>
                     <p>New customer? <span><Link to='/en/register'>register here</Link></span></p>
                     <button id="login__submit" type="submit">Login</button>
