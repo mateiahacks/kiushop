@@ -12,6 +12,11 @@ nav {
     width: 100%;
 }
 
+.header{
+    position: fixed;
+    z-index: 6;
+    background-color: #ffffff88;
+}
 #logout {
     margin-right: 20px;
     cursor: pointer;
@@ -27,12 +32,14 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px;
+   
     max-width: 1200px;
     flex: 1;
 }
 
 .header__left > h1 {
     padding: 10px;
+    
     border: 1px solid black;
     cursor: pointer;
     font-size: 34px;
@@ -52,6 +59,7 @@ nav {
 .header__left, .header__right {
     display: flex;
     align-items: center;
+    height: 90px;
 }
 
 .searchbar__container {
@@ -79,8 +87,9 @@ nav {
 }
 
 .header__right {
-    margin-top: 20px;
     align-items: baseline;
+    padding-top: 20px;
+   box-sizing: border-box;
 }
 .header__right > * {
     margin-left: 10px;
@@ -101,8 +110,7 @@ nav {
 }
 
 .logo {
-    font-family: 'Italiana', serif;
-    font-size: 36px;
+    width: 200px;
 }
 
 .header__right__resp {

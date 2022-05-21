@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@600&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.veirfy{
+    background-color: #F7FAFF;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.vector{
+    width: 500px;
+    margin-left: 40px;
+   height: auto;
+    object-fit: contain;
+    object-position: center;
+}
+.textBox{
+width: 500px;
+height: 500px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+padding: 30px 30px;
+margin-bottom: 70px;
+}
+.textBox h1{
+    font-family: 'Italiana', serif;
+
+font-size: 49px;
+font-weight: 400;
+line-height: 58px;
+letter-spacing: 0em;
+text-align: center;
+
+}
+
+.textBox p{
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: center;
+    
+}
+.buttFront{
+width: 100%;
+height: 50px;
+background-color: black;
+color: white;
+font-size: 21px;
+text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: 0.2s;
+
+}
+.buttonBack{
+    width: 440px;
+    height: 50px;
+    border: 2px solid black;
+    position: absolute;
+    margin-top: -40px;
+    margin-left: 10px;
+   
+}
+.button:hover .buttFront{
+    margin-bottom: -10px;
+    margin-left: 10px;
+   
+}
+.button{
+    width: calc(100% +20px);
+    height: 60px;
+   
+}

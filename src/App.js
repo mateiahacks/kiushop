@@ -2,12 +2,13 @@ import React from 'react';
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import { useState } from 'react';
 import HomeEn from './components/HomeEn.js';
+import ProductDetail from './components/ProductDetail.js';
 import LoginEn from './components/LoginEn.js';
 import RegisterEn from './components/RegisterEn.js';
 import Verify from './components/Verify.js';
 import server from './components/ServerURL.js';
 import ProfileEN from './components/ProfileEN.js';
-
+import vector from './images/vector.png';
 const App = () => {
   const [logged_in, set_logged_in] = useState(false);
   const [LoginLoading, setLoginLoading] = useState(false);
@@ -90,11 +91,18 @@ const App = () => {
             <Route path='/en' element={
               <HomeEn logout={logout} userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/>
             } />
+             
             <Route path='/en/login' element={ 
               <LoginEn loading={LoginLoading} userData={userData} login={login} logged_in={logged_in} toggleLogged={toggleLogged}/> 
             } />
             <Route path='/en/register' element={ 
               <RegisterEn userData={userData}/> 
+            } />
+            <Route path='/en/verify' element={ 
+              <Verify userData={userData} vector={vector} header="Your email has been verified" message="Happy shoping" /> 
+            } />
+              <Route path='/en/details' element={ 
+              <ProductDetail /> 
             } />
             <Route path='/en/profile' element={<ProfileEN />}/>      
             <Route path="/ka" element={
@@ -103,6 +111,7 @@ const App = () => {
 
             <Route path={'en/kiushop/verify/:email/:token'} element={<Verify />}/>
           </Routes>  
+          
       </div>
 
     </Router>
