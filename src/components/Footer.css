@@ -88,6 +88,9 @@
     align-items: center;
 }
 
+
+
 .contact > * {
     margin-right: 10px;
+    margin-bottom: 10px;
 }

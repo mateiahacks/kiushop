@@ -1,4 +1,4 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import server from './ServerURL';
 import './Verify.css';
@@ -33,10 +33,10 @@ const Verify = ({header, message,vector}) => {
             <div className="textBox">
                 <h1>{header}</h1>
                 <p>{message}</p>
-                <div className="button">
+                <Link className='text-link' to={'/'}><div className="button">
                     <div className="buttFront" >GET BACK TO HOME PAGE</div>
                     <div className="buttonBack"></div>
-                </div>
+                </div></Link>
             </div>
         </div>
     )
