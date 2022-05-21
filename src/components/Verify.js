@@ -1,10 +1,11 @@
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import server from './ServerURL';
+import './Verify.css';
 
-const Verify = () => {
+const Verify = ({header, message,vector}) => {
     const { email, token } = useParams();
-
+    
     const sendData = async () => {
         const log = {
             user_email: email,
@@ -19,6 +20,7 @@ const Verify = () => {
         const data = await response.json();
         console.log(data);
     }
+    
 
     useEffect(()=>{
         sendData();
@@ -26,10 +28,16 @@ const Verify = () => {
 
 
     return (
-        <div style={{marginTop: "200px"}}>
-            <h1>verify</h1>
-            <h2>{"email: " + email}</h2>
-            <h2>{"token: " + token}</h2>
+        <div className="veirfy">
+            <img src={vector}  class="vector" />
+            <div className="textBox">
+                <h1>{header}</h1>
+                <p>{message}</p>
+                <div className="button">
+                    <div className="buttFront" >GET BACK TO HOME PAGE</div>
+                    <div className="buttonBack"></div>
+                </div>
+            </div>
         </div>
     )
 }
