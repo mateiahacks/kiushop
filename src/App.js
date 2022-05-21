@@ -7,6 +7,7 @@ import RegisterEn from './components/RegisterEn.js';
 import Verify from './components/Verify.js';
 import server from './components/ServerURL.js';
 import ProfileEN from './components/ProfileEN.js';
+import ProductExtendedEn from './components/ProductExtendedEn';
 
 const App = () => {
   const [logged_in, set_logged_in] = useState(false);
@@ -100,8 +101,8 @@ const App = () => {
             <Route path="/ka" element={
               <HomeEn logout={logout} userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/>
             } />
-
-            <Route path={'en/kiushop/verify/:email/:token'} element={<Verify />}/>
+            <Route path={'en/verify/:email/:token'} element={<Verify />}/>
+            <Route path={'en/product/:id'} element={<ProductExtendedEn />} />
           </Routes>  
       </div>
 

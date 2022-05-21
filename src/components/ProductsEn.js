@@ -19,7 +19,7 @@ const ProductsEn = () => {
                 <div className="products__list">
                     {
                         products.map((prod) => (type === prod.type || type === "all") && (
-                            <Product key={products.indexOf(prod)} sale={prod.sale} image={prod.image} name={prod.name} price={prod.price}/>
+                            <Product id={prod.id} key={products.indexOf(prod)} sale={prod.sale} image={prod.image} name={prod.name} price={prod.price}/>
                         ))
                     }
                 </div>

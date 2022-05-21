@@ -1,8 +1,9 @@
 import './Product.css';
 import { BsHeart } from 'react-icons/bs';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-const Product = ({sale, image, name, price}) => {
+const Product = ({id, sale, image, name, price}) => {
     
     useEffect(() => {
         console.log(sale);
@@ -12,12 +13,12 @@ const Product = ({sale, image, name, price}) => {
         <div className="product">
             {sale !== 0 && <div className="sale-pointer">{"-" + sale + "%"}</div>}
             <div className="product__inner">
-                <div className="prod__img">
+                <Link to={'/en/product/' + id}><div className="prod__img">
                     <img id='product' src={image} alt="product"/>
                     <div className="bg">
                         <div className="view">View Plant</div>
                     </div>
-                </div>
+                </div></Link>
                 <p>{name}</p>
                 <p>{"$" + price + ".00"}</p>
                 <div className="prod__action">
