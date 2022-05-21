@@ -11,6 +11,7 @@ import ProfileEN from './components/ProfileEN.js';
 import vector from './images/vector.png';
 const App = () => {
   const [logged_in, set_logged_in] = useState(false);
+  const [LoginLoading, setLoginLoading] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
     name: "",
@@ -26,27 +27,32 @@ const App = () => {
         email: em,
         password: pass
     }
+    const loginError = document.getElementById("login_error");
 
     console.log(log);
     const link = server + 'login';
+
+    setLoginLoading(true);
+    loginError.style.display = 'none';
     const response = await fetch(link, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(log)
     });
     const data = await response.json();
-    if(response.status === 200 && logged_in !== true) {
+    setLoginLoading(false);
+    if(response.status === 200) {
       toggleLogged();
       setUserData(data.user);
       nav("/en");
-      return true;
+      loginError.style.display = "none";
+    } else {
+      loginError.style.display = "block";
     }
     localStorage.setItem("access_token", data.access_token);
     localStorage.setItem("refresh_token", data.refresh_token);
-
     console.log(data);
     console.log(logged_in);
-    return false;
 
 }
   const logout2 = async () => {
@@ -69,6 +75,7 @@ const App = () => {
                   'Authorization': 'Bearer ' + localStorage.getItem("access_token")            
         },    
     });
+    console.log(localStorage.getItem("refresh_token") + " : " + localStorage.getItem("access_token"));
     const data = await response.json();
     logout2();
     console.log(data);
@@ -86,7 +93,7 @@ const App = () => {
             } />
              
             <Route path='/en/login' element={ 
-              <LoginEn userData={userData} login={login} logged_in={logged_in} toggleLogged={toggleLogged}/> 
+              <LoginEn loading={LoginLoading} userData={userData} login={login} logged_in={logged_in} toggleLogged={toggleLogged}/> 
             } />
             <Route path='/en/register' element={ 
               <RegisterEn userData={userData}/> 

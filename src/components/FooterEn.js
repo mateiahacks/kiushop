@@ -35,7 +35,7 @@ const FooterEn = () => {
                                 <GoMail size={15}/>
                                 <p>KIUShop@gmail.com</p>
                             </div>
-                            <p>Privacy Policy</p>
+                            <p style={{cursor: 'pointer'}}>Privacy Policy</p>
                         </div>
                     </div>
                 </div>

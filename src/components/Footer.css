@@ -38,7 +38,7 @@
 .subscribe {
     display: flex;
     justify-content: space-between;
-    width: 600px;
+    max-width: 600px;
     margin-bottom: 50px;
 }
 
@@ -65,7 +65,7 @@
 
 .footer__right > p {
     text-align: center;
-    width: 600px;
+    max-width: 600px;
     font-weight: 100;
 }
 

@@ -14,8 +14,8 @@ const RegisterEn = ({userData}) => {
     const [success, setSuccess] = useState(false);
     const [data, setData] = useState({});
     const [currentStatus, setCurrentStatus] = useState(0);
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const register = async () => {
         const postData = {
@@ -26,6 +26,8 @@ const RegisterEn = ({userData}) => {
         }
 
         const link = server + "register";
+        setLoading(true);
+        setErrorMessage('');
         const response = await fetch(link, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -34,21 +36,22 @@ const RegisterEn = ({userData}) => {
         if(response.status === 200) {
             setSuccess(true);
             setCurrentStatus(200);
-            setEmailError('');
-            setPassword('');
+            setErrorMessage('');
         }
         const data = await response.json();
+        setLoading(false);
         if(response.status === 400) {
-            setEmailError(data.email);
-            setPasswordError(data.password);
+            setErrorMessage("*" + data.message);
         }
         setData(data);
         console.log(data);
     }
 
+    const errorStyle = {color: 'red', fontSize: '13px', marginTop: '0px'}
+
     const submit = (e) => {
         e.preventDefault();
-        if(password === r_password) {
+        if(password === r_password && password.length >= 5) {
             register();
         }
     }
@@ -60,7 +63,7 @@ const RegisterEn = ({userData}) => {
             {!success && <div style={{padding: '0 30px 30px 30px'}} className="register__modal">
                 <h1>My Account</h1>
                 <form onSubmit={submit}>
-                    <div className="names">
+                    <div className="names" style={{marginBottom: '-15px'}}>
                         <div>
                             <label>FIRST NAME</label>
                             <input 
@@ -95,7 +98,6 @@ const RegisterEn = ({userData}) => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    {passwordError !== '' && <p style={{color: 'red', fontSize: '12px', marginTop: '-10px'}}>*{passwordError}</p>}
                     <label>CONFIRM PASSWORD</label>
                     <input 
                         type="password" 
@@ -103,7 +105,10 @@ const RegisterEn = ({userData}) => {
                         onChange={(e) => set_r_password(e.target.value)}
                         required
                     />
-                    {r_password !==password && <p style={{color: 'red', fontSize: '12px', marginTop: '-10px'}}>*passwords don't match</p>}
+                    {loading && <div className="loading-spinner"></div>}
+                    {r_password !==password && <p style={errorStyle}>*passwords don't match</p>}
+                    {(password.length < 5 && password.length > 0) && <p style={errorStyle}>*password's length is less than 5 symbol</p>}
+                    {errorMessage !== '' && <p style={errorStyle}>{errorMessage}</p>}
                     <button id="register__submit" type="submit">Register</button>
                 </form>
             </div>}
