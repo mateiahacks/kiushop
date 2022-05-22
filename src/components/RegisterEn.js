@@ -11,6 +11,7 @@ const RegisterEn = ({userData}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [r_password, set_r_password] = useState('');
+    const [number, setNumber] = useState("");
     const [success, setSuccess] = useState(false);
     const [data, setData] = useState({});
     const [currentStatus, setCurrentStatus] = useState(0);
@@ -23,6 +24,7 @@ const RegisterEn = ({userData}) => {
             surname: lastName,
             email: email,
             password: password,
+            phone: number
         }
 
         const link = server + "register";
@@ -61,9 +63,9 @@ const RegisterEn = ({userData}) => {
             <HomeEn userData={userData}/>
             <Link style={{cursor: 'default'}} to='/'><div className="modal__bg"></div></Link> 
             {!success && <div style={{padding: '0 30px 30px 30px'}} className="register__modal">
-                <h1>My Account</h1>
+                <h1 style={{marginTop: '30px'}}>My Account</h1>
                 <form onSubmit={submit}>
-                    <div className="names" style={{marginBottom: '-15px'}}>
+                    <div className="names" style={{marginBottom: '5px'}}>
                         <div>
                             <label>FIRST NAME</label>
                             <input 
@@ -72,7 +74,6 @@ const RegisterEn = ({userData}) => {
                                 onChange={(e) => setFirstName(e.target.value)}
                                 required
                             />
-                            <p></p>
                         </div>
                         <div style={{marginRight: '-40px'}}>
                             <label>LAST NAME</label>
@@ -89,6 +90,13 @@ const RegisterEn = ({userData}) => {
                         type="email" 
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <label>PHONE</label>
+                    <input 
+                        type="text"
+                        value={number}
+                        onChange={(e) => setNumber(e.target.value)}
                         required
                     />
                     <label>PASSWORD</label>
@@ -109,7 +117,7 @@ const RegisterEn = ({userData}) => {
                     {r_password !==password && <p style={errorStyle}>*passwords don't match</p>}
                     {(password.length < 5 && password.length > 0) && <p style={errorStyle}>*password's length is less than 5 symbol</p>}
                     {errorMessage !== '' && <p style={errorStyle}>{errorMessage}</p>}
-                    <button id="register__submit" type="submit">Register</button>
+                    <button id="register__submit" type="submit" style={{border: 'none', cursor: 'pointer', padding: '15px'}}>Register</button>
                 </form>
             </div>}
             {success && <div style={{borderRadius: '20px'}} className="register__modal">

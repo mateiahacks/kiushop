@@ -129,6 +129,10 @@ nav {
     cursor: pointer;
 }
 
+#resp_logout:hover {
+    text-decoration: underline;
+}
+
 @keyframes dropAnimation {
     from {
         right: -150px;
@@ -156,6 +160,10 @@ nav {
     }
 
     #search__icon {
+        display: none;
+    }
+
+    #logout {
         display: none;
     }
 

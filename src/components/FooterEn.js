@@ -26,7 +26,7 @@ const FooterEn = () => {
                             <div className="sub__btn">Subscribe</div>
                         </div>
                         <div className="contacts">
-                            <h4 style={{marginBottom: '10px'}}>Contact me</h4>
+                            <h4 style={{marginBottom: '20px'}}>Contact me</h4>
                             <div className="contact">
                                 <BsTelephone size={15} />
                                 <p>+995 555 555 555</p>
@@ -35,7 +35,7 @@ const FooterEn = () => {
                                 <GoMail size={15}/>
                                 <p>KIUShop@gmail.com</p>
                             </div>
-                            <p style={{cursor: 'pointer', marginBottom: '20px'}}>Privacy Policy</p>
+                            <p style={{cursor: 'pointer', marginBottom: '20px', marginLeft: '25px'}}>Privacy Policy</p>
                         </div>
                     </div>
                 </div>

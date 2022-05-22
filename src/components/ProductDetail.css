@@ -7,8 +7,6 @@
 }
 .product_details{
 width: 100vw;
-
-
 }
 .product_line{
     width: 100%;
@@ -17,6 +15,7 @@ width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
 }
 .mainImage{
@@ -34,8 +33,12 @@ width: 100vw;
     margin-right: 50px;
     justify-content: space-between;
     overflow-y: auto;
-    
 }
+
+.line_left > * {
+    cursor: pointer;
+}
+
 .line_left::-webkit-scrollbar-thumb {
    background-color: rgba(0, 0, 0, 0.491);
     outline: 1px solid slategrey;

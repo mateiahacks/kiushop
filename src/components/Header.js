@@ -68,12 +68,13 @@ const Header = ({logout, name, logged_in, toggleLogged}) => {
                 </div>
                 {logged_in ?
                 <div className="header__right__resp">
-                    <Link className='text-link' to={'login'}><div className="profile">
+                    <Link className='text-link' to={'/'}><div className="profile">
                         <CgProfile size={35}/>  
                         <p id='login'>{name}</p>
                     </div></Link>
                     <BsHeart size={30}/>
                     <BsCart size={30}/>
+                    <p id='resp_logout' onClick={onLogout}>Logout</p>
                 </div>
                 :  
                 <div className="header__right__resp">

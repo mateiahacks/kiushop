@@ -9,6 +9,10 @@
     padding: 5px 10px;
 }
 
+.footer__left > * {
+    margin-bottom: 13px;
+}
+
 .footer__inner {
     margin: auto;
     max-width: 1400px;
@@ -33,11 +37,13 @@
 
 .footer__right > h1 {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .subscribe {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     max-width: 600px;
     margin-bottom: 50px;
 }
@@ -50,12 +56,14 @@
     outline: none;
     width: 350px;
     border-radius: 15px;
+    margin: 20px 0;
 }
 
 .sub__btn {
     background-color: #107500;
     padding: 10px 20px;
     display: inline-block;
+    height: 45px;
     cursor: pointer;
 }
 
@@ -88,6 +96,9 @@
     align-items: center;
 }
 
+.contacts > * {
+    margin-bottom: 10px;
+}
 
 
 .contact > * {

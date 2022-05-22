@@ -5,18 +5,26 @@ import detail1 from '../images/detail1.png';
 import detail2 from '../images/detail2.png';
 import detail3 from '../images/detail3.png';
 import ProductsEn from './ProductsEn';
-import { useState } from 'react';
-const ProductDetail = () => {
+import { useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
+
+const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
+
+    const { id } = useParams();
     var name="Monstera";
     var detailsArr=[product1,detail1,detail2,detail3,detail3,detail3];
     // var mainImage=product1;
     const [mainImage,setMainImage]=useState(product1);
     var discount=50;
     var Price=20.00;
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     
     return ( 
         <div className="product_details">
-        <Header/>
+        <Header logout={logout} name={userData.name} logged_in={logged_in} toggleLogged={toggleLogged}/>
          <div className="product_line">
               <div className="line_left">
                   {

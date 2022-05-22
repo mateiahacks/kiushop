@@ -1,9 +1,10 @@
 import { useLocation, useParams, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import server from './ServerURL';
+import vector from '../images/vector.png';
 import './Verify.css';
 
-const Verify = ({header, message,vector}) => {
+const Verify = ({header, message}) => {
     const { email, token } = useParams();
     
     const sendData = async () => {
@@ -29,10 +30,10 @@ const Verify = ({header, message,vector}) => {
 
     return (
         <div className="veirfy">
-            <img src={vector}  class="vector" />
+            <img src={vector}  className="vector" />
             <div className="textBox">
-                <h1>{header}</h1>
-                <p>{message}</p>
+                <h1>Your email has been verified</h1>
+                <p>Happy shoping</p>
                 <Link className='text-link' to={'/'}><div className="button">
                     <div className="buttFront" >GET BACK TO HOME PAGE</div>
                     <div className="buttonBack"></div>

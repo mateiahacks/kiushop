@@ -9,6 +9,8 @@ import Verify from './components/Verify.js';
 import server from './components/ServerURL.js';
 import ProfileEN from './components/ProfileEN.js';
 import vector from './images/vector.png';
+import MessengerCustomerChat from 'react-messenger-customer-chat/lib/MessengerCustomerChat';
+
 const App = () => {
   const [logged_in, set_logged_in] = useState(false);
   const [LoginLoading, setLoginLoading] = useState(false);
@@ -101,17 +103,16 @@ const App = () => {
             <Route path='/en/verify' element={ 
               <Verify userData={userData} vector={vector} header="Your email has been verified" message="Happy shoping" /> 
             } />
-              <Route path='/en/details' element={ 
-              <ProductDetail /> 
+              <Route path={'/en/product/:id'} element={ 
+              <ProductDetail logout={logout} userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/> 
             } />
             <Route path='/en/profile' element={<ProfileEN />}/>      
             <Route path="/ka" element={
               <HomeEn logout={logout} userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/>
             } />
-
             <Route path={'en/kiushop/verify/:email/:token'} element={<Verify />}/>
+            <Route path='en/addproduct'  element/>
           </Routes>  
-          
       </div>
 
     </Router>

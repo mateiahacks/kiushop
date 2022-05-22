@@ -10,6 +10,10 @@ const LoginEn = ({ loading, userData, login, logged_in, toggleLogged}) => {
     const [errorFlag, setErrorFlag] = useState(false);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const onSubmit = (e) => {
         e.preventDefault();
         login(email, password, navigate);

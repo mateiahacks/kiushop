@@ -20,11 +20,15 @@
 
 .product__inner > p {
     font-size: 18px;
+    margin-bottom: 5px;
 }
 
 .prod__img {
     position: relative;
     cursor: pointer;
+    margin-bottom: 5px;
+    width: 320px;
+    height: 455px;
 }
 
 .bg {
@@ -76,6 +80,11 @@
 
 @media only screen and (max-width: 1200px) {
     #product {
+        width: 200px;
+        height: 300px;
+    }
+
+    .prod__img {
         width: 200px;
         height: 300px;
     }
