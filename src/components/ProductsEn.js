@@ -12,6 +12,7 @@ const ProductsEn = () => {
     const [products, setProducts] = useState(getProducts);
     const [showAdd, setShowAdd] = useState(false);
     const [data, setData] = useState([]);
+    const [loaded, setLoaded] = useState(false);
 
     const toggleShowAdd = () => {
         setShowAdd(!showAdd);
@@ -24,6 +25,7 @@ const ProductsEn = () => {
             headers: {"Content-Type": "application/json"}
         });
         const result = await response.json();
+        setLoaded(true);
         setData(result.products);
         console.log(result.products);
     }
@@ -43,9 +45,9 @@ const ProductsEn = () => {
                 </div>
             <div className="products__inner">
                 <div className="products__list">
-                <div onClick={() => {toggleShowAdd(); window.scrollTo(0, 0);}} className="addProduct">
+                {loaded && <div onClick={() => {toggleShowAdd(); window.scrollTo(0, 0);}} className="addProduct">
                     <BiPlusCircle className='addIcon' size={100}/>
-                </div>
+                </div>}
                     {/* {
                         products.map((prod) => (type === prod.type || type === "all") && (
                             <Product key={products.indexOf(prod)} id={prod.id} sale={prod.sale} image={prod.image} name={prod.name} price={prod.price}/>

@@ -118,6 +118,7 @@ background-color: black;
 color: white;
 font-size: 20px;
 margin: 15px 0;
+cursor: pointer;
 
 }
 .front{
@@ -130,6 +131,7 @@ margin: 15px 0;
     color: white;
     margin-left: 10px;
     transition: 0.2s;
+    cursor: pointer;
 }
 .back{
     width: 260px;
@@ -139,6 +141,7 @@ margin: 15px 0;
     position: absolute;
     margin-top: -30px;
     margin-left: 20px;
+    cursor: pointer;
 }
 .button:hover .front{
     margin-right: -10px !important;

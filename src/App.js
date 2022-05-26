@@ -10,6 +10,7 @@ import server from './components/ServerURL.js';
 import ProfileEN from './components/ProfileEN.js';
 import vector from './images/vector.png';
 import MessengerCustomerChat from 'react-messenger-customer-chat/lib/MessengerCustomerChat';
+import HomeKa from './components/componentsKA/HomeKa.js';
 
 const App = () => {
   const [logged_in, set_logged_in] = useState(false);
@@ -80,6 +81,8 @@ const App = () => {
     console.log(localStorage.getItem("refresh_token") + " : " + localStorage.getItem("access_token"));
     const data = await response.json();
     logout2();
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
     console.log(data);
   }
 
@@ -108,7 +111,7 @@ const App = () => {
             } />
             <Route path='/en/profile' element={<ProfileEN />}/>      
             <Route path="/ka" element={
-              <HomeEn logout={logout} userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/>
+              <HomeKa logout={logout} userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/>
             } />
             <Route path={'en/kiushop/verify/:email/:token'} element={<Verify />}/>
             <Route path='en/addproduct'  element/>

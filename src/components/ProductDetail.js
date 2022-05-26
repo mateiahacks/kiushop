@@ -7,10 +7,12 @@ import detail3 from '../images/detail3.png';
 import ProductsEn from './ProductsEn';
 import { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
+import server from './ServerURL.js';
 
 const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
 
     const { id } = useParams();
+    const [product, setProduct] = useState({});
     var name="Monstera";
     var detailsArr=[product1,detail1,detail2,detail3,detail3,detail3];
     // var mainImage=product1;
@@ -18,10 +20,24 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
     var discount=50;
     var Price=20.00;
 
+    const getProduct = async () => {
+        const link = server + "product/" + id;
+        const response = await fetch(link, {
+            method: 'GET',
+            headers: {"Content-Type": "application/json"}
+        });
+        const data = await response.json();
+        setProduct(data.product);
+        console.log(data);
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0);
+        getProduct();
     }, []);
     
+
+
     return ( 
         <div className="product_details">
         <Header logout={logout} name={userData.name} logged_in={logged_in} toggleLogged={toggleLogged}/>
@@ -35,10 +51,10 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
               <img class="mainImage" onClick={()=>setMainImage(product1)} src={mainImage} alt="" />
               <div className="line_right">
                   <div className="discount_place">
-                      -{discount}%
+                      -{product.discount}%
                   </div>
-                  <h1>{name}</h1>
-                  <p>${Price}</p>
+                  <h1 style={{width: '400px'}}>{product.title_en}</h1>
+                  <p>${product.price}</p>
                   <div className="amount">
                       <label htmlFor="quantity">Quantity</label>
                       <input type="number" id="quantity" min="0"/>

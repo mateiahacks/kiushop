@@ -11,7 +11,7 @@ const AddProduct = ({toggleShowAdd}) => {
     const [size, set_size] = useState("");
     const [desc_en, set_desc_en] = useState("");
     const [desc_ge, set_desc_ge] = useState("");
-    const [discount, set_discount] = useState("");
+    const [discount, set_discount] = useState(0);
     const [featured, set_featured] = useState(false);
 
     const addProduct = async () => {

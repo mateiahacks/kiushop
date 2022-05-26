@@ -22,9 +22,8 @@
 .carousel__image {
     width: 100vw;
     object-fit: cover;
-    object-position:0px -300px;
+    
     height: 500px;
-    transform: matrix(-1, 0, 0, 1, 0, 0);
 }
 .carousel__image:nth-child(1){
 
