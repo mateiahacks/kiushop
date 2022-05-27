@@ -15,11 +15,11 @@ import LoginKa from './components/componentsKA/LoginKa.js';
 import RegisterKa from './components/componentsKA/RegisterKa.js';
 
 const App = () => {
-  const [logged_in, set_logged_in] = useState(false);
+  const [logged_in, set_logged_in] = useState(localStorage.getItem("access_token")===null ? false:true);
   const [LoginLoading, setLoginLoading] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
-    name: "",
+    name: logged_in ? localStorage.getItem("user_name"):"",
     surname: "",
   });
 
@@ -51,11 +51,12 @@ const App = () => {
       setUserData(data.user);
       nav("/en");
       loginError.style.display = "none";
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("refresh_token", data.refresh_token);
+      localStorage.setItem("user_name", data.user.name);
     } else {
       loginError.style.display = "block";
     }
-    localStorage.setItem("access_token", data.access_token);
-    localStorage.setItem("refresh_token", data.refresh_token);
     console.log(data);
     console.log(logged_in);
 
