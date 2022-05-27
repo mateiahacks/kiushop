@@ -13,6 +13,10 @@ import MessengerCustomerChat from 'react-messenger-customer-chat/lib/MessengerCu
 import HomeKa from './components/componentsKA/HomeKa.js';
 import LoginKa from './components/componentsKA/LoginKa.js';
 import RegisterKa from './components/componentsKA/RegisterKa.js';
+import ProductDetailKa from './components/componentsKA/ProductDetailKa.js';
+
+
+
 
 const App = () => {
   const [logged_in, set_logged_in] = useState(localStorage.getItem("access_token")===null ? false:true);
@@ -121,6 +125,9 @@ const App = () => {
             } />
             <Route path="/ka/register" element={
               <RegisterKa userData={userData}/>
+            } />
+            <Route path={'/ka/product/:id'} element={ 
+              <ProductDetailKa logout={logout} userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/> 
             } />
             <Route path={'en/kiushop/verify/:email/:token'} element={<Verify />}/>
             <Route path='en/addproduct'  element/>

@@ -11,19 +11,31 @@ width: 100vw;
 .product_line{
     width: 100%;
     margin-top: 200px;
-    height: 530px;
+    height: 590px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
 
 }
+
+#main_image_w_upload {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
 .mainImage{
     width: 450px;
     height:550px;
     margin-right: 20px;
+    margin-bottom: 10px;
     object-fit: cover;
     object-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 
 }
 .line_left{
@@ -170,4 +182,9 @@ align-items: center;
     line-height: 85px;
     letter-spacing: 0em;
     text-align: center;
+}
+
+.mainImage > .loading-spinner {
+    width: 100px;
+    height: 100px;
 }
