@@ -22,11 +22,9 @@
 .carousel__image {
     width: 100vw;
     object-fit: cover;
-    
     height: 500px;
 }
-.carousel__image:nth-child(1){
-
+.carousel__image:nth-child(1) {
     transform: matrix(-1, 0, 0, 1, 0, 0)  rotateY(180deg);
 }
 

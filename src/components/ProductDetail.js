@@ -13,12 +13,9 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
 
     const { id } = useParams();
     const [product, setProduct] = useState({});
-    var name="Monstera";
-    var detailsArr=[product1,detail1,detail2,detail3,detail3,detail3];
-    // var mainImage=product1;
-    const [mainImage,setMainImage]=useState(product1);
-    var discount=50;
-    var Price=20.00;
+    const [detailsArr, setDetailsArr] = useState([]);
+    const [mainImage,setMainImage]=useState("");
+    const [image, setImage] = useState({});
 
     const getProduct = async () => {
         const link = server + "product/" + id;
@@ -27,7 +24,25 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
             headers: {"Content-Type": "application/json"}
         });
         const data = await response.json();
+        setDetailsArr(data.product.images.map((e) => e.img_url));
+        if(data.product.images[0] !== undefined) {
+            setMainImage(data.product.images[0].img_url);
+        }
         setProduct(data.product);
+        console.log(data);
+    }
+
+    const sendPhoto = async (e) => {
+        const formdata = new FormData();
+        formdata.append("image", e.target.files[0]);
+        const link = server + 'product/' + id + '/attach_image';
+        const response = await fetch(link, {
+            method: 'POST',
+            body: formdata
+        })
+        const data = await response.json();
+        setImage(data.image.img_url);
+        setMainImage(data.image.img_url);
         console.log(data);
     }
 
@@ -44,7 +59,7 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
          <div className="product_line">
               <div className="line_left">
                   {
-                      detailsArr.map((x) =><img onClick={() => setMainImage(x)}  class="detail" src={x} /> )
+                      detailsArr.map((x) =><img style={{height: '100px', width: '100px'}} onClick={() => setMainImage(x)}  class="detail" src={x} /> )
                         
                   }
               </div>
@@ -78,6 +93,10 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
                   </div>
               </div>
          </div>
+         
+         <input style={{margin: 'auto'}} type="file" onChange={(e) => {
+                sendPhoto(e);
+                }} />
          <div className="header2">Related Products</div>
          <ProductsEn />
         </div>

@@ -1,5 +1,5 @@
 import Carousel from '../Carousel';
-import ProductsEn from '../ProductsEn';
+import ProductsKa from './ProductsKa';
 import "../Home.css";
 import FooterEn from '../FooterEn.js';
 import HeaderKA from './HeaderKa';
@@ -22,7 +22,7 @@ const HomeEn = ({logout ,userData, logged_in, toggleLogged}) => {
         <div className='home'>
             <HeaderKA logout={logout} name={userData.name} logged_in={logged_in} toggleLogged={toggleLogged}/>
             <Carousel />
-            <ProductsEn />
+            <ProductsKa />
             <FooterEn />
         </div>
     );

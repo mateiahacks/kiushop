@@ -29,14 +29,16 @@ width: 100vw;
 .line_left{
     display: flex;
     height: 100%;
+    width: 150px;
     flex-direction: column;
-    margin-right: 50px;
+    margin-right: 20px;
     justify-content: space-between;
     overflow-y: auto;
 }
 
 .line_left > * {
     cursor: pointer;
+    object-fit: cover;
 }
 
 .line_left::-webkit-scrollbar-thumb {

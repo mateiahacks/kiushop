@@ -1,8 +1,8 @@
-import HomeEn from "./HomeEn";
+import HomeKa from "./HomeKa";
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import server from "./ServerURL";
-import './Register.css';
+import server from "../ServerURL";
+import '../Register.css';
 import { GoVerified } from 'react-icons/go';
 
 const RegisterEn = ({userData}) => {
@@ -60,14 +60,14 @@ const RegisterEn = ({userData}) => {
 
     return (
         <div className="register">
-            <HomeEn userData={userData}/>
-            <Link style={{cursor: 'default'}} to='/'><div className="modal__bg"></div></Link> 
+            <HomeKa userData={userData}/>
+            <Link style={{cursor: 'default'}} to='/ka'><div className="modal__bg"></div></Link> 
             {!success && <div style={{padding: '0 30px 30px 30px'}} className="register__modal">
-                <h1 style={{marginTop: '30px'}}>My Account</h1>
+                <h1 style={{marginTop: '30px'}}>ჩემი ანგარიში</h1>
                 <form onSubmit={submit}>
                     <div className="names" style={{marginBottom: '5px'}}>
                         <div>
-                            <label>FIRST NAME</label>
+                            <label>სახელი</label>
                             <input 
                                 type="text" 
                                 value={firstName}
@@ -76,7 +76,7 @@ const RegisterEn = ({userData}) => {
                             />
                         </div>
                         <div style={{marginRight: '-40px'}}>
-                            <label>LAST NAME</label>
+                            <label>გვარი</label>
                             <input 
                                 type="text" 
                                 value={lastName}
@@ -85,28 +85,28 @@ const RegisterEn = ({userData}) => {
                             />
                         </div>
                     </div>
-                    <label>EMAIL</label>
+                    <label>მაილი</label>
                     <input 
                         type="email" 
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                    <label>PHONE</label>
+                    <label>ტელეფონი</label>
                     <input 
                         type="text"
                         value={number}
                         onChange={(e) => setNumber(e.target.value)}
                         required
                     />
-                    <label>PASSWORD</label>
+                    <label>პაროლი</label>
                     <input 
                         type="password" 
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <label>CONFIRM PASSWORD</label>
+                    <label>გაიმეორე პაროლი</label>
                     <input 
                         type="password" 
                         value={r_password}
@@ -114,11 +114,10 @@ const RegisterEn = ({userData}) => {
                         required
                     />
                     {loading && <div className="loading-spinner"></div>}
-                    {r_password !==password && <p style={errorStyle}>*passwords don't match</p>}
-                    {(password.length < 5 && password.length > 0) && <p style={errorStyle}>*password's length is less than 5 symbol</p>}
+                    {r_password !==password && <p style={errorStyle}>*პაროლები არ ემთხვევა</p>}
+                    {(password.length < 5 && password.length > 0) && <p style={errorStyle}>*პაროლის სიგრძე ნაკლებია 5-ზე</p>}
                     {errorMessage !== '' && <p style={errorStyle}>{errorMessage}</p>}
-                    
-                    <button id="register__submit" type="submit" style={{cursor: 'pointer', padding: '15px', marginTop: '20px'}}>Register</button>
+                    <button id="register__submit" type="submit" style={{border: 'none', cursor: 'pointer', padding: '15px'}}>რეგისტრაცია</button>
                 </form>
             </div>}
             {success && <div style={{borderRadius: '20px'}} className="register__modal">

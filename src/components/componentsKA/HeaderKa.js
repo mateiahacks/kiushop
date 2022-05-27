@@ -74,19 +74,19 @@ const Header = ({logout, name, logged_in, toggleLogged}) => {
                     </div></Link>
                     <BsHeart size={30}/>
                     <BsCart size={30}/>
-                    <p id='resp_logout' onClick={onLogout}>Logout</p>
+                    <p id='resp_logout' onClick={onLogout}>გამოსვლა</p>
                 </div>
                 :  
                 <div className="header__right__resp">
                     <Link className='text-link' to={'login'}><div className="profile">
                         <CgProfile size={35}/>  
-                        <p id='login'>Login</p>
+                        <p id='login'>შესვლა</p>
                     </div></Link>
                     <BsHeart size={30}/>
                     <BsCart size={30}/>
                 </div>}
             </div>
-            {logged_in && <p id='logout' onClick={onLogout}>Logout</p>}
+            {logged_in && <p id='logout' onClick={onLogout}>გამოსვლა</p>}
         </nav>
     );
 }

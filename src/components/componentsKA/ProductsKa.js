@@ -1,11 +1,11 @@
-import './Products.css';
-import './Carousel.css';
+import '../Products.css';
+import '../Carousel.css';
 import { useState, useEffect } from 'react';
-import Product from './Product';
-import getProducts from './ProductService';
+import Product from '../Product';
+import getProducts from '../ProductService';
 import { BiPlusCircle } from 'react-icons/bi';
-import AddProduct from './AddProduct';
-import server from './ServerURL.js';
+import AddProduct from '../AddProduct';
+import server from '../ServerURL.js';
 
 const ProductsEn = () => {
     const [type, setType] = useState("all");
@@ -39,9 +39,9 @@ const ProductsEn = () => {
         <div className="products">
             {showAdd && <AddProduct toggleShowAdd={toggleShowAdd}/>}
             <div className="prod__types">
-                    <div onClick={() => setType("new")} className={type==="new" ? "prod__type prod-type-selected":"prod__type"}>New Products</div>
-                    <div onClick={() => setType("featured")} className={type==="featured" ? "prod__type prod-type-selected":"prod__type"}>Featured Procuts</div>
-                    <div onClick={() => setType("all")} className={type==="all" ? "prod__type prod-type-selected":"prod__type"}>All Products</div>
+                    <div onClick={() => setType("new")} className={type==="new" ? "prod__type prod-type-selected":"prod__type"}>ახალი პროდუქტი</div>
+                    <div onClick={() => setType("featured")} className={type==="featured" ? "prod__type prod-type-selected":"prod__type"}>გამორჩეული პროდუქტი</div>
+                    <div onClick={() => setType("all")} className={type==="all" ? "prod__type prod-type-selected":"prod__type"}>ყველა პროდუქტი</div>
                 </div>
             <div className="products__inner">
                 <div className="products__list">
@@ -55,7 +55,7 @@ const ProductsEn = () => {
                     } */}
                     {
                         data.map((prod) => (prod.featured == true && type === "featured" || (prod.featured == false && type !== "featured") || type === "all") && (
-                            <Product key={data.indexOf(prod)} id={prod.id} sale={prod.discount} name={prod.title_en} price={prod.price} img={prod.images[prod.images.length-1] === undefined ? "":prod.images[prod.images.length-1].img_url}/>
+                            <Product key={data.indexOf(prod)} id={prod.id} sale={prod.discount} name={prod.title_ge} price={prod.price} img={prod.images[prod.images.length-1] === undefined ? "":prod.images[prod.images.length-1].img_url}/>
                         ))
                     }
                 </div>

@@ -1,12 +1,18 @@
-import { useLocation, useParams, Link } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import server from './ServerURL';
-import vector from '../images/vector.png';
 import './Verify.css';
+import {useState} from 'react';
+import validVector from '../images/vector.png'
+import invalidVector from '../images/vector404.png'
+import { Link } from 'react-router-dom';
 
-const Verify = ({header, message}) => {
+
+const Verify = () => {
     const { email, token } = useParams();
-    
+    const [header, setHeader]=useState("");
+    const [message, setMessage]=useState("Happy shoping");
+    const [vector,setVector]=useState(validVector);
     const sendData = async () => {
         const log = {
             user_email: email,
@@ -20,27 +26,40 @@ const Verify = ({header, message}) => {
         });
         const data = await response.json();
         console.log(data);
+        console.log(response.status);
+        if(response.status===400){
+            setHeader("Email already verified");
+        }else if(response.status==200){
+            setHeader("Your email has been verified");
+        }else{
+            setHeader("Looks like your request has failed");
+            setMessage("The link you are trying to access is no longer valid, so please request a new one");
+            setVector(invalidVector);
+        }
     }
     
-
+  
     useEffect(()=>{
         sendData();
     }, [])
 
-
+    const lang = useLocation().pathname.substring(1, 3);   
     return (
         <div className="veirfy">
-            <img src={vector}  className="vector" />
+            <img src={vector}  class="vector" />
             <div className="textBox">
-                <h1>Your email has been verified</h1>
-                <p>Happy shoping</p>
-                <Link className='text-link' to={'/'}><div className="button">
+                <h1>{header}</h1>
+                <p>{message}</p>
+                <Link to='/'>
+                <div className="button">
                     <div className="buttFront" >GET BACK TO HOME PAGE</div>
                     <div className="buttonBack"></div>
-                </div></Link>
+                </div>
+                </Link>
+               
             </div>
         </div>
     )
 }
 
-export default Verify;
+export default Verify;//this is comment

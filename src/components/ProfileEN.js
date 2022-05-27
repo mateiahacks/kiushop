@@ -8,13 +8,13 @@ const ProfileEN = () => {
     const sendPhoto = async (e) => {
         const formdata = new FormData();
         formdata.append("image", e.target.files[0]);
-        const link = server + 'upload/image';
+        const link = server + 'product/1/attach_image';
         const response = await fetch(link, {
             method: 'POST',
             body: formdata
         })
         const data = await response.json();
-        setImage(data.image);
+        setImage(data.image.img_url);
         console.log(data);
     }
 
@@ -25,7 +25,7 @@ const ProfileEN = () => {
             <input type="file" onChange={(e) => {
                 sendPhoto(e);
                 }} />
-            <img src={"data:image/png;base64," + image} alt="" />
+            <img src={image} alt="" />
         </div>
     )
 }

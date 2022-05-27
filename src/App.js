@@ -11,6 +11,8 @@ import ProfileEN from './components/ProfileEN.js';
 import vector from './images/vector.png';
 import MessengerCustomerChat from 'react-messenger-customer-chat/lib/MessengerCustomerChat';
 import HomeKa from './components/componentsKA/HomeKa.js';
+import LoginKa from './components/componentsKA/LoginKa.js';
+import RegisterKa from './components/componentsKA/RegisterKa.js';
 
 const App = () => {
   const [logged_in, set_logged_in] = useState(false);
@@ -112,6 +114,12 @@ const App = () => {
             <Route path='/en/profile' element={<ProfileEN />}/>      
             <Route path="/ka" element={
               <HomeKa logout={logout} userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/>
+            } />
+            <Route path="/ka/login" element={
+              <LoginKa loading={LoginLoading} userData={userData} login={login} logged_in={logged_in} toggleLogged={toggleLogged}/>
+            } />
+            <Route path="/ka/register" element={
+              <RegisterKa userData={userData}/>
             } />
             <Route path={'en/kiushop/verify/:email/:token'} element={<Verify />}/>
             <Route path='en/addproduct'  element/>
