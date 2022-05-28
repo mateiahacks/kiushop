@@ -9,10 +9,10 @@ const Carousel = () => {
     const [seconds, setSeconds] = useState(0);
 
     const next = () => {
+
         const size = document.querySelector('.carousel__image').clientWidth;
         const slide = document.querySelector('.carousel__slide');
         slide.style.transform = 'translateX(' + (-size*counter) + "px)";
-        slide.classList.add('slided');
         setCounter(counter+1);
     }
 
@@ -43,13 +43,20 @@ const Carousel = () => {
     useEffect(()=>{
         let interval = setInterval(()=>{
             setSeconds(seconds+1);
+            const slide = document.querySelector('.carousel__slide');
             if(seconds === 3) {
-                const slide = document.querySelector('.carousel__slide');
-                const first = slide.firstChild;
-                slide.appendChild(first);
-                slide.removeChild(first);
                 next();
                 setSeconds(0);
+            }
+            if(counter === 4) {
+                const size = document.querySelector('.carousel__image').clientWidth;
+                slide.style.transition = "none";
+                slide.style.transform = 'translateX(' + (-3*size) + "px)";
+                setCounter(0);
+            }
+
+            if(counter === 1) {
+                slide.style.transition = 'transform 0.6s ease-in-out';
             }
         }, 1000);
         return () => {
@@ -76,7 +83,7 @@ const Carousel = () => {
                                 prev2();
                             }
                         }
-                    } className={counter===1 ? "dot dot__selected":"dot"}></div>
+                    } className={counter===1 || counter==0 ? "dot dot__selected":"dot"}></div>
                     <div onClick={
                             () => {
                                 if (counter === 1) {
@@ -102,6 +109,7 @@ const Carousel = () => {
                     <img className='carousel__image' src={carousel1} alt="carousel" />
                     <img className='carousel__image' src={carousel2} alt="carousel" />
                     <img className='carousel__image' src={carousel3} alt="carousel" />
+                    <img className='carousel__image' id='firstCopy' src={carousel1} alt="carousel" />
                 </div>
             </div>
         </div>

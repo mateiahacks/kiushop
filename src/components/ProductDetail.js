@@ -80,7 +80,6 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
                                                 <MdRemoveCircle size={20} id="rm_circle" onClick={() => removeimg(x, img_ids[detailsArr.indexOf(x)])}/>
                                                 <img style={{height: '100px', width: '100px'}} onClick={() => setMainImage(x)}  class="detail" src={x} />
                                             </div> )
-                        
                   }
               </div>
               <div id='main_image_w_upload'>
