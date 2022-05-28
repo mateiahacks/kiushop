@@ -1,6 +1,5 @@
 import './ProductDetail.css'
 import Header from './Header.js'
-import product1 from '../images/product1.png';
 import detail1 from '../images/detail1.png';
 import detail2 from '../images/detail2.png';
 import detail3 from '../images/detail3.png';
@@ -9,6 +8,7 @@ import FooterEn from './FooterEn';
 import { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import server from './ServerURL.js';
+import { MdRemoveCircle } from 'react-icons/md';
 
 const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
 
@@ -18,6 +18,7 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
     const [mainImage,setMainImage]=useState("");
     const [image, setImage] = useState({});
     const [loading, setLoading] = useState(false);
+    const [img_ids, set_img_ids] = useState([]);
 
     const getProduct = async () => {
         const link = server + "product/" + id;
@@ -29,6 +30,7 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
         const data = await response.json();
         setLoading(false);
         setDetailsArr(data.product.images.map((e) => e.img_url));
+        set_img_ids(data.product.images.map((e) => e.id));
         if(data.product.images[0] !== undefined) {
             setMainImage(data.product.images[0].img_url);
         }
@@ -50,6 +52,17 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
         console.log(data);
     }
 
+    const removeimg = async (element, img_id) => {
+        console.log("remove");
+        setDetailsArr(detailsArr.filter((e) => e !== element));
+        const response = await fetch(server + "/product/" + id + "/detach_image/" + img_id, {
+            method: 'DELETE',
+            headers: {"Content-Type" : "application/json"}
+        })
+        const data = await response.json();
+        console.log(data);
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0);
         getProduct();
@@ -63,12 +76,15 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
          <div className="product_line">
               <div className="line_left">
                   {
-                      detailsArr.map((x) =><img style={{height: '100px', width: '100px'}} onClick={() => setMainImage(x)}  class="detail" src={x} /> )
+                      detailsArr.map((x) =><div className='left_img'>
+                                                <MdRemoveCircle size={20} id="rm_circle" onClick={() => removeimg(x, img_ids[detailsArr.indexOf(x)])}/>
+                                                <img style={{height: '100px', width: '100px'}} onClick={() => setMainImage(x)}  class="detail" src={x} />
+                                            </div> )
                         
                   }
               </div>
               <div id='main_image_w_upload'>
-                {loading ? <div class="mainImage"><div className='loading-spinner'></div></div> : <img class={"mainImage"} onClick={()=>setMainImage(product1)} src={mainImage} alt="" />}
+                {loading ? <div class="mainImage"><div className='loading-spinner'></div></div> : <img class={"mainImage"} src={mainImage} alt="" />}
                 <input style={{margin: 'auto'}} type="file" onChange={(e) => {
                     sendPhoto(e);
                     }} />

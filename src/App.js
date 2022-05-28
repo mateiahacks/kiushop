@@ -16,8 +16,6 @@ import RegisterKa from './components/componentsKA/RegisterKa.js';
 import ProductDetailKa from './components/componentsKA/ProductDetailKa.js';
 
 
-
-
 const App = () => {
   const [logged_in, set_logged_in] = useState(localStorage.getItem("access_token")===null ? false:true);
   const [LoginLoading, setLoginLoading] = useState(false);

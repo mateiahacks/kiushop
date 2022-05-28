@@ -43,12 +43,12 @@ const Carousel = () => {
     useEffect(()=>{
         let interval = setInterval(()=>{
             setSeconds(seconds+1);
-            if(seconds === 3 && counter !== 3) {
+            if(seconds === 3) {
+                const slide = document.querySelector('.carousel__slide');
+                const first = slide.firstChild;
+                slide.appendChild(first);
+                slide.removeChild(first);
                 next();
-                setSeconds(0);
-            }
-            if(seconds === 3 && counter === 3) {
-                prev2();
                 setSeconds(0);
             }
         }, 1000);

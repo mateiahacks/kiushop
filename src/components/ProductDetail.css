@@ -44,7 +44,6 @@ width: 100vw;
     width: 150px;
     flex-direction: column;
     margin-right: 20px;
-    justify-content: space-between;
     overflow-y: auto;
 }
 
@@ -187,4 +186,15 @@ align-items: center;
 .mainImage > .loading-spinner {
     width: 100px;
     height: 100px;
+}
+
+.left_img {
+    position: relative;
+}
+
+#rm_circle {
+    position: absolute;
+    top: 0;
+    right: 45px;
+    color: red;
 }

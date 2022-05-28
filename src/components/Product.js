@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 
 const Product = ({lang, img, id, sale, name, price}) => {
 
-
-
     return (
         <div className="product">
             {sale !== 0 && <div className="sale-pointer">{"-" + sale + "%"}</div>}

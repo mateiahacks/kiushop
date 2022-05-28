@@ -1,9 +1,6 @@
 import '../ProductDetail.css'
 import Header from './HeaderKa.js'
 import product1 from '../../images/product1.png';
-import detail1 from '../../images/detail1.png';
-import detail2 from '../../images/detail2.png';
-import detail3 from '../../images/detail3.png';
 import ProductsKa from './ProductsKa';
 import FooterEn from '../FooterEn';
 import { useState, useEffect} from 'react';
