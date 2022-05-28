@@ -1,8 +1,5 @@
 import './ProductDetail.css'
 import Header from './Header.js'
-import detail1 from '../images/detail1.png';
-import detail2 from '../images/detail2.png';
-import detail3 from '../images/detail3.png';
 import ProductsEn from './ProductsEn';
 import FooterEn from './FooterEn';
 import { useState, useEffect} from 'react';

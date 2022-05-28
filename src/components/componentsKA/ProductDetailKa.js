@@ -1,6 +1,5 @@
 import '../ProductDetail.css'
 import Header from './HeaderKa.js'
-import product1 from '../../images/product1.png';
 import ProductsKa from './ProductsKa';
 import FooterEn from '../FooterEn';
 import { useState, useEffect} from 'react';
@@ -65,7 +64,7 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
                   }
               </div>
               <div id='main_image_w_upload'>
-                {loading ? <div class="mainImage"><div className='loading-spinner'></div></div> : <img class={"mainImage"} onClick={()=>setMainImage(product1)} src={mainImage} alt="" />}
+                {loading ? <div class="mainImage"><div className='loading-spinner'></div></div> : <img class={"mainImage"} src={mainImage} alt="" />}
                 <input style={{margin: 'auto'}} type="file" onChange={(e) => {
                     sendPhoto(e);
                     }} />
