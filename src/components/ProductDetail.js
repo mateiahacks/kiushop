@@ -2,12 +2,13 @@ import './ProductDetail.css'
 import Header from './Header.js'
 import ProductsEn from './ProductsEn';
 import FooterEn from './FooterEn';
-import { useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../UserContext';
 import { useParams } from 'react-router-dom';
 import server from './ServerURL.js';
 import { MdRemoveCircle } from 'react-icons/md';
 
-const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
+const ProductDetail = () => {
 
     const { id } = useParams();
     const [product, setProduct] = useState({});
@@ -16,6 +17,8 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
     const [image, setImage] = useState({});
     const [loading, setLoading] = useState(false);
     const [img_ids, set_img_ids] = useState([]);
+
+    const {userData, logout, logged_in, toggleLogged} = useContext(UserContext);
 
     const getProduct = async () => {
         const link = server + "product/" + id;

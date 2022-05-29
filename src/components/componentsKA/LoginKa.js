@@ -1,14 +1,16 @@
 import HomeKa from "./HomeKa";
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { UserContext } from "../../UserContext";
 import server from "../ServerURL";
 import '../Login.css';
 
-const LoginEn = ({ loading, userData, login, logged_in, toggleLogged}) => {
+const LoginEn = ({ loading, login}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorFlag, setErrorFlag] = useState(false);
     const navigate = useNavigate();
+    const {userData, logged_in, toggleLogged} = useContext(UserContext);
 
     useEffect(() => {
         window.scrollTo(0, 0);

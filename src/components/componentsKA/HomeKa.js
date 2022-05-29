@@ -5,7 +5,7 @@ import FooterEn from '../FooterEn.js';
 import HeaderKA from './HeaderKa';
 import { useEffect } from 'react';
 
-const HomeEn = ({logout ,userData, logged_in, toggleLogged}) => {
+const HomeEn = () => {
 
     const enableScroll = () => {
         const temp =  document.getElementsByTagName('body')[0];
@@ -20,7 +20,7 @@ const HomeEn = ({logout ,userData, logged_in, toggleLogged}) => {
 
     return (
         <div className='home'>
-            <HeaderKA logout={logout} name={userData.name} logged_in={logged_in} toggleLogged={toggleLogged}/>
+            <HeaderKA />
             <Carousel />
             <ProductsKa />
             <FooterEn />

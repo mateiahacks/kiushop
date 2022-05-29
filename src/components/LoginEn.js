@@ -1,13 +1,15 @@
 import HomeEn from "./HomeEn";
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from "../UserContext";
 import server from "./ServerURL";
 import './Login.css';
 
-const LoginEn = ({ loading, userData, login, logged_in, toggleLogged}) => {
+const LoginEn = ({ loading, login}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorFlag, setErrorFlag] = useState(false);
+    const {userData, logged_in, toggleLogged} = useContext(UserContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,7 +22,7 @@ const LoginEn = ({ loading, userData, login, logged_in, toggleLogged}) => {
     }
     return (
         <div className="login">
-            <HomeEn userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/>
+            <HomeEn/>
             <Link style={{cursor: 'default'}} to='/en'><div className="modal__bg"></div></Link>
             <div className="login__modal">
                 <h1>My Account</h1>

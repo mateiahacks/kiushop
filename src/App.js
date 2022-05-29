@@ -7,14 +7,13 @@ import LoginEn from './components/LoginEn.js';
 import RegisterEn from './components/RegisterEn.js';
 import Verify from './components/Verify.js';
 import server from './components/ServerURL.js';
-import ProfileEN from './components/ProfileEN.js';
 import vector from './images/vector.png';
 import MessengerCustomerChat from 'react-messenger-customer-chat/lib/MessengerCustomerChat';
 import HomeKa from './components/componentsKA/HomeKa.js';
 import LoginKa from './components/componentsKA/LoginKa.js';
 import RegisterKa from './components/componentsKA/RegisterKa.js';
 import ProductDetailKa from './components/componentsKA/ProductDetailKa.js';
-
+import { UserContext } from './UserContext.js';
 
 const App = () => {
   const [logged_in, set_logged_in] = useState(localStorage.getItem("access_token")===null ? false:true);
@@ -93,45 +92,42 @@ const App = () => {
 
   return (
     <Router>
-      <div className="app">
-          <Routes>
-            <Route path='/' element={
-              <Navigate to='/en' />
-            } />
-            <Route path='/en' element={
-              <HomeEn logout={logout} userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/>
-            } />
-             
-            <Route path='/en/login' element={ 
-              <LoginEn loading={LoginLoading} userData={userData} login={login} logged_in={logged_in} toggleLogged={toggleLogged}/> 
-            } />
-            <Route path='/en/register' element={ 
-              <RegisterEn userData={userData}/> 
-            } />
-            <Route path='/en/verify' element={ 
-              <Verify userData={userData} vector={vector} header="Your email has been verified" message="Happy shoping" /> 
-            } />
-              <Route path={'/en/product/:id'} element={ 
-              <ProductDetail logout={logout} userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/> 
-            } />
-            <Route path='/en/profile' element={<ProfileEN />}/>      
-            <Route path="/ka" element={
-              <HomeKa logout={logout} userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/>
-            } />
-            <Route path="/ka/login" element={
-              <LoginKa loading={LoginLoading} userData={userData} login={login} logged_in={logged_in} toggleLogged={toggleLogged}/>
-            } />
-            <Route path="/ka/register" element={
-              <RegisterKa userData={userData}/>
-            } />
-            <Route path={'/ka/product/:id'} element={ 
-              <ProductDetailKa logout={logout} userData={userData} logged_in={logged_in} toggleLogged={toggleLogged}/> 
-            } />
-            <Route path={'en/kiushop/verify/:email/:token'} element={<Verify />}/>
-            <Route path='en/addproduct'  element/>
-          </Routes>  
-      </div>
-
+      <UserContext.Provider value={{logged_in, toggleLogged, userData, logout}}>
+        <div className="app">
+            <Routes>
+                <Route path='/' element={
+                  <Navigate to='/en' />
+                } />
+                <Route path='/en' element={
+                  <HomeEn userData={userData}/>
+                } />
+                
+                <Route path='/en/login' element={ 
+                  <LoginEn loading={LoginLoading} login={login}/> 
+                } />
+                <Route path='/en/register' element={ 
+                  <RegisterEn userData={userData}/> 
+                } />
+                <Route path='/en/verify' element={ 
+                  <Verify /> 
+                } />
+                <Route path={'/en/product/:id'} element={ <ProductDetail /> } />      
+                <Route path="/ka" element={
+                  <HomeKa />
+                } />
+                <Route path="/ka/login" element={ <LoginKa loading={LoginLoading} login={login}/>} />
+                <Route path="/ka/register" element={
+                  <RegisterKa userData={userData}/>
+                } />
+                <Route path={'/ka/product/:id'} element={ 
+                  <ProductDetailKa /> 
+                } />
+                <Route path={'en/kiushop/verify/:email/:token'} element={<Verify />}/>
+                <Route path='en/addproduct'  element/>
+                
+            </Routes>  
+        </div>
+      </UserContext.Provider>
     </Router>
   );
 }

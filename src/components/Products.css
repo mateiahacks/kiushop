@@ -60,6 +60,11 @@
     justify-content: space-between;
 }
 
+.products__list__all {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
 .prod__dots {
     position: relative;
     width: 100px;
@@ -82,6 +87,7 @@
     padding: 50px 100px;
     margin: 50px 50px 0px 100px;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 

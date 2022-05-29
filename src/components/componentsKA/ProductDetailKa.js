@@ -2,11 +2,13 @@ import '../ProductDetail.css'
 import Header from './HeaderKa.js'
 import ProductsKa from './ProductsKa';
 import FooterEn from '../FooterEn';
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useContext} from 'react';
+import { UserContext } from '../../UserContext';
 import { useParams } from 'react-router-dom';
 import server from '../ServerURL.js';
+import { MdRemoveCircle } from 'react-icons/md';
 
-const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
+const ProductDetail = () => {
 
     const { id } = useParams();
     const [product, setProduct] = useState({});
@@ -14,6 +16,10 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
     const [mainImage,setMainImage]=useState("");
     const [image, setImage] = useState({});
     const [loading, setLoading] = useState(false);
+    const [img_ids, set_img_ids] = useState([]);
+
+    const {logout ,userData, logged_in, toggleLogged} = useContext(UserContext);
+
 
     const getProduct = async () => {
         const link = server + "product/" + id;
@@ -46,6 +52,17 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
         console.log(data);
     }
 
+    const removeimg = async (element, img_id) => {
+        console.log("remove");
+        setDetailsArr(detailsArr.filter((e) => e !== element));
+        const response = await fetch(server + "/product/" + id + "/detach_image/" + img_id, {
+            method: 'DELETE',
+            headers: {"Content-Type" : "application/json"}
+        })
+        const data = await response.json();
+        console.log(data);
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0);
         getProduct();
@@ -57,10 +74,12 @@ const ProductDetail = ({logout ,userData, logged_in, toggleLogged}) => {
         <div className="product_details">
         <Header logout={logout} name={userData.name} logged_in={logged_in} toggleLogged={toggleLogged}/>
          <div className="product_line">
-              <div className="line_left">
+            <div className="line_left">
                   {
-                      detailsArr.map((x) =><img style={{height: '100px', width: '100px'}} onClick={() => setMainImage(x)}  class="detail" src={x} /> )
-                        
+                      detailsArr.map((x) =><div className='left_img'>
+                                                <MdRemoveCircle size={20} id="rm_circle" onClick={() => removeimg(x, img_ids[detailsArr.indexOf(x)])}/>
+                                                <img style={{height: '100px', width: '100px'}} onClick={() => setMainImage(x)}  class="detail" src={x} />
+                                            </div> )
                   }
               </div>
               <div id='main_image_w_upload'>

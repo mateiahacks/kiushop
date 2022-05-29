@@ -3,10 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { FiSearch, FiMenu } from 'react-icons/fi';
 import { CgProfile } from 'react-icons/cg';
 import { BsHeart, BsCart } from 'react-icons/bs';
-import { useEffect,useState } from 'react';
+import REeact, { useEffect, useState, useContext } from 'react';
 import logo from '../images/logoBlack.png';
-const Header = ({logout, name, logged_in, toggleLogged}) => {
+import { UserContext } from '../UserContext';
+
+const Header = () => {
     const lang = useLocation().pathname.substring(1, 3);    
+    const {userData, logout, logged_in, toggleLogged} = useContext(UserContext);
+    const name = userData.name;
 
     const removeDropdown = () => {
         const temp = document.querySelector('.header__right__resp');

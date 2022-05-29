@@ -44,7 +44,7 @@ const ProductsEn = () => {
                     <div onClick={() => setType("all")} className={type==="all" ? "prod__type prod-type-selected":"prod__type"}>ყველა პროდუქტი</div>
                 </div>
             <div className="products__inner">
-                <div className="products__list">
+                <div className={type === "all" ? "products__list__all":"products__list"}>
                 {loaded && <div onClick={() => {toggleShowAdd(); window.scrollTo(0, 0);}} className="addProduct">
                     <BiPlusCircle className='addIcon' size={100}/>
                 </div>}

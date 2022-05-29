@@ -32,9 +32,6 @@ width: 100vw;
     margin-bottom: 10px;
     object-fit: cover;
     object-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden;
 
 }
@@ -197,4 +194,23 @@ align-items: center;
     top: 0;
     right: 45px;
     color: red;
+}
+
+@media only screen and (max-width: 1200px) {
+    .product_line {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .line_left {
+        display: none;
+    }
+
+    .mainImage {
+        
+        overflow: visible;
+    }
+
 }
