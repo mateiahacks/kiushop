@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FiSearch, FiMenu } from 'react-icons/fi';
 import { CgProfile } from 'react-icons/cg';
 import { BsHeart, BsCart } from 'react-icons/bs';
-import REeact, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import logo from '../images/logoBlack.png';
 import { UserContext } from '../UserContext';
 
@@ -68,7 +68,7 @@ const Header = () => {
                         <p id='login'>Login</p>
                     </div></Link>}
                     <BsHeart size={30}/>
-                    <BsCart size={30}/>
+                    <Link to='/en/cart/1' className='text-link'><BsCart size={30}/></Link>
                 </div>
                 {logged_in ?
                 <div className="header__right__resp">

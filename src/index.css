@@ -17,3 +17,20 @@ html, body {
 -webkit-transform {
   transform: translate3d(0, 0, 0) 
 }
+
+.d-flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.centered {
+  align-items: center;
+  justify-content: center;
+}
+
+ul {
+  list-style-type: none;
+}

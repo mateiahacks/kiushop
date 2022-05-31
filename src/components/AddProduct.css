@@ -6,6 +6,7 @@
     background-color: white;
     box-shadow: 0px 0px 12px rgb(125, 125, 125);
     padding: 30px 30px 30px 30px;
+    margin-top: 300px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -41,5 +42,49 @@
     color: white;
     border: none;
     cursor: pointer;
+}
+
+.category {
+    width: 100%;
+    border: 1px solid gray;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+form > ul > li {
+    padding: 8px 12px;
+    background-color: gray;
+    margin: 3px 0;
+    height: 40px;
+    position: relative;
+    cursor: pointer;
+}
+
+form > ul > li > span {
+    position: absolute;
+    right: 10px;
+}
+
+.category__field {
+    padding: 8px 12px;   
+    margin: 4px 0;
+    width: 100%;
+}
+
+.add-cat{
+    background-color: black;
+    color: white;
+    text-align: center;
+    display: block;
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#category_error {
+    color: red;
+    font-size: 12px;
+    display: none;
 }
 

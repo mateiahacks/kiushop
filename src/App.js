@@ -13,6 +13,7 @@ import HomeKa from './components/componentsKA/HomeKa.js';
 import LoginKa from './components/componentsKA/LoginKa.js';
 import RegisterKa from './components/componentsKA/RegisterKa.js';
 import ProductDetailKa from './components/componentsKA/ProductDetailKa.js';
+import Cart from './components/Cart.js';
 import { UserContext } from './UserContext.js';
 
 const App = () => {
@@ -108,6 +109,7 @@ const App = () => {
                 <Route path='/en/register' element={ 
                   <RegisterEn userData={userData}/> 
                 } />
+                <Route path='/en/cart/:id' element={<Cart />}/>
                 <Route path='/en/verify' element={ 
                   <Verify /> 
                 } />
