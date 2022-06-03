@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import HomeEn from './components/HomeEn.js';
 import ProductDetail from './components/ProductDetail.js';
 import LoginEn from './components/LoginEn.js';
@@ -17,13 +17,35 @@ import Cart from './components/Cart.js';
 import { UserContext } from './UserContext.js';
 
 const App = () => {
-  const [logged_in, set_logged_in] = useState(localStorage.getItem("access_token")===null ? false:true);
+  const [logged_in, set_logged_in] = useState(false);
   const [LoginLoading, setLoginLoading] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
-    name: logged_in ? localStorage.getItem("user_name"):"",
+    name: "",
     surname: "",
   });
+
+  const checkUser = async () => {
+    const link = server + 'user_info';
+    const response = await fetch(link, {
+      method: 'GET',
+      headers: {
+        "Content-Type":"application/json",
+        'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+      }
+    });
+    const data = await response.json();
+    if(response.status == 200) {
+      set_logged_in(true);
+      setUserData(data.user);
+    }
+    console.log(data);
+  }
+
+  useEffect(()=>{
+    checkUser();
+  }, []);
+  
 
   const toggleLogged = () => {
     set_logged_in(!logged_in);
@@ -55,14 +77,18 @@ const App = () => {
       loginError.style.display = "none";
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("refresh_token", data.refresh_token);
-      localStorage.setItem("user_name", data.user.name);
     } else {
       loginError.style.display = "block";
     }
     console.log(data);
     console.log(logged_in);
 
-}
+  }
+
+  // 401 if not logged in
+  // 403 if not admin
+
+
   const logout2 = async () => {
     const link = server + 'logout2';
     const response = await fetch(link, {

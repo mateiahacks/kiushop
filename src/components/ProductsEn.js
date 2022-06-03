@@ -1,6 +1,8 @@
 import './Products.css';
 import './Carousel.css';
 import { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
 import Product from './Product';
 import getProducts from './ProductService';
 import { BiPlusCircle } from 'react-icons/bi';
@@ -13,6 +15,7 @@ const ProductsEn = () => {
     const [showAdd, setShowAdd] = useState(false);
     const [data, setData] = useState([]);
     const [loaded, setLoaded] = useState(false);
+    const { userData, logged_in } = useContext(UserContext);
 
     const toggleShowAdd = () => {
         setShowAdd(!showAdd);
@@ -45,7 +48,7 @@ const ProductsEn = () => {
                 </div>
             <div className="products__inner">
                 <div className={type === "all" ? "products__list__all":"products__list"}>
-                {loaded && <div onClick={() => {toggleShowAdd(); window.scrollTo(0, 0);}} className="addProduct">
+                {(loaded && userData.permission === "admin" && logged_in) && <div onClick={() => {toggleShowAdd(); window.scrollTo(0, 0);}} className="addProduct">
                     <BiPlusCircle className='addIcon' size={100}/>
                 </div>}
                     {/* {

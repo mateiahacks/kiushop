@@ -25,7 +25,10 @@ const ProductDetail = () => {
         setLoading(true);
         const response = await fetch(link, {
             method: 'GET',
-            headers: {"Content-Type": "application/json"}
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+            }
         });
         const data = await response.json();
         setLoading(false);
@@ -44,6 +47,9 @@ const ProductDetail = () => {
         const link = server + 'product/' + id + '/attach_image';
         const response = await fetch(link, {
             method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+            },
             body: formdata
         })
         const data = await response.json();
@@ -57,7 +63,11 @@ const ProductDetail = () => {
         setDetailsArr(detailsArr.filter((e) => e !== element));
         const response = await fetch(server + "/product/" + id + "/detach_image/" + img_id, {
             method: 'DELETE',
-            headers: {"Content-Type" : "application/json"}
+            headers: {
+                "Content-Type" : "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+            },
+            
         })
         const data = await response.json();
         console.log(data);

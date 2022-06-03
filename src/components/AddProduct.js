@@ -53,7 +53,10 @@ const AddProduct = ({toggleShowAdd}) => {
         if(category_name_en.length !== 0 && category_name_ge.length !== 0) {
             const response = await fetch(link, {
                 method: 'POST',
-                headers: {'Content-Type':'application/json'},
+                headers: {
+                    'Content-Type':'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+                },
                 body: JSON.stringify(send_data)
             });
             const data = await response.json();
