@@ -1,0 +1,11 @@
+.favourites {
+    margin-top: 150px;
+    margin-bottom: 500px;
+}
+
+.favourites > h1 {
+    text-align: center;
+    font-family: 'Italiana';
+    font-size: 48px;
+    font-weight: 500;
+}

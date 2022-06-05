@@ -7,6 +7,7 @@ import { UserContext } from '../UserContext';
 import { useParams } from 'react-router-dom';
 import server from './ServerURL.js';
 import { MdRemoveCircle } from 'react-icons/md';
+import { upload } from '@testing-library/user-event/dist/upload';
 
 const ProductDetail = () => {
 
@@ -16,6 +17,7 @@ const ProductDetail = () => {
     const [mainImage,setMainImage]=useState("");
     const [image, setImage] = useState({});
     const [loading, setLoading] = useState(false);
+    const [uploading, setUploading] = useState(false);
     const [img_ids, set_img_ids] = useState([]);
 
     const {userData, logout, logged_in, toggleLogged} = useContext(UserContext);
@@ -45,6 +47,11 @@ const ProductDetail = () => {
         const formdata = new FormData();
         formdata.append("image", e.target.files[0]);
         const link = server + 'product/' + id + '/attach_image';
+        const img = document.getElementById('main_img');
+        img.style.display = 'none';
+
+        setUploading(true);
+
         const response = await fetch(link, {
             method: 'POST',
             headers: {
@@ -54,7 +61,10 @@ const ProductDetail = () => {
         })
         const data = await response.json();
         setImage(data.image.img_url);
+        setDetailsArr([...detailsArr, data.image.img_url]);
         setMainImage(data.image.img_url);
+        img.style.display = 'block';
+        setUploading(false);
         console.log(data);
     }
 
@@ -76,6 +86,7 @@ const ProductDetail = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
         getProduct();
+        
     }, []);
     
 
@@ -93,10 +104,14 @@ const ProductDetail = () => {
                   }
               </div>
               <div id='main_image_w_upload'>
-                {loading ? <div class="mainImage"><div className='loading-spinner'></div></div> : <img class={"mainImage"} src={mainImage} alt="" />}
-                <input style={{margin: 'auto'}} type="file" onChange={(e) => {
-                    sendPhoto(e);
-                    }} />
+                {loading || uploading ? <div class="mainImage"><div className='loading-spinner'></div></div> : 
+                <div className='mainImage'>
+                    <img id='main_img' src={mainImage} alt=""/>
+                    {userData.permission === "admin" && <input className="main_upload" type="file" onChange={(e) => {
+                        sendPhoto(e);
+                    }} />}
+                </div>}
+                
               </div>
               <div className="line_right">
                   <div className="discount_place">

@@ -33,7 +33,8 @@ width: 100vw;
     object-fit: cover;
     object-position: center;
     overflow: hidden;
-
+    display: flex;
+    position: relative;
 }
 .line_left{
     display: flex;
@@ -183,6 +184,7 @@ align-items: center;
 .mainImage > .loading-spinner {
     width: 100px;
     height: 100px;
+    margin: auto;
 }
 
 .left_img {
@@ -194,6 +196,11 @@ align-items: center;
     top: 0;
     right: 45px;
     color: red;
+}
+
+.main_upload {
+    position: absolute;
+    transform: translate(50%, 50%);
 }
 
 @media only screen and (max-width: 1200px) {

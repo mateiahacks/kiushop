@@ -67,7 +67,7 @@ const Header = () => {
                         <CgProfile size={35}/>  
                         <p id='login'>Login</p>
                     </div></Link>}
-                    <BsHeart size={30}/>
+                    <Link className='text-link' to={'/en/favourites/1'}><BsHeart size={30}/></Link>
                     <Link to='/en/cart/1' className='text-link'><BsCart size={30}/></Link>
                 </div>
                 {logged_in ?
@@ -76,7 +76,7 @@ const Header = () => {
                         <CgProfile size={35}/>  
                         <p id='login'>{name}</p>
                     </div></Link>
-                    <BsHeart size={30}/>
+                    <Link className='text-link' to={'/en/favourites/1'}><BsHeart size={30}/></Link>
                     <BsCart size={30}/>
                     <p id='resp_logout' onClick={onLogout}>Logout</p>
                 </div>
@@ -86,7 +86,7 @@ const Header = () => {
                         <CgProfile size={35}/>  
                         <p id='login'>Login</p>
                     </div></Link>
-                    <BsHeart size={30}/>
+                    <Link className='text-link' to={'/en/favourites/1'}><BsHeart size={30}/></Link>
                     <BsCart size={30}/>
                 </div>}
             </div>

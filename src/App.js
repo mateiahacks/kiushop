@@ -13,6 +13,7 @@ import HomeKa from './components/componentsKA/HomeKa.js';
 import LoginKa from './components/componentsKA/LoginKa.js';
 import RegisterKa from './components/componentsKA/RegisterKa.js';
 import ProductDetailKa from './components/componentsKA/ProductDetailKa.js';
+import Favourites from './components/Favourites.js';
 import Cart from './components/Cart.js';
 import { UserContext } from './UserContext.js';
 
@@ -139,6 +140,7 @@ const App = () => {
                 <Route path='/en/verify' element={ 
                   <Verify /> 
                 } />
+                <Route path='/en/favourites/:id' element={<Favourites />}/>
                 <Route path={'/en/product/:id'} element={ <ProductDetail /> } />      
                 <Route path="/ka" element={
                   <HomeKa />
