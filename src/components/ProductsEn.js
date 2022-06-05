@@ -15,7 +15,7 @@ const ProductsEn = () => {
     const [showAdd, setShowAdd] = useState(false);
     const [data, setData] = useState([]);
     const [loaded, setLoaded] = useState(false);
-    const { userData, logged_in } = useContext(UserContext);
+    const { userData, logged_in, lang } = useContext(UserContext);
 
     const toggleShowAdd = () => {
         setShowAdd(!showAdd);
@@ -42,9 +42,9 @@ const ProductsEn = () => {
         <div className="products">
             {showAdd && <AddProduct toggleShowAdd={toggleShowAdd}/>}
             <div className="prod__types">
-                    <div onClick={() => setType("new")} className={type==="new" ? "prod__type prod-type-selected":"prod__type"}>New Products</div>
-                    <div onClick={() => setType("featured")} className={type==="featured" ? "prod__type prod-type-selected":"prod__type"}>Featured Procuts</div>
-                    <div onClick={() => setType("all")} className={type==="all" ? "prod__type prod-type-selected":"prod__type"}>All Products</div>
+                    <div onClick={() => setType("new")} className={type==="new" ? "prod__type prod-type-selected":"prod__type"}>{lang==="ka" ? "ახალი პროდუქტი":"New Products"}</div>
+                    <div onClick={() => setType("featured")} className={type==="featured" ? "prod__type prod-type-selected":"prod__type"}>{lang==="ka" ? "გამორჩეული პროდუქტი":"Featured Products"}</div>
+                    <div onClick={() => setType("all")} className={type==="all" ? "prod__type prod-type-selected":"prod__type"}>{lang==="ka" ? "ყველა პროდუქტი":"All Products"}</div>
                 </div>
             <div className="products__inner">
                 <div className={type === "all" ? "products__list__all":"products__list"}>
@@ -58,7 +58,7 @@ const ProductsEn = () => {
                     } */}
                     {
                         data.map((prod) => (prod.featured == true && type === "featured" || (prod.featured == false && type !== "featured") || type === "all") && (
-                            <Product key={data.indexOf(prod)} lang="en" id={prod.id} sale={prod.discount} name={prod.title_en} price={prod.price} img={prod.images[prod.images.length-1] === undefined ? "":prod.images[prod.images.length-1].img_url}/>
+                            <Product key={data.indexOf(prod)} lang="en" id={prod.id} sale={prod.discount} name={lang==="ka" ?  prod.title_ge:prod.title_en} price={prod.price} img={prod.images[prod.images.length-1] === undefined ? "":prod.images[prod.images.length-1].img_url}/>
                         ))
                     }
                 </div>

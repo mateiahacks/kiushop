@@ -7,11 +7,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import logo from '../images/logoBlack.png';
 import { UserContext } from '../UserContext';
 
-const Header = () => {
-    const lang = useLocation().pathname.substring(1, 3);    
-    const {userData, logout, logged_in, toggleLogged} = useContext(UserContext);
+const Header = () => {    
+    const {userData, logout, logged_in, toggleLogged, changeLang, lang} = useContext(UserContext);
     const name = userData.name;
-
     const removeDropdown = () => {
         const temp = document.querySelector('.header__right__resp');
         window.addEventListener('resize', () => {
@@ -31,7 +29,6 @@ const Header = () => {
     }
 
 
-
     const toggleDropdown = () => {
         const temp = document.querySelector('.header__right__resp');
         if(temp.style.display === 'flex') {
@@ -45,9 +42,9 @@ const Header = () => {
         <nav className="header">
             <div className="header__inner">
                 <div className="header__left">
-                    <Link className='text-link' to={'/' + lang}><img className='logo' src={logo} alt="" /></Link>
-                    <Link className='text-link' to='/ka'><div className='lang'>KA</div></Link>
-                    <Link className='text-link' to='/en'><div className='lang'>EN</div></Link>
+                    <Link className='text-link' to={'/'}><img className='logo' src={logo} alt="" /></Link>
+                    <div onClick={() => changeLang("ka")} className='lang'>KA</div>
+                    <div onClick={() => changeLang("en")} className='lang'>EN</div>
                     <div className='searchbar__container'>
                         <input type="text" className="searchbar" placeholder='Search . . .'/>
                         <FiSearch id='search__icon' size={30}/>
@@ -62,13 +59,13 @@ const Header = () => {
                         <p id='login'>{name}</p>
                     </div></Link>
                     :
-                    <Link className='text-link' to={"/" + lang + "/login"}><div className="profile">
+                    <Link className='text-link' to={"/login"}><div className="profile">
                     
                         <CgProfile size={35}/>  
-                        <p id='login'>Login</p>
+                        <p id='login'>{lang==="ka" ? "შესვლა":"Login"}</p>
                     </div></Link>}
-                    <Link className='text-link' to={'/en/favourites/1'}><BsHeart size={30}/></Link>
-                    <Link to='/en/cart/1' className='text-link'><BsCart size={30}/></Link>
+                    <Link className='text-link' to={'/favourites/1'}><BsHeart size={30}/></Link>
+                    <Link to='/cart/1' className='text-link'><BsCart size={30}/></Link>
                 </div>
                 {logged_in ?
                 <div className="header__right__resp">
@@ -76,21 +73,21 @@ const Header = () => {
                         <CgProfile size={35}/>  
                         <p id='login'>{name}</p>
                     </div></Link>
-                    <Link className='text-link' to={'/en/favourites/1'}><BsHeart size={30}/></Link>
+                    <Link className='text-link' to={'/favourites/1'}><BsHeart size={30}/></Link>
                     <BsCart size={30}/>
-                    <p id='resp_logout' onClick={onLogout}>Logout</p>
+                    <p id='resp_logout' onClick={onLogout}>{lang==="ka" ? "გამოსვლა":"Logout"}</p>
                 </div>
                 :  
                 <div className="header__right__resp">
                     <Link className='text-link' to={'login'}><div className="profile">
                         <CgProfile size={35}/>  
-                        <p id='login'>Login</p>
+                        <p id='login'>{lang==="ka" ? "გამოსვლა":"Logout"}</p>
                     </div></Link>
-                    <Link className='text-link' to={'/en/favourites/1'}><BsHeart size={30}/></Link>
+                    <Link className='text-link' to={'/favourites/1'}><BsHeart size={30}/></Link>
                     <BsCart size={30}/>
                 </div>}
             </div>
-            {logged_in && <p id='logout' onClick={onLogout}>Logout</p>}
+            {logged_in && <p id='logout' onClick={onLogout}>{lang==="ka" ? "გამოსვლა":"Logout"}</p>}
         </nav>
     );
 }

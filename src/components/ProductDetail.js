@@ -20,7 +20,7 @@ const ProductDetail = () => {
     const [uploading, setUploading] = useState(false);
     const [img_ids, set_img_ids] = useState([]);
 
-    const {userData, logout, logged_in, toggleLogged} = useContext(UserContext);
+    const {userData, logout, logged_in, toggleLogged, lang} = useContext(UserContext);
 
     const getProduct = async () => {
         const link = server + "product/" + id;
@@ -98,7 +98,7 @@ const ProductDetail = () => {
               <div className="line_left">
                   {
                       detailsArr.map((x) =><div className='left_img'>
-                                                <MdRemoveCircle size={20} id="rm_circle" onClick={() => removeimg(x, img_ids[detailsArr.indexOf(x)])}/>
+                                                {userData.permission==="admin" && logged_in && <MdRemoveCircle size={20} id="rm_circle" onClick={() => removeimg(x, img_ids[detailsArr.indexOf(x)])}/>}
                                                 <img style={{height: '100px', width: '100px'}} onClick={() => setMainImage(x)}  class="detail" src={x} />
                                             </div> )
                   }
@@ -107,7 +107,7 @@ const ProductDetail = () => {
                 {loading || uploading ? <div class="mainImage"><div className='loading-spinner'></div></div> : 
                 <div className='mainImage'>
                     <img id='main_img' src={mainImage} alt=""/>
-                    {userData.permission === "admin" && <input className="main_upload" type="file" onChange={(e) => {
+                    {userData.permission === "admin" && logged_in && <input className="main_upload" type="file" onChange={(e) => {
                         sendPhoto(e);
                     }} />}
                 </div>}
@@ -117,33 +117,33 @@ const ProductDetail = () => {
                   <div className="discount_place">
                       -{product.discount}%
                   </div>
-                  <h1 style={{width: '400px'}}>{product.title_en}</h1>
+                  <h1 style={{width: lang === "ka" ? "580px":"400px"}}>{lang==="ka" ? product.title_ge:product.title_en}</h1>
                   <p>${product.price}</p>
                   <div className="amount">
-                      <label htmlFor="quantity">Quantity</label>
+                      <label htmlFor="quantity">{lang==="ka" ? "რაოდენობა":"Quantity"}</label>
                       <input type="number" id="quantity" min="0"/>
                   </div>
                   <div className="amount">
-                      <label htmlFor="currency">Curency</label>
+                      <label htmlFor="currency">{lang==="ka" ? "ვალუტა":"Curency"}</label>
                       <select name="" id="currency">
                           <option value="USD">USD</option>
                           <option value="EUR">EUR</option>
                           <option value="GEL">GEL</option>
                       </select>
                   </div>
-                  <button>ADD TO CART</button>
+                  <button style={{width: "360px"}}>{lang=="ka" ?  "კალათაში დამატება":"ADD TO CART"}</button>
                   <div className="terms_conditions">
                       <input type="checkbox" />
-                      <p>I agree with terms and conditions</p>
+                      <p>{lang==="ka" ? "ვეთანხმები წესებს და პირობებს":"I agree with terms and conditions"}</p>
                   </div>
                   <div className="button">
-                      <div className="front">BUY IT NOW</div>
+                      <div className="front">{lang==="ka" ? "ყიდვა ახლა":"BUY IT NOW"}</div>
                       <div className="back"></div>
                   </div>
               </div>
          </div>
          
-         <div className="header2">Related Products</div>
+         <div className="header2">{lang==="ka" ? "მსგავსი პროდუქტი":"Related Products"}</div>
          <ProductsEn />
          <FooterEn />
         </div>

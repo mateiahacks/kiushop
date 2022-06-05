@@ -9,10 +9,6 @@ import Verify from './components/Verify.js';
 import server from './components/ServerURL.js';
 import vector from './images/vector.png';
 import MessengerCustomerChat from 'react-messenger-customer-chat/lib/MessengerCustomerChat';
-import HomeKa from './components/componentsKA/HomeKa.js';
-import LoginKa from './components/componentsKA/LoginKa.js';
-import RegisterKa from './components/componentsKA/RegisterKa.js';
-import ProductDetailKa from './components/componentsKA/ProductDetailKa.js';
 import Favourites from './components/Favourites.js';
 import Cart from './components/Cart.js';
 import { UserContext } from './UserContext.js';
@@ -25,6 +21,12 @@ const App = () => {
     name: "",
     surname: "",
   });
+  const [lang, set_lang] = useState(localStorage.getItem('lang') !==undefined ?  localStorage.getItem('lang'):'en');
+
+  const changeLang = (newLang) => {
+    set_lang(newLang);
+    localStorage.setItem("lang", newLang);
+  }
 
   const checkUser = async () => {
     const link = server + 'user_info';
@@ -74,7 +76,7 @@ const App = () => {
     if(response.status === 200) {
       toggleLogged();
       setUserData(data.user);
-      nav("/en");
+      nav("/");
       loginError.style.display = "none";
       localStorage.setItem("access_token", data.access_token);
       localStorage.setItem("refresh_token", data.refresh_token);
@@ -120,40 +122,28 @@ const App = () => {
 
   return (
     <Router>
-      <UserContext.Provider value={{logged_in, toggleLogged, userData, logout}}>
+      <UserContext.Provider value={{logged_in, lang, changeLang, toggleLogged, userData, logout}}>
         <div className="app">
             <Routes>
                 <Route path='/' element={
-                  <Navigate to='/en' />
-                } />
-                <Route path='/en' element={
                   <HomeEn userData={userData}/>
                 } />
                 
-                <Route path='/en/login' element={ 
+                <Route path='/login' element={ 
                   <LoginEn loading={LoginLoading} login={login}/> 
                 } />
-                <Route path='/en/register' element={ 
+                <Route path='/register' element={ 
                   <RegisterEn userData={userData}/> 
                 } />
-                <Route path='/en/cart/:id' element={<Cart />}/>
-                <Route path='/en/verify' element={ 
+                <Route path='/cart/:id' element={<Cart />}/>
+                <Route path='/verify' element={ 
                   <Verify /> 
                 } />
-                <Route path='/en/favourites/:id' element={<Favourites />}/>
-                <Route path={'/en/product/:id'} element={ <ProductDetail /> } />      
-                <Route path="/ka" element={
-                  <HomeKa />
-                } />
-                <Route path="/ka/login" element={ <LoginKa loading={LoginLoading} login={login}/>} />
-                <Route path="/ka/register" element={
-                  <RegisterKa userData={userData}/>
-                } />
-                <Route path={'/ka/product/:id'} element={ 
-                  <ProductDetailKa /> 
-                } />
-                <Route path={'en/kiushop/verify/:email/:token'} element={<Verify />}/>
-                <Route path='en/addproduct'  element/>
+                <Route path='/favourites/:id' element={<Favourites />}/>
+                <Route path={'/product/:id'} element={ <ProductDetail /> } />      
+                
+                <Route path={'/kiushop/verify/:email/:token'} element={<Verify />}/>
+                <Route path='/addproduct'  element/>
                 
             </Routes>  
         </div>
