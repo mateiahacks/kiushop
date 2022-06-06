@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+
+.profileImg{
+    width:  150px;
+    height: 150px;
+
+}
+.CartProduct{
+    display: flex;
+    padding: 0px 30px;
+    align-items: center;
+    padding: 30px;
+}
+.cart_profile{
+    display: flex;
+    width: 500px;
+}
+.amount{
+    left: 0;
+    width: 100px;
+    height: 50px;
+    font-size: 25px;
+    padding-left: 20px;
+}
+.profileInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 30px;
+}
+.profileInfo h2{
+    font-family: 'Italiana', serif; 
+    color: rgba(0, 0, 0, 0.655);
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.profileInfo p{
+    font-size: 21px;
+}
+.total{
+    margin-left: 400px;
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 1200px) {
+    
+}

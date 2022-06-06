@@ -36,7 +36,10 @@ const AddProduct = ({toggleShowAdd}) => {
         }
         const response = await fetch(link, {
             method: 'POST',
-            headers: {"Content-Type": "application/json"},
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+            },
             body: JSON.stringify(product) 
         });
         const data = await response.json();
@@ -76,7 +79,10 @@ const AddProduct = ({toggleShowAdd}) => {
         const link = server + 'remove_tag/' + id;
         const response = await fetch(link, {
             method: 'DELETE',
-            headers: {'Content-Type':'application/json'}
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+            }
         });
         const result = await response.json();
         console.log(result);
@@ -86,7 +92,10 @@ const AddProduct = ({toggleShowAdd}) => {
         const link = server + 'all_tags';
         const response = await fetch(link, {
             method: 'GET',
-            headers: {'Content-Type':'application/json'}
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+            }
         });
         const data = await response.json();
         set_categories(data.tags);
