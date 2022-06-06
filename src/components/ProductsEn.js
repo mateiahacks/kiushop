@@ -58,7 +58,7 @@ const ProductsEn = () => {
                     } */}
                     {
                         data.map((prod) => (prod.featured == true && type === "featured" || (prod.featured == false && type !== "featured") || type === "all") && (
-                            <Product key={data.indexOf(prod)} lang="en" id={prod.id} sale={prod.discount} name={lang==="ka" ?  prod.title_ge:prod.title_en} price={prod.price} img={prod.images[prod.images.length-1] === undefined ? "":prod.images[prod.images.length-1].img_url}/>
+                            <Product key={data.indexOf(prod)} lang="en" id={prod.id} sale={prod.discount} name={lang==="ka" ?  prod.title_ge:prod.title_en} price={prod.price} img={prod.images.filter((e) => e.main)[0] ? prod.images.filter((e) => e.main)[0].img_url:""}/>
                         ))
                     }
                 </div>

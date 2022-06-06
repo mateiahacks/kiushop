@@ -6,7 +6,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../UserContext';
 import { useParams } from 'react-router-dom';
 import server from './ServerURL.js';
-import { MdRemoveCircle } from 'react-icons/md';
+import { MdRemoveCircle, MdPhoto } from 'react-icons/md';
 import { upload } from '@testing-library/user-event/dist/upload';
 
 const ProductDetail = () => {
@@ -36,9 +36,8 @@ const ProductDetail = () => {
         setLoading(false);
         setDetailsArr(data.product.images.map((e) => e.img_url));
         set_img_ids(data.product.images.map((e) => e.id));
-        if(data.product.images[0] !== undefined) {
-            setMainImage(data.product.images[0].img_url);
-        }
+        const main_img = data.product.images.filter((e) => e.main===true)[0];
+        setMainImage(main_img && main_img.img_url);
         setProduct(data.product);
         console.log(data);
     }
@@ -83,6 +82,21 @@ const ProductDetail = () => {
         console.log(data);
     }
 
+    const setMainPhoto = async (p) => {
+        const img_id = img_ids[detailsArr.indexOf(p)];
+        setMainImage(p);
+        const link = server + "product/" + id + "/main_image/" + img_id;
+        const res = await fetch(link, {
+            method: 'PUT',
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+            }
+        });
+        const data = await res.json();
+        console.log(data);
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0);
         getProduct();
@@ -99,6 +113,7 @@ const ProductDetail = () => {
                   {
                       detailsArr.map((x) =><div className='left_img'>
                                                 {userData.permission==="admin" && logged_in && <MdRemoveCircle size={20} id="rm_circle" onClick={() => removeimg(x, img_ids[detailsArr.indexOf(x)])}/>}
+                                                {userData.permission==="admin" && logged_in && <MdPhoto size={20} id="photo_circle" onClick={() => setMainPhoto(x)}/>}
                                                 <img style={{height: '100px', width: '100px'}} onClick={() => setMainImage(x)}  class="detail" src={x} />
                                             </div> )
                   }
@@ -117,7 +132,7 @@ const ProductDetail = () => {
                   <div className="discount_place">
                       -{product.discount}%
                   </div>
-                  <h1 style={{width: lang === "ka" ? "580px":"400px"}}>{lang==="ka" ? product.title_ge:product.title_en}</h1>
+                  <h1 style={{fontSize: lang === "ka" ? "42px":"56px"}}>{lang==="ka" ? product.title_ge:product.title_en}</h1>
                   <p>${product.price}</p>
                   <div className="amount">
                       <label htmlFor="quantity">{lang==="ka" ? "რაოდენობა":"Quantity"}</label>

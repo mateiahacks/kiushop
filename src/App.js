@@ -136,9 +136,7 @@ const App = () => {
                   <RegisterEn userData={userData}/> 
                 } />
                 <Route path='/cart/:id' element={<Cart />}/>
-                <Route path='/verify' element={ 
-                  <Verify /> 
-                } />
+                <Route path='/verify' element={ <Verify /> } />
                 <Route path='/favourites/:id' element={<Favourites />}/>
                 <Route path={'/product/:id'} element={ <ProductDetail /> } />      
                 

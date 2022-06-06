@@ -198,6 +198,12 @@ align-items: center;
     color: red;
 }
 
+#photo_circle {
+    position: absolute;
+    right: 45px;
+    bottom: 15px;
+}
+
 .main_upload {
     position: absolute;
     transform: translate(50%, 50%);
