@@ -8,7 +8,7 @@ import logo from '../images/logoBlack.png';
 import { UserContext } from '../UserContext';
 
 const Header = () => {    
-    const {userData, logout, logged_in, toggleLogged, changeLang, lang} = useContext(UserContext);
+    const {userData, logout, logged_in, set_logged_in, changeLang, lang} = useContext(UserContext);
     const name = userData.name;
     const removeDropdown = () => {
         const temp = document.querySelector('.header__right__resp');
@@ -24,7 +24,7 @@ const Header = () => {
     }, []);
 
     const onLogout = () => {
-        toggleLogged();
+        set_logged_in(false);
         logout();
     }
 

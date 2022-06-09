@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import HomeEn from './components/HomeEn.js';
 import ProductDetail from './components/ProductDetail.js';
 import LoginEn from './components/LoginEn.js';
@@ -38,20 +38,13 @@ const App = () => {
       }
     });
     const data = await response.json();
-    if(response.status == 200) {
+    if(response.status === 200) {
       set_logged_in(true);
+      console.log("my logged in " + logged_in);
       setUserData(data.user);
     }
+    console.log("checked");
     console.log(data);
-  }
-
-  useEffect(()=>{
-    checkUser();
-  }, []);
-  
-
-  const toggleLogged = () => {
-    set_logged_in(!logged_in);
   }
 
   const login = async (em, pass, nav) => {
@@ -74,7 +67,7 @@ const App = () => {
     const data = await response.json();
     setLoginLoading(false);
     if(response.status === 200) {
-      toggleLogged();
+      set_logged_in(true);
       setUserData(data.user);
       nav("/");
       loginError.style.display = "none";
@@ -114,15 +107,22 @@ const App = () => {
     });
     console.log(localStorage.getItem("refresh_token") + " : " + localStorage.getItem("access_token"));
     const data = await response.json();
+    set_logged_in(false);
+    //setUserData(null);
     logout2();
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
     console.log(data);
+    window.location.reload();
   }
+
+  useEffect(()=>{
+    localStorage.getItem("access_token") && checkUser();
+  }, []);
 
   return (
     <Router>
-      <UserContext.Provider value={{logged_in, lang, changeLang, toggleLogged, userData, logout}}>
+      <UserContext.Provider value={{logged_in, lang, changeLang, set_logged_in, userData, logout, checkUser}}>
         <div className="app">
             <Routes>
                 <Route path='/' element={

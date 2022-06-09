@@ -9,32 +9,54 @@ import { BiPlusCircle } from 'react-icons/bi';
 import AddProduct from './AddProduct';
 import server from './ServerURL.js';
 
+
 const ProductsEn = () => {
     const [type, setType] = useState("all");
     const [products, setProducts] = useState(getProducts);
     const [showAdd, setShowAdd] = useState(false);
     const [data, setData] = useState([]);
     const [loaded, setLoaded] = useState(false);
-    const { userData, logged_in, lang } = useContext(UserContext);
+    const { userData, logged_in, lang, checkUser, set_logged_in } = useContext(UserContext);
 
     const toggleShowAdd = () => {
         setShowAdd(!showAdd);
     }
 
+    const changeVisibility = async (id) => {
+        const link = server + '/product/' + id + '/visible';
+        const res = await fetch(link, {
+            method: 'PUT',
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem("access_token")}
+        })
+        const data = await res.json();
+        console.log(data);
+
+    }
+
+
+
     const getData = async () => {
         const link = server + "products/page/1"
         const response = await fetch(link, {
             method: 'GET',
-            headers: {"Content-Type": "application/json"}
+            headers: localStorage.getItem("access_token") ? {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+            } : {
+                "Content-Type": "application/json",
+                
+            }
         });
         const result = await response.json();
         setLoaded(true);
         setData(result.products);
         console.log(result.products);
+        console.log("is logged in from product" + logged_in)
     }
 
     useEffect(() => {
-      getData();
+        getData();
+      
     }, [])
 
  
@@ -58,7 +80,7 @@ const ProductsEn = () => {
                     } */}
                     {
                         data.map((prod) => (prod.featured == true && type === "featured" || (prod.featured == false && type !== "featured") || type === "all") && (
-                            <Product key={data.indexOf(prod)} lang="en" id={prod.id} sale={prod.discount} name={lang==="ka" ?  prod.title_ge:prod.title_en} price={prod.price} img={prod.images.filter((e) => e.main)[0] ? prod.images.filter((e) => e.main)[0].img_url:""}/>
+                            <Product key={data.indexOf(prod)} isadmin={userData.permission === "admin"} lang="en" isvisible={prod.is_visible} id={prod.id} sale={prod.discount} name={lang==="ka" ?  prod.title_ge:prod.title_en} price={prod.price} img={prod.images.filter((e) => e.main)[0] ? prod.images.filter((e) => e.main)[0].img_url:""}/>
                         ))
                     }
                 </div>

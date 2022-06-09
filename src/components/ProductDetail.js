@@ -20,7 +20,7 @@ const ProductDetail = () => {
     const [uploading, setUploading] = useState(false);
     const [img_ids, set_img_ids] = useState([]);
 
-    const {userData, logout, logged_in, toggleLogged, lang} = useContext(UserContext);
+    const {userData, logout, logged_in, toggleLogged, lang, checkUser} = useContext(UserContext);
 
     const getProduct = async () => {
         const link = server + "product/" + id;
@@ -101,6 +101,7 @@ const ProductDetail = () => {
         window.scrollTo(0, 0);
         getProduct();
         
+        
     }, []);
     
 
@@ -118,10 +119,12 @@ const ProductDetail = () => {
                                             </div> )
                   }
               </div>
+
               <div id='main_image_w_upload'>
+
                 {loading || uploading ? <div class="mainImage"><div className='loading-spinner'></div></div> : 
                 <div className='mainImage'>
-                    <img id='main_img' src={mainImage} alt=""/>
+                    <img id='main_img' src={mainImage} style={{objectFit: 'cover', objectPosition: 'center'}} alt="product image"/>
                     {userData.permission === "admin" && logged_in && <input className="main_upload" type="file" onChange={(e) => {
                         sendPhoto(e);
                     }} />}

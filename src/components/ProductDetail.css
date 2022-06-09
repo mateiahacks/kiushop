@@ -22,7 +22,12 @@ width: 100vw;
 #main_image_w_upload {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+}
+
+#main_img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .mainImage{
@@ -30,8 +35,7 @@ width: 100vw;
     height:550px;
     margin-right: 20px;
     margin-bottom: 10px;
-    object-fit: cover;
-    object-position: center;
+    
     overflow: hidden;
     display: flex;
     position: relative;
