@@ -6,6 +6,7 @@ import ProductDetail from './components/ProductDetail.js';
 import LoginEn from './components/LoginEn.js';
 import RegisterEn from './components/RegisterEn.js';
 import Verify from './components/Verify.js';
+import SearchPage from './components/SearchPage.js';
 import server from './components/ServerURL.js';
 import vector from './images/vector.png';
 import MessengerCustomerChat from 'react-messenger-customer-chat/lib/MessengerCustomerChat';
@@ -49,7 +50,7 @@ const App = () => {
 
   const login = async (em, pass, nav) => {
     const log = {
-        email: em,
+        login: em,
         password: pass
     }
     const loginError = document.getElementById("login_error");
@@ -135,6 +136,7 @@ const App = () => {
                 <Route path='/register' element={ 
                   <RegisterEn userData={userData}/> 
                 } />
+                <Route path='/search' element={<SearchPage />}/>
                 <Route path='/cart/:id' element={<Cart />}/>
                 <Route path='/verify' element={ <Verify /> } />
                 <Route path='/favourites/:id' element={<Favourites />}/>

@@ -6,7 +6,7 @@ import server from "./ServerURL";
 import './Login.css';
 
 const LoginEn = ({ loading, login}) => {
-    const [email, setEmail] = useState('');
+    const [log, setLog] = useState('');
     const [password, setPassword] = useState('');
     const [errorFlag, setErrorFlag] = useState(false);
     const {userData, logged_in, toggleLogged, lang} = useContext(UserContext);
@@ -18,7 +18,7 @@ const LoginEn = ({ loading, login}) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        login(email, password, navigate);
+        login(log, password, navigate);
     }
     return (
         <div className="login">
@@ -27,11 +27,11 @@ const LoginEn = ({ loading, login}) => {
             <div className="login__modal">
                 <h1>{lang==="ka" ? "ჩემი ანგარიში":"My Account"}</h1>
                 <form onSubmit={onSubmit}>
-                    <label>{lang==="ka" ? "ელ-ფოსტა":"EMAIL"}</label>
+                    <label>{lang==="ka" ? "იუზერნეიმი ან ელ-ფოსტა":"EMAIL OR USERNAME"}</label>
                     <input
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        type="email" 
+                        value={log}
+                        onChange={(e) => setLog(e.target.value)}
+                        type="text" 
                         required
                     />
                     <label>{lang==="ka" ? "პაროლი":"PASSWORD"}</label>

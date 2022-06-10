@@ -8,6 +8,7 @@ import { GoVerified } from 'react-icons/go';
 const RegisterEn = ({userData}) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [r_password, set_r_password] = useState('');
@@ -23,6 +24,7 @@ const RegisterEn = ({userData}) => {
             name: firstName,
             surname: lastName,
             email: email,
+            username: userName,
             password: password,
             phone: number
         }
@@ -85,6 +87,13 @@ const RegisterEn = ({userData}) => {
                             />
                         </div>
                     </div>
+                    <label>USERNAME</label>
+                    <input 
+                        type="text"
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                        required
+                    />
                     <label>EMAIL</label>
                     <input 
                         type="email" 
