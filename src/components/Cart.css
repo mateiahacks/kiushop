@@ -52,6 +52,10 @@ width: 100%;
 font-size: 45px;
 justify-content: space-between;
 }
+.cart-left  ul li{
+width: 500px;
+text-align: center;
+}
 .cart-right{
     width: 400px;
     height: 800px;
@@ -104,5 +108,4 @@ text-align: left;
 .button{
     margin-top: 20px;
 }
-
 

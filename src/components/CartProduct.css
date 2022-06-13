@@ -10,10 +10,17 @@
     padding: 0px 30px;
     align-items: center;
     padding: 30px;
+    justify-content: space-between;
 }
 .cart_profile{
     display: flex;
     width: 500px;
+    
+}
+.amount_cont{
+    width: 500px;
+    display: flex;
+    justify-content: center;
 }
 .amount{
     left: 0;
@@ -28,6 +35,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding-left: 30px;
+    
 }
 .profileInfo h2{
     font-family: 'Italiana', serif; 
@@ -39,8 +47,9 @@
     font-size: 21px;
 }
 .total{
-    margin-left: 400px;
     font-size: 20px;
+    width: 500px;
+    text-align: center;
 }
 
 @media only screen and (max-width: 1200px) {

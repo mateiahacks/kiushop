@@ -20,7 +20,9 @@ const CartProduct = ({img,name, price, amount}) => {
                 </div>
             </div>
             </div>
+            <div className="amount_cont">
             <input type="number" className='amount' min="0" defaultValue={amount}/>
+            </div>
             <p className='total'>${total}</p>
         </div>
      );

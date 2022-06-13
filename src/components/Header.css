@@ -32,7 +32,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 10px;
+    padding: 0px 10px;
    
     max-width: 1200px;
     flex: 1;
@@ -60,7 +60,7 @@ nav {
 .header__left, .header__right {
     display: flex;
     align-items: center;
-    height: 90px;
+    height: 100px;
 }
 
 .searchbar__container {
@@ -74,7 +74,7 @@ nav {
     border: 1px solid gray;
     padding: 10px 20px;
     border-radius: 20px;
-    font-size: 16px;
+    font-size: 20px;
     margin-right: 5px;
     outline: none;
 }
@@ -133,7 +133,173 @@ nav {
 #resp_logout:hover {
     text-decoration: underline;
 }
+.searchbar__container:hover .searchModal{
+display: flex;
+}
+.searchbar__container{
+   height: 100%;
+}
+.searchModal:hover{
+    display: flex;
+}
+.searchModal{
+    width: 80vw;
+    height: 700px;
+    background-color: rgba(255, 255, 255, 0.911);
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.735);
+    left: calc(20vw/2);
+    position: absolute;
+    display: none;
+    top:100px;
+    animation: dropdown 1s ;
+    overflow-y: hidden;
+}
+@keyframes dropdown {
+    0%{
+        height: 0px;
+        
+    }
+    100%{
+        height: 700px;
+    }
+}
+.parameters{
+    height: 600px;
+    width: 300px;
+    border: 1px solid black;
+    background-color: white;
+    margin: 20px;
+    display: flex;
+}
 
+.prods{
+    overflow-y: auto;
+    width: 100%;
+    height: 600px;
+}
+#searchImg{
+    width:  200px;
+    height: 200px;
+    object-fit: cover;
+   
+}
+.SearchElement{
+    display: flex;
+}
+#searchel{
+    display: flex;
+    border: 1px solid black;
+   padding: 10px;
+   margin-top: 20px;
+    height: 250px;
+    align-items: center;
+    background-color: white;
+width: 80%;
+
+}
+.searchName{
+
+font-size: 28px;
+font-weight: 400;
+line-height: 42px;
+letter-spacing: 0em;
+text-align: left;
+color: black;
+
+}
+.searchLink{
+    text-decoration: none;
+    color: black;
+}
+.prices{
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    font-size: 25px;
+    width: 100%;
+    justify-content: space-between;
+}
+.prices p{
+    text-decoration: line-through !important;
+    margin-right: 10px;
+}
+.prices h3{
+font-weight: 500;
+}
+
+.info p{
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.833);
+}
+.info{
+  padding-left: 20px;
+  height: 90%;
+width: 90%;
+}
+.pricess{
+    display: flex !important;
+    align-items: center;
+}
+.discount{
+    text-align: center;
+    background-color: #FAFF01;
+    padding: 10px;
+    font-size: 25px;
+    position:relative;
+    height: 60px;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+    top: 0;
+    margin-left: 15px;
+}
+.nodiscount{
+    display: none;
+}
+.currencys{
+    display: flex;
+    width: 110px;
+    justify-content: space-between;
+    height: 60px;
+    align-items: center;
+margin-right: 100px;
+position: absolute;
+left: 0;
+}
+.addto{
+    display: flex;
+    align-items: center;
+    height: 60px;
+    margin-top: 20px;
+}
+.addto img{
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.info button{
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 28px;
+    margin-top: 20px;
+    padding: 10px 20px;
+}
+.qurrency{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border:1px solid black;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.usd{
+    color: white;
+    background-color: black;
+}
 @keyframes dropAnimation {
     from {
         right: -150px;
@@ -169,7 +335,6 @@ nav {
     }
 
 }
-
 
 
 
