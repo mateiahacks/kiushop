@@ -1,73 +1,175 @@
-import React from 'react';
-import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
-import HomeEn from './components/HomeEn.js';
-import ProductDetail from './components/ProductDetail.js';
-import LoginEn from './components/LoginEn.js';
-import RegisterEn from './components/RegisterEn.js';
-import Verify from './components/Verify.js';
-import SearchPage from './components/SearchPage.js';
-import server from './components/ServerURL.js';
-import vector from './images/vector.png';
-import MessengerCustomerChat from 'react-messenger-customer-chat/lib/MessengerCustomerChat';
-import Favourites from './components/Favourites.js';
-import Cart from './components/Cart.js';
-import { UserContext } from './UserContext.js';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import HomeEn from "./components/HomeEn.js";
+import ProductDetail from "./components/ProductDetail.js";
+import LoginEn from "./components/LoginEn.js";
+import RegisterEn from "./components/RegisterEn.js";
+import Verify from "./components/Verify.js";
+import SearchPage from "./components/SearchPage.js";
+import server from "./components/ServerURL.js";
+import vector from "./images/vector.png";
+import MessengerCustomerChat from "react-messenger-customer-chat/lib/MessengerCustomerChat";
+import Favourites from "./components/Favourites.js";
+import Cart from "./components/Cart.js";
+import { UserContext } from "./UserContext.js";
 
 const App = () => {
   const [logged_in, set_logged_in] = useState(false);
   const [LoginLoading, setLoginLoading] = useState(false);
+  const [basket, set_basket] = useState([]);
   const [userData, setUserData] = useState({
     email: "",
     name: "",
     surname: "",
   });
-  const [lang, set_lang] = useState(localStorage.getItem('lang') !==undefined ?  localStorage.getItem('lang'):'en');
+
+  const [lang, set_lang] = useState(
+    localStorage.getItem("lang") !== undefined
+      ? localStorage.getItem("lang")
+      : "en"
+  );
 
   const changeLang = (newLang) => {
     set_lang(newLang);
     localStorage.setItem("lang", newLang);
-  }
+  };
+
+  const deleteFromBasket = async (id) => {
+    const link = server + "basket";
+    set_basket({
+      title: basket.title,
+      total_cost: basket.total_cost,
+      products: basket.products.filter((p) => p.id !== id),
+    });
+    const res = await fetch(link, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+      },
+      body: JSON.stringify({
+        product_id: id,
+        basket_title: localStorage.getItem("basket_title"),
+      }),
+    });
+    const data = await res.json();
+    console.log(data);
+  };
+
+  const createBasket = async () => {
+    const link = server + "basket";
+    const res = await fetch(link, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await res.json();
+    localStorage.setItem("basket_title", data.basket_title);
+    console.log(data);
+  };
+
+  const getBasket = async () => {
+    const link =
+      server + `basket?title=${localStorage.getItem("basket_title")}`;
+    const res = await fetch(link, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+      },
+    });
+    const data = await res.json();
+    console.log(data);
+    set_basket(data.basket);
+  };
+
+  const addToBasket = async (prod_id, product, quantity) => {
+    const link = server + "basket";
+    set_basket({
+      title: basket.title,
+      total_cost: basket.total_cost,
+      products: [...basket.products, product],
+    });
+    const res = await fetch(link, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        product_id: prod_id,
+        quantity: quantity,
+        basket_title: localStorage.getItem("basket_title"),
+      }),
+    });
+    const data = await res.json();
+    console.log(data);
+  };
+
+  const tokenRefresh = async () => {
+    const link = server + "/token_refresh";
+    const res = await fetch(link, {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("refresh_token"),
+      },
+    });
+    const data = await res.json();
+    localStorage.setItem("access_token", data.access_token);
+    console.log("refreshed");
+    console.log(data);
+  };
+
+  const useForceUpdate = () => {
+    const [value, setValue] = useState(0); // integer state
+    return () => setValue((value) => value + 1); // update state to force render
+    // An function that increment 👆🏻 the previous state like here
+    // is better than directly setting `value + 1`
+  };
 
   const checkUser = async () => {
-    const link = server + 'user_info';
+    const link = server + "user_info";
     const response = await fetch(link, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        "Content-Type":"application/json",
-        'Authorization': 'Bearer ' + localStorage.getItem("access_token")
-      }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+      },
     });
     const data = await response.json();
-    if(response.status === 200) {
+    if (data.msg === "Token has expired") {
+      tokenRefresh();
+    }
+    if (response.status === 200) {
       set_logged_in(true);
       console.log("my logged in " + logged_in);
       setUserData(data.user);
     }
-    console.log("checked");
     console.log(data);
-  }
+  };
 
   const login = async (em, pass, nav) => {
     const log = {
-        login: em,
-        password: pass
-    }
+      login: em,
+      password: pass,
+    };
     const loginError = document.getElementById("login_error");
 
     console.log(log);
-    const link = server + 'login';
+    const link = server + "login";
 
     setLoginLoading(true);
-    loginError.style.display = 'none';
+    loginError.style.display = "none";
     const response = await fetch(link, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(log)
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(log),
     });
     const data = await response.json();
     setLoginLoading(false);
-    if(response.status === 200) {
+    if (response.status === 200) {
       set_logged_in(true);
       setUserData(data.user);
       nav("/");
@@ -79,34 +181,38 @@ const App = () => {
     }
     console.log(data);
     console.log(logged_in);
-
-  }
+  };
 
   // 401 if not logged in
   // 403 if not admin
 
-
   const logout2 = async () => {
-    const link = server + 'logout2';
+    const link = server + "logout2";
     const response = await fetch(link, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + localStorage.getItem("refresh_token")            
-        },    
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("refresh_token"),
+      },
     });
     const data = await response.json();
     console.log(data);
-  }
+  };
 
   const logout = async () => {
-    const link = server + 'logout';
+    const link = server + "logout";
     const response = await fetch(link, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + localStorage.getItem("access_token")            
-        },    
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("access_token"),
+      },
     });
-    console.log(localStorage.getItem("refresh_token") + " : " + localStorage.getItem("access_token"));
+    console.log(
+      localStorage.getItem("refresh_token") +
+        " : " +
+        localStorage.getItem("access_token")
+    );
     const data = await response.json();
     set_logged_in(false);
     //setUserData(null);
@@ -114,42 +220,58 @@ const App = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
     console.log(data);
-    window.location.reload();
-  }
+  };
 
-  useEffect(()=>{
-    localStorage.getItem("access_token") && checkUser();
+  useEffect(() => {
+    localStorage.getItem("access_token") !== undefined && checkUser();
+    getBasket();
   }, []);
 
   return (
     <Router>
-      <UserContext.Provider value={{logged_in, lang, changeLang, set_logged_in, userData, logout, checkUser}}>
+      <UserContext.Provider
+        value={{
+          logged_in,
+          lang,
+          changeLang,
+          set_logged_in,
+          userData,
+          logout,
+          checkUser,
+          getBasket,
+          basket,
+          deleteFromBasket,
+          addToBasket,
+        }}
+      >
         <div className="app">
-            <Routes>
-                <Route path='/' element={
-                  <HomeEn userData={userData}/>
-                } />
-                
-                <Route path='/login' element={ 
-                  <LoginEn loading={LoginLoading} login={login}/> 
-                } />
-                <Route path='/register' element={ 
-                  <RegisterEn userData={userData}/> 
-                } />
-                <Route path='/search' element={<SearchPage />}/>
-                <Route path='/cart/:id' element={<Cart />}/>
-                <Route path='/verify' element={ <Verify /> } />
-                <Route path='/favourites/:id' element={<Favourites />}/>
-                <Route path={'/product/:id'} element={ <ProductDetail /> } />      
-                
-                <Route path={'/kiushop/verify/:email/:token'} element={<Verify />}/>
-                <Route path='/addproduct'  element/>
-                
-            </Routes>  
+          <Routes>
+            <Route path="/" element={<HomeEn userData={userData} />} />
+
+            <Route
+              path="/login"
+              element={<LoginEn loading={LoginLoading} login={login} />}
+            />
+            <Route
+              path="/register"
+              element={<RegisterEn userData={userData} />}
+            />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/cart/:id" element={<Cart />} />
+            <Route path="/verify" element={<Verify />} />
+            <Route path="/favourites/:id" element={<Favourites />} />
+            <Route path={"/product/:id"} element={<ProductDetail />} />
+
+            <Route
+              path={"/kiushop/verify/:email/:token"}
+              element={<Verify />}
+            />
+            <Route path="/addproduct" element />
+          </Routes>
         </div>
       </UserContext.Provider>
     </Router>
   );
-}
+};
 
 export default App;
