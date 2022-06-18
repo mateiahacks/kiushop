@@ -17,7 +17,7 @@ const Product = ({
   self,
 }) => {
   const [vis, set_vis] = useState(isvisible);
-  const { addToBasket } = useContext(UserContext);
+  const { addToBasket, getBasket } = useContext(UserContext);
 
   const turn_visible_on = () => {
     toggle_visibility();
@@ -54,6 +54,7 @@ const Product = ({
     });
     const data = await res.json();
     localStorage.setItem("basket_title", data.basket_title);
+    getBasket();
     console.log(data);
   };
 
@@ -102,11 +103,14 @@ const Product = ({
         <div className="prod__action">
           <div
             className="add-cart"
-            onClick={() =>
-              localStorage.getItem("basket_title")
-                ? addToBasket(id, self, 1)
-                : createBasket()
-            }
+            onClick={() => {
+              if (localStorage.getItem("basket_title")) {
+                addToBasket(id, self, 1);
+              } else {
+                createBasket();
+                addToBasket(id, self, 1);
+              }
+            }}
           >
             {lang == "en" ? "ADD TO CART" : "კალათაში დამატება"}
           </div>

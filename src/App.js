@@ -90,6 +90,7 @@ const App = () => {
 
   const addToBasket = async (prod_id, product, quantity) => {
     const link = server + "basket";
+    console.log(basket.products);
     set_basket({
       title: basket.title,
       total_cost: basket.total_cost,
@@ -120,6 +121,7 @@ const App = () => {
     localStorage.setItem("access_token", data.access_token);
     console.log("refreshed");
     console.log(data);
+    window.location.reload();
   };
 
   const useForceUpdate = () => {
@@ -224,7 +226,7 @@ const App = () => {
 
   useEffect(() => {
     localStorage.getItem("access_token") !== undefined && checkUser();
-    getBasket();
+    localStorage.getItem("basket_title") && getBasket();
   }, []);
 
   return (
