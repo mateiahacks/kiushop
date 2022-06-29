@@ -108,6 +108,27 @@ const App = () => {
     console.log(data);
   };
 
+  const addToBasket2 = async (prod_id, product, q) => {
+    const link = server + "basket";
+    console.log(basket.products);
+    set_basket({
+      title: basket.title,
+      total_cost: basket.total_cost,
+      products: basket.products,
+    });
+    const res = await fetch(link, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        product_id: prod_id,
+        basket_title: localStorage.getItem("basket_title"),
+        quantity: q,
+      }),
+    });
+    const data = await res.json();
+    console.log(data);
+  };
+
   const tokenRefresh = async () => {
     const link = server + "/token_refresh";
     const res = await fetch(link, {
@@ -121,13 +142,6 @@ const App = () => {
     console.log("refreshed");
     console.log(data);
     window.location.reload();
-  };
-
-  const useForceUpdate = () => {
-    const [value, setValue] = useState(0); // integer state
-    return () => setValue((value) => value + 1); // update state to force render
-    // An function that increment 👆🏻 the previous state like here
-    // is better than directly setting `value + 1`
   };
 
   const checkUser = async () => {
@@ -248,6 +262,7 @@ const App = () => {
           basket,
           deleteFromBasket,
           addToBasket,
+          addToBasket2,
         }}
       >
         <div className="app">

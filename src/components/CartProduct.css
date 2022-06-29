@@ -44,7 +44,11 @@
     margin-left: 400px;
     font-size: 20px;
 }
-#rm_cart {
+
+.remove {
+    border: 1px solid black;
+    padding: 4px 8px;
+    margin-top: 20px;
     cursor: pointer;
 }
 
