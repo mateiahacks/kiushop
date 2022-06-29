@@ -22,7 +22,7 @@ import { UserContext } from "./UserContext.js";
 const App = () => {
   const [logged_in, set_logged_in] = useState(false);
   const [LoginLoading, setLoginLoading] = useState(false);
-  const [basket, set_basket] = useState([]);
+  const [basket, set_basket] = useState({ products: [] });
   const [userData, setUserData] = useState({
     email: "",
     name: "",
