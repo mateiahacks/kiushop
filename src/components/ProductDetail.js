@@ -12,12 +12,11 @@ import { upload } from "@testing-library/user-event/dist/upload";
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const [detailsArr, setDetailsArr] = useState([]);
   const [mainImage, setMainImage] = useState("");
   const [image, setImage] = useState({});
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [img_ids, set_img_ids] = useState([]);
+  const [images, set_images] = useState([]);
 
   const {
     userData,
@@ -47,8 +46,17 @@ const ProductDetail = () => {
     });
     const data = await response.json();
     setLoading(false);
-    setDetailsArr(data.product.images.map((e) => e.img_url));
-    set_img_ids(data.product.images.map((e) => e.id));
+
+    set_images(data.product.images);
+
+    console.log("product");
+    console.log(data.product);
+
+    console.log(images);
+
+    console.log("data product images");
+    console.log(data.product.images);
+
     const main_img = data.product.images.filter((e) => e.main === true)[0];
     setMainImage(main_img && main_img.img_url);
     setProduct(data.product);
@@ -72,9 +80,10 @@ const ProductDetail = () => {
       body: formdata,
     });
     const data = await response.json();
-    setImage(data.image.img_url);
-    setDetailsArr([...detailsArr, data.image.img_url]);
-    setMainImage(data.image.img_url);
+
+    console.log(data.image);
+    set_images([...images, data.image]);
+
     img.style.display = "block";
     setUploading(false);
     console.log(data);
@@ -82,7 +91,7 @@ const ProductDetail = () => {
 
   const removeimg = async (element, img_id) => {
     console.log("remove");
-    setDetailsArr(detailsArr.filter((e) => e !== element));
+    set_images(images.filter((e) => e !== element));
     const response = await fetch(
       server + "/product/" + id + "/detach_image/" + img_id,
       {
@@ -98,8 +107,8 @@ const ProductDetail = () => {
   };
 
   const setMainPhoto = async (p) => {
-    const img_id = img_ids[detailsArr.indexOf(p)];
-    setMainImage(p);
+    const img_id = p.id;
+    setMainImage(p.img_url);
     const link = server + "product/" + id + "/main_image/" + img_id;
     const res = await fetch(link, {
       method: "PUT",
@@ -128,13 +137,13 @@ const ProductDetail = () => {
       />
       <div className="product_line">
         <div className="line_left">
-          {detailsArr.map((x) => (
+          {images.map((x) => (
             <div className="left_img">
               {userData.permission === "admin" && logged_in && (
                 <MdRemoveCircle
                   size={20}
                   id="rm_circle"
-                  onClick={() => removeimg(x, img_ids[detailsArr.indexOf(x)])}
+                  onClick={() => removeimg(x, x.id)}
                 />
               )}
               {userData.permission === "admin" && logged_in && (
@@ -146,9 +155,9 @@ const ProductDetail = () => {
               )}
               <img
                 style={{ height: "100px", width: "100px" }}
-                onClick={() => setMainImage(x)}
+                onClick={() => setMainImage(x.img_url)}
                 class="detail"
-                src={x}
+                src={x.img_url}
               />
             </div>
           ))}
@@ -203,7 +212,7 @@ const ProductDetail = () => {
           </div>
           <button
             style={{ width: "360px" }}
-            onClick={() => addToBasket(id, product, 1)}
+            onClick={() => addToBasket(id, product)}
           >
             {lang == "ka" ? "კალათაში დამატება" : "ADD TO CART"}
           </button>

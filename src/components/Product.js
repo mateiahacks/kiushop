@@ -104,8 +104,7 @@ const Product = ({
           <div
             className="add-cart"
             onClick={() => {
-              getBasket();
-              addToBasket(id, self, 1);
+              addToBasket(id, self);
               console.log("added");
             }}
           >

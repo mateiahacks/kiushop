@@ -88,8 +88,8 @@ const App = () => {
     set_basket(data.basket);
   };
 
-  const addToBasket = async (prod_id, product, quantity) => {
-    const link = server + "basket";
+  const addToBasket = async (prod_id, product) => {
+    const link = server + "basket/add";
     console.log(basket.products);
     set_basket({
       title: basket.title,
@@ -97,11 +97,10 @@ const App = () => {
       products: [...basket.products, product],
     });
     const res = await fetch(link, {
-      method: "PUT",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         product_id: prod_id,
-        quantity: quantity,
         basket_title: localStorage.getItem("basket_title"),
       }),
     });
