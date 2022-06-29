@@ -12,6 +12,7 @@ import { upload } from "@testing-library/user-event/dist/upload";
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState("");
   const [image, setImage] = useState({});
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,7 @@ const ProductDetail = () => {
     lang,
     checkUser,
     getBasket,
-    addToBasket,
+    addToBasket2,
   } = useContext(UserContext);
 
   const getProduct = async () => {
@@ -198,7 +199,13 @@ const ProductDetail = () => {
             <label htmlFor="quantity">
               {lang === "ka" ? "რაოდენობა" : "Quantity"}
             </label>
-            <input type="number" id="quantity" min="0" />
+            <input
+              type="number"
+              id="quantity"
+              min="1"
+              defaultValue={1}
+              onChange={(e) => setQuantity(e.target.value)}
+            />
           </div>
           <div className="amount">
             <label htmlFor="currency">
@@ -212,7 +219,7 @@ const ProductDetail = () => {
           </div>
           <button
             style={{ width: "360px" }}
-            onClick={() => addToBasket(id, product)}
+            onClick={() => addToBasket2(id, product, quantity)}
           >
             {lang == "ka" ? "კალათაში დამატება" : "ADD TO CART"}
           </button>

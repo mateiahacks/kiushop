@@ -4,14 +4,12 @@ import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
 import Product from "./Product";
-import getProducts from "./ProductService";
 import { BiPlusCircle } from "react-icons/bi";
 import AddProduct from "./AddProduct";
 import server from "./ServerURL.js";
 
 const ProductsEn = () => {
   const [type, setType] = useState("all");
-  const [products, setProducts] = useState(getProducts);
   const [showAdd, setShowAdd] = useState(false);
   const [data, setData] = useState([]);
   const [basket, setBasket] = useState([]);

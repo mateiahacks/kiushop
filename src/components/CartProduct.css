@@ -15,7 +15,7 @@
 }
 .cart_profile{
     display: flex;
-    width: 500px;
+    
 }
 .amount{
     left: 0;
@@ -41,9 +41,9 @@
     font-size: 21px;
 }
 .total{
-    margin-left: 400px;
     font-size: 20px;
 }
+
 
 .remove {
     border: 1px solid black;

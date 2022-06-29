@@ -16,6 +16,7 @@ const Header = () => {
     changeLang,
     lang,
     basket,
+    cartSize,
   } = useContext(UserContext);
   const name = userData.name;
   const removeDropdown = () => {
@@ -88,9 +89,7 @@ const Header = () => {
             <BsHeart size={30} />
           </Link>
           <a href="/cart/1" className="text-link cart-icon">
-            {basket.products && basket.products.length !== 0 && (
-              <div className="cart-number">{basket.products.length}</div>
-            )}
+            {cartSize !== 0 && <div className="cart-number">{cartSize}</div>}
             <BsCart size={30} />
           </a>
         </div>

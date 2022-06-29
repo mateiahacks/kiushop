@@ -23,6 +23,7 @@ const App = () => {
   const [logged_in, set_logged_in] = useState(false);
   const [LoginLoading, setLoginLoading] = useState(false);
   const [basket, set_basket] = useState({ products: [] });
+  const [cartSize, setCartSize] = useState(0);
   const [userData, setUserData] = useState({
     email: "",
     name: "",
@@ -60,6 +61,7 @@ const App = () => {
     });
     const data = await res.json();
     console.log(data);
+    setCartSize(data.basket.basket_product_cnt);
   };
 
   const createBasket = async () => {
@@ -86,6 +88,7 @@ const App = () => {
     const data = await res.json();
     console.log(data);
     set_basket(data.basket);
+    setCartSize(data.basket.products.length);
   };
 
   const addToBasket = async (prod_id, product) => {
@@ -94,7 +97,9 @@ const App = () => {
     set_basket({
       title: basket.title,
       total_cost: basket.total_cost,
-      products: [...basket.products, product],
+      products: basket.products.includes(product)
+        ? basket.products
+        : [...basket.products, product],
     });
     const res = await fetch(link, {
       method: "POST",
@@ -105,6 +110,8 @@ const App = () => {
       }),
     });
     const data = await res.json();
+    setCartSize(data.basket_product_cnt);
+    console.log(data.basket_product_cnt);
     console.log(data);
   };
 
@@ -127,6 +134,7 @@ const App = () => {
     });
     const data = await res.json();
     console.log(data);
+    setCartSize(data.basket.basket_product_cnt);
   };
 
   const tokenRefresh = async () => {
@@ -263,6 +271,8 @@ const App = () => {
           deleteFromBasket,
           addToBasket,
           addToBasket2,
+          cartSize,
+          setCartSize,
         }}
       >
         <div className="app">
