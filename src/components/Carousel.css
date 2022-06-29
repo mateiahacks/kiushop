@@ -106,11 +106,11 @@
     }
 
     .carousel__image {
-        height: 240px;
+        height: 400px;
     }
 
     .carousel__container {
-        height: 240px;
+        height: 400px;
     }
 
 }

@@ -9,8 +9,8 @@
     margin-top: 300px;
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -140%);
+    top: 0;
+    transform: translate(-50%, -60%);
     z-index: 10;
     width: 400px;
 }

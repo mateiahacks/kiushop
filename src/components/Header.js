@@ -87,12 +87,12 @@ const Header = () => {
           <Link className="text-link" to={"/favourites/1"}>
             <BsHeart size={30} />
           </Link>
-          <Link to="/cart/1" className="text-link cart-icon">
+          <a href="/cart/1" className="text-link cart-icon">
             {basket.products && basket.products.length !== 0 && (
               <div className="cart-number">{basket.products.length}</div>
             )}
             <BsCart size={30} />
-          </Link>
+          </a>
         </div>
         {logged_in ? (
           <div className="header__right__resp">

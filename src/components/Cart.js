@@ -12,7 +12,7 @@ const Cart = () => {
   const { lang, basket, getBasket } = useContext(UserContext);
 
   useEffect(() => {
-    getBasket();
+    localStorage.getItem("basket_title") && getBasket();
   }, []);
 
   return (
@@ -30,7 +30,7 @@ const Cart = () => {
           {basket.products &&
             basket.products.map((x) => (
               <CartProduct
-                img={x.images[0].img_url}
+                img={x.images[0]?.img_url}
                 name={x.title_en}
                 price={x.price}
                 amount={x.quantity}

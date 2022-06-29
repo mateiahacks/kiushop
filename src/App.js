@@ -141,14 +141,15 @@ const App = () => {
       },
     });
     const data = await response.json();
-    if (data.msg === "Token has expired") {
+    if (data.msg === "Signature verification failed") {
       tokenRefresh();
     }
-    if (response.status === 200) {
+    if (response.ok) {
       set_logged_in(true);
       console.log("my logged in " + logged_in);
       setUserData(data.user);
     }
+    console.log("checkuseroiii");
     console.log(data);
   };
 
@@ -225,8 +226,12 @@ const App = () => {
   };
 
   useEffect(() => {
-    localStorage.getItem("access_token") !== undefined && checkUser();
+    localStorage.getItem("access_token") && checkUser();
     localStorage.getItem("basket_title") && getBasket();
+    if (!localStorage.getItem("basket_title")) {
+      createBasket();
+      console.log("craeted");
+    }
   }, []);
 
   return (

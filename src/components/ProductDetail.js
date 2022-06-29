@@ -27,6 +27,7 @@ const ProductDetail = () => {
     lang,
     checkUser,
     getBasket,
+    addToBasket,
   } = useContext(UserContext);
 
   const getProduct = async () => {
@@ -200,7 +201,10 @@ const ProductDetail = () => {
               <option value="GEL">GEL</option>
             </select>
           </div>
-          <button style={{ width: "360px" }}>
+          <button
+            style={{ width: "360px" }}
+            onClick={() => addToBasket(id, product, 1)}
+          >
             {lang == "ka" ? "კალათაში დამატება" : "ADD TO CART"}
           </button>
           <div className="terms_conditions">

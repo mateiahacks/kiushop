@@ -104,12 +104,8 @@ const Product = ({
           <div
             className="add-cart"
             onClick={() => {
-              if (localStorage.getItem("basket_title")) {
-                addToBasket(id, self, 1);
-              } else {
-                createBasket();
-                addToBasket(id, self, 1);
-              }
+              addToBasket(id, self, 1);
+              console.log("added");
             }}
           >
             {lang == "en" ? "ADD TO CART" : "კალათაში დამატება"}
