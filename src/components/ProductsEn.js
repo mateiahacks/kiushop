@@ -60,7 +60,9 @@ const ProductsEn = () => {
 
   return (
     <div className="products">
-      {showAdd && <AddProduct toggleShowAdd={toggleShowAdd} />}
+      {showAdd && (
+        <AddProduct method="POST" prod_id=" " toggleShowAdd={toggleShowAdd} />
+      )}
       <div className="prod__types">
         <div
           onClick={() => setType("new")}

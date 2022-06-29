@@ -15,22 +15,13 @@
 }
 .cart_profile{
     display: flex;
-
-    width: 500px;
-    
-}
-.amount_cont{
-    width: 500px;
-    display: flex;
-    justify-content: center;
-
 }
 .amount{
-    left: 0;
     width: 100px;
     height: 50px;
     font-size: 25px;
     padding-left: 20px;
+    margin-right: 200px;
 }
 .profileInfo{
     display: flex;
@@ -38,7 +29,6 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding-left: 30px;
-    
 }
 .profileInfo h2{
     font-family: 'Italiana', serif; 
@@ -51,8 +41,6 @@
 }
 .total{
     font-size: 20px;
-    width: 500px;
-    text-align: center;
 }
 
 

@@ -53,8 +53,8 @@ font-size: 45px;
 justify-content: space-between;
 }
 .cart-left  ul li{
-width: 500px;
-text-align: center;
+    max-width: 500px;
+    text-align: center;
 }
 .cart-right{
     max-width: 400px;

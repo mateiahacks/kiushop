@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import server from "./ServerURL.js";
 import { MdRemoveCircle, MdPhoto } from "react-icons/md";
 import { upload } from "@testing-library/user-event/dist/upload";
+import AddProduct from "./AddProduct";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -18,6 +19,7 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [images, set_images] = useState([]);
+  const [editing, setEditing] = useState(false);
 
   const {
     userData,
@@ -28,6 +30,7 @@ const ProductDetail = () => {
     checkUser,
     getBasket,
     addToBasket2,
+    setCartSize,
   } = useContext(UserContext);
 
   const getProduct = async () => {
@@ -136,6 +139,23 @@ const ProductDetail = () => {
         logged_in={logged_in}
         toggleLogged={toggleLogged}
       />
+      {editing && (
+        <AddProduct
+          toggleShowAdd={() => setEditing(false)}
+          method="PUT"
+          info={{
+            title_en: product.title_en,
+            title_ge: product.title_ge,
+            price: product.price,
+            amount: product.amount,
+            discount: product.discount,
+            description_en: product.description_en,
+            description_ge: product.description_ge,
+            prod_id: id,
+            setProduct: setProduct,
+          }}
+        />
+      )}
       <div className="product_line">
         <div className="line_left">
           {images.map((x) => (
@@ -191,7 +211,13 @@ const ProductDetail = () => {
         </div>
         <div className="line_right">
           <div className="discount_place">-{product.discount}%</div>
-          <h1 style={{ fontSize: lang === "ka" ? "42px" : "56px" }}>
+          <h1
+            style={{
+              fontSize: lang === "ka" ? "42px" : "56px",
+              lineHeight: "40px",
+              marginBottom: "20px",
+            }}
+          >
             {lang === "ka" ? product.title_ge : product.title_en}
           </h1>
           <p>${product.price}</p>
@@ -237,6 +263,9 @@ const ProductDetail = () => {
             </div>
             <div className="back"></div>
           </div>
+          <button id="edit" onClick={() => setEditing(!editing)}>
+            {lang === "ka" ? "პროდუქტის რედაქტირება" : "Edit Product"}
+          </button>
         </div>
       </div>
 
