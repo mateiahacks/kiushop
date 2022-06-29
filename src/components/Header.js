@@ -16,8 +16,17 @@ const Header = () => {
     const [type, setType] = useState("all");
     const [curency, setCurency]=useState("USD");
     const [kursi, setKursi]=useState(2.92);
-    const {userData, logout, logged_in, set_logged_in, changeLang, lang} = useContext(UserContext);
-    const name = userData.name;
+    const {
+        userData,
+        logout,
+        logged_in,
+        set_logged_in,
+        changeLang,
+        lang,
+        basket,
+        cartSize,
+      } = useContext(UserContext);
+       const name = userData.name;
     const removeDropdown = () => {
         const temp = document.querySelector('.header__right__resp');
         window.addEventListener('resize', () => {
@@ -197,7 +206,10 @@ const changeCurr=function(e){
                         <p id='login'>{lang==="ka" ? "შესვლა":"Login"}</p>
                     </div></Link>}
                     <Link className='text-link' to={'/favourites/1'}><BsHeart size={30}/></Link>
-                    <Link to='/cart/1' className='text-link'><BsCart size={30}/></Link>
+                    <a href="/cart/1" className="text-link cart-icon">
+            {cartSize !== 0 && <div className="cart-number">{cartSize}</div>}
+            <BsCart size={30} />
+          </a>
                 </div>
                 {logged_in ?
                 <div className="header__right__resp">

@@ -10,10 +10,12 @@
     padding: 0px 30px;
     align-items: center;
     padding: 30px;
+    width: 100%;
     justify-content: space-between;
 }
 .cart_profile{
     display: flex;
+
     width: 500px;
     
 }
@@ -21,6 +23,7 @@
     width: 500px;
     display: flex;
     justify-content: center;
+
 }
 .amount{
     left: 0;
@@ -50,6 +53,14 @@
     font-size: 20px;
     width: 500px;
     text-align: center;
+}
+
+
+.remove {
+    border: 1px solid black;
+    padding: 4px 8px;
+    margin-top: 20px;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 1200px) {

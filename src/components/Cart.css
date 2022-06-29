@@ -17,7 +17,7 @@
 }
 .front{
     background-color: #107500;
-    width: 260px;
+    max-width: 260px;
     height: 40px;
     display: flex;
     justify-content: center;
@@ -28,7 +28,7 @@
     cursor: pointer;
 }
 .back{
-    width: 260px;
+    max-width: 260px;
     height: 40px;
     border:1px solid black;
     z-index: -1;
@@ -57,7 +57,7 @@ width: 500px;
 text-align: center;
 }
 .cart-right{
-    width: 400px;
+    max-width: 400px;
     height: 800px;
     margin: 30px;
     border:1px solid rgba(0, 0, 0, 0.543);
