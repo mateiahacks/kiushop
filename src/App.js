@@ -18,6 +18,7 @@ import MessengerCustomerChat from "react-messenger-customer-chat/lib/MessengerCu
 import Favourites from "./components/Favourites.js";
 import Cart from "./components/Cart.js";
 import { UserContext } from "./UserContext.js";
+import SuccessOrder from "./components/SuccessOrder.js";
 
 const App = () => {
   const [logged_in, set_logged_in] = useState(false);
@@ -162,7 +163,7 @@ const App = () => {
       },
     });
     const data = await response.json();
-    if (data.msg === "Signature verification failed") {
+    if (data.msg === "Token has expired") {
       tokenRefresh();
     }
     if (response.ok) {
@@ -297,7 +298,7 @@ const App = () => {
               path={"/kiushop/verify/:email/:token"}
               element={<Verify />}
             />
-            <Route path="/addproduct" element />
+            <Route path="/order_success" element={<SuccessOrder />} />
           </Routes>
         </div>
       </UserContext.Provider>

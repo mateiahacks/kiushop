@@ -89,7 +89,6 @@ const Header = () => {
     getData();
   }, []);
 
-  console.log(data);
   const check = function () {
     setData2([]);
     const prods = document.querySelector(".prods");
