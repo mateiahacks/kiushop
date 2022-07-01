@@ -8,14 +8,17 @@ import logo from "../images/logoBlack.png";
 import heart from "../images/heart.png";
 import { UserContext } from "../UserContext";
 // import SearchElement from './SearchElement.js';
+
 import server from "./ServerURL.js";
 const Header = () => {
   const [data, setData] = useState([]);
+  const [colorParam, setColorParam] = useState();
   const [data2, setData2] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [type, setType] = useState("all");
   const [curency, setCurency] = useState("USD");
   const [kursi, setKursi] = useState(2.92);
+  const [sortby, setSortBy] = useState("");
   const {
     userData,
     logout,
@@ -35,6 +38,10 @@ const Header = () => {
       }
     });
   };
+
+  useEffect(() => {
+    removeDropdown();
+  }, []);
 
   useEffect(() => {
     removeDropdown();
@@ -89,6 +96,24 @@ const Header = () => {
     getData();
   }, []);
 
+  console.log(data);
+  const selectColor = function (collr) {
+    setColorParam(collr);
+    var colorList = document.querySelectorAll(".colr");
+    for (var i of colorList) {
+      if (i.id == collr && i.style.width != "50px") {
+        i.style.width = "50px";
+        i.style.height = "50px";
+      } else if (i.id == collr && i.style.width == "50px") {
+        i.style.width = "40px";
+        i.style.height = "40px";
+        setColorParam();
+      } else {
+        i.style.width = "40px";
+        i.style.height = "40px";
+      }
+    }
+  };
   const check = function () {
     setData2([]);
     const prods = document.querySelector(".prods");
@@ -127,11 +152,88 @@ const Header = () => {
         prods.innerHTML += ` <a href="/product/${i.id}" class="searchLink">
         <div class="SearchElement" id="searchel">
 
-        <img id="searchImg" src=${
+                <img id="searchImg"  class="searchImg" src=${
+                  i.images.filter((e) => e.main)[0]
+                    ? i.images.filter((e) => e.main)[0].img_url
+                    : ""
+                } alt="" />
+                <div class="info">
+                    <p class="searchName">${i.title_en}</p>
+                            <div class="prices">
+                                <div class="pricess">
+                                    <p class=${
+                                      i.discount != 0 ? "" : "nodiscount"
+                                    }> ${curency == "USD" ? "$" : "₾"}${
+          curency == "USD" ? i.price : Math.floor(i.price * kursi)
+        }</p>
+                                    <h3>$${Math.floor(
+                                      (i.price * (100 - i.discount)) / 100
+                                    )}</h3>
+                                    <div class=${
+                                      i.discount != 0
+                                        ? "discount"
+                                        : "nodiscount"
+                                    }>-${i.discount}%</div>
+                                </div>
+                                
+                            </div>
+                
+                    <div class="addto">
+                        <button>GO TO DETAILS</button>
+                        <img src="${heart}"/>
+                    </div>
+                </div>
+        </div>     
+   </a>`;
+      }
+    }
+  };
+
+  const filter = function () {
+    var priceFrom = document.querySelector(".from").value;
+    var priceTo = document.querySelector(".to").value;
+    var size = document.querySelector(".size").value;
+    var discount = document.querySelector(".dicountparam").checked;
+    console.log(priceFrom, priceTo, size, discount, colorParam);
+    setData2([]);
+    var hasDiscount = discount ? 1 : 0;
+    const prods = document.querySelector(".prods");
+    prods.innerHTML = "";
+    const searchbar = document.querySelector(".searchbar").value;
+    const newData =
+      sortby == "Sort by price"
+        ? data.sort(function (a, b) {
+            return a.price - b.price;
+          })
+        : data.sort(function (a, b) {
+            return b.discount - a.discount;
+          });
+
+    for (var i of newData) {
+      var boo = false;
+      var hasDiscount = i.discount > 0 ? true : false;
+      if (
+        (priceFrom == priceTo
+          ? true
+          : priceFrom < i.price && i.price < priceTo) &&
+        (size == "default" ? true : i.size == size) &&
+        (colorParam == undefined ? true : i.color == colorParam) &&
+        (discount == false ? true : hasDiscount == discount)
+      ) {
+        boo = true;
+      }
+
+      if (boo) {
+        console.log(i);
+        prods.innerHTML += ` <a href="/product/${i.id}" class="searchLink">
+        <div class="SearchElement" id="searchel">
+
+        <img id="searchImg"  class="searchImg" src=${
           i.images.filter((e) => e.main)[0]
             ? i.images.filter((e) => e.main)[0].img_url
             : ""
         } alt="" />
+
             <div class="info">
                 <p class="searchName">${i.title_en}</p>
                     <div class="prices">
@@ -150,7 +252,7 @@ const Header = () => {
                     </div>
           
             <div class="addto">
-            <button>ADD TO CART</button>
+            <button>GO TO DETAILS</button>
             <img src="${heart}"/></div>
             </div>
         </div>     
@@ -192,7 +294,113 @@ const Header = () => {
             />
             <FiSearch id="search__icon" size={30} />
             <div className="searchModal">
-              <div className="parameters"></div>
+              <div className="parameters">
+                <div className="parrameters_upper">
+                  <div className="parameter">
+                    <label>Price</label>
+                    <div className="range">
+                      <p>from</p>
+                      <select class="from dropdown">
+                        <option value="0">0</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="300">300</option>
+                      </select>
+                      <p style={{ marginLeft: "3px" }}>to</p>
+                      <select class="to dropdown">
+                        <option value="0">0</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="300">300</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="parameter">
+                    <label htmlFor="dicountparam">Discount</label>
+                    <input
+                      type="checkbox"
+                      id="dicountparam"
+                      className="dicountparam"
+                    />
+                  </div>
+                  <div className="parameter">
+                    <label>Size</label>
+                    <select className="size dropdown">
+                      <option value="default">default</option>
+                      <option value="small">small</option>
+                      <option value="medium">medium</option>
+                      <option value="large">large</option>
+                    </select>
+                  </div>
+                  <div className="parameter">
+                    <label>Color</label>
+                    <div className="colors">
+                      <div
+                        className="colr"
+                        id="green1"
+                        onClick={() => {
+                          selectColor("green1");
+                        }}
+                        style={{ backgroundColor: "#257A17" }}
+                      ></div>
+                      <div
+                        className="colr"
+                        id="green2"
+                        onClick={() => {
+                          selectColor("green2");
+                        }}
+                        style={{ backgroundColor: "#2FA810" }}
+                      ></div>
+                      <div
+                        className="colr"
+                        id="green3"
+                        onClick={() => {
+                          selectColor("green3");
+                        }}
+                        style={{ backgroundColor: "#B2DE01" }}
+                      ></div>
+                      <div
+                        className="colr"
+                        id="gray"
+                        onClick={() => {
+                          selectColor("gray");
+                        }}
+                        style={{ backgroundColor: "#D9D9D9" }}
+                      ></div>
+                      <div
+                        className="colr"
+                        id="black"
+                        onClick={() => {
+                          selectColor("black");
+                        }}
+                        style={{ backgroundColor: "#000000" }}
+                      ></div>
+                    </div>
+                  </div>
+                  <select
+                    className="dropdown"
+                    onChange={(e) => {
+                      setSortBy(e.target.value);
+                    }}
+                  >
+                    <option value="Sort by price">Sort by price</option>
+                    <option value="Sort by discount">Sort by discount</option>
+                  </select>
+                </div>
+                <div className="parrameters_lower">
+                  <button
+                    className="searchByparams"
+                    onClick={() => {
+                      filter();
+                    }}
+                  >
+                    SEARCH
+                  </button>
+                </div>
+              </div>
+
               <div className="prods"></div>
             </div>
           </div>
@@ -221,7 +429,9 @@ const Header = () => {
             {cartSize !== 0 && <div className="cart-number">{cartSize}</div>}
             <BsCart size={30} />
           </a>
-          <Link to='/orders' className="text-link"><p>Orders</p></Link>
+          <Link to="orders" className="text-link">
+            orders
+          </Link>
         </div>
         {logged_in ? (
           <div className="header__right__resp">

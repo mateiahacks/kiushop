@@ -13,11 +13,12 @@ nav {
 
 }
 
-.header{
+.header {
     position: fixed;
     z-index: 6;
     background-color: #ffffff88;
 }
+
 #logout {
     margin-right: 20px;
     cursor: pointer;
@@ -33,22 +34,23 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 0px 10px;
-   
+
     max-width: 1200px;
     flex: 1;
 }
 
-.header__left > h1 {
+.header__left>h1 {
     padding: 10px;
-    
+
     border: 1px solid black;
     cursor: pointer;
     font-size: 34px;
 }
 
-.header__left > *, .header__right > * {
+.header__left>*,
+.header__right>* {
     margin-right: 20px;
-} 
+}
 
 .lang {
     padding: 5px 8px;
@@ -57,7 +59,8 @@ nav {
     cursor: pointer;
 }
 
-.header__left, .header__right {
+.header__left,
+.header__right {
     display: flex;
     align-items: center;
     height: 100px;
@@ -83,16 +86,17 @@ nav {
     text-align: center;
 }
 
-.profile:hover > p {
+.profile:hover>p {
     text-decoration: underline;
 }
 
 .header__right {
     align-items: baseline;
     padding-top: 20px;
-   box-sizing: border-box;
+    box-sizing: border-box;
 }
-.header__right > * {
+
+.header__right>* {
     margin-left: 10px;
     cursor: pointer;
 }
@@ -125,7 +129,7 @@ nav {
     animation: dropAnimation 0.3s ease-out;
 }
 
-.header__right__resp > * {
+.header__right__resp>* {
     margin-bottom: 20px;
     cursor: pointer;
 }
@@ -133,85 +137,184 @@ nav {
 #resp_logout:hover {
     text-decoration: underline;
 }
-.searchbar__container:hover .searchModal{
-display: flex;
-}
-.searchbar__container{
-   height: 100%;
-}
-.searchModal:hover{
+
+.searchbar__container:hover .searchModal {
     display: flex;
 }
-.searchModal{
+
+.searchbar__container {
+    height: 100%;
+}
+
+.searchModal:hover {
+    display: flex;
+}
+
+.searchModal {
     width: 80vw;
-    height: 700px;
+    height: 800px;
     background-color: rgba(255, 255, 255, 0.911);
     box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.735);
     left: calc(20vw/2);
     position: absolute;
     display: none;
-    top:100px;
-    animation: dropdown 1s ;
+    top: 100px;
+    animation: dropdown 1s;
     overflow-y: hidden;
 }
+
 @keyframes dropdown {
-    0%{
+    0% {
         height: 0px;
-        
+
     }
-    100%{
-        height: 700px;
+
+    100% {
+        height: 800px;
     }
 }
-.parameters{
-    height: 600px;
-    width: 300px;
+
+@keyframes dropdown2 {
+    0% {
+        height: 0;
+        overflow-y: hidden;
+    }
+
+    100% {
+        height: 100%;
+        overflow-y: hidden;
+    }
+}
+
+/* parameters styles */
+.parameters {
+    height: 700px;
+    width: 500px;
     border: 1px solid black;
     background-color: white;
     margin: 20px;
     display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: space-between;
 }
 
-.prods{
+.range {
+    display: flex;
+    align-items: center !important;
+
+
+}
+
+.parameter {
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#dicountparam {
+    transform: scale(1.5);
+    margin-left: 30px;
+}
+
+.parameter label {
+    font-size: 25px;
+}
+
+.parameter select option {
+    font-size: 20px;
+}
+
+.parameter select,
+.dropdown {
+    padding: 10px;
+    border-radius: 25px;
+    width: 100%;
+    font-size: 20px;
+    margin: 0;
+}
+
+.parameter p {
+    margin-right: 3px;
+    color: rgba(0, 0, 0, 0.626);
+}
+
+.colors {
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.colr {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.parrameters_lower button {
+    width: 100%;
+    background-color: #4BEB00;
+    color: white;
+    height: 60px;
+    font-size: 25px;
+    border-radius: 25px;
+    border: none
+}
+
+.searchByparams:hover {
+
+    background: linear-gradient(#4BEB00, #339b03);
+}
+
+/* end of parameters style */
+.prods {
     overflow-y: auto;
     width: 100%;
-    height: 600px;
+    height: 720px;
+    /* margin-top: 3px; */
 }
-#searchImg{
-    width:  200px;
+
+.searchImg {
+    width: 200px;
     height: 200px;
     object-fit: cover;
-   
+
 }
-.SearchElement{
+
+.SearchElement {
     display: flex;
+    /* justify-content: space-between; */
 }
-#searchel{
+
+#searchel {
     display: flex;
     border: 1px solid black;
-   padding: 10px;
-   margin-top: 20px;
+    padding: 10px;
+    margin-top: 20px;
     height: 250px;
     align-items: center;
     background-color: white;
-width: 80%;
+    width: 80%;
 
 }
-.searchName{
 
-font-size: 28px;
-font-weight: 400;
-line-height: 42px;
-letter-spacing: 0em;
-text-align: left;
-color: black;
+.searchName {
+
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 42px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: black;
 
 }
-.searchLink{
+
+.searchLink {
     text-decoration: none;
     color: black;
 }
-.prices{
+
+.prices {
     display: flex;
     align-items: center;
     padding-top: 20px;
@@ -219,13 +322,16 @@ color: black;
     width: 100%;
     justify-content: space-between;
 }
-.prices p{
+
+.prices p {
     text-decoration: line-through !important;
     margin-right: 10px;
 }
-.prices h3{
-font-weight: 500;
+
+.prices h3 {
+    font-weight: 500;
 }
+
 .cart-icon {
     position: relative;
 }
@@ -241,25 +347,31 @@ font-weight: 500;
     border-radius: 50%;
     right: -5px;
 }
-.info p{
+
+.info p {
     text-decoration: none;
     color: rgba(0, 0, 0, 0.833);
 }
-.info{
-  padding-left: 20px;
-  height: 90%;
-width: 90%;
+
+.info {
+    padding-left: 20px;
+    height: 90%;
+    width: 500px;
+
+
 }
-.pricess{
+
+.pricess {
     display: flex !important;
     align-items: center;
 }
-.discount{
+
+.discount {
     text-align: center;
     background-color: #FAFF01;
     padding: 10px;
     font-size: 25px;
-    position:relative;
+    position: relative;
     height: 60px;
     width: 70px;
     display: flex;
@@ -269,30 +381,35 @@ width: 90%;
     top: 0;
     margin-left: 15px;
 }
-.nodiscount{
+
+.nodiscount {
     display: none;
 }
-.currencys{
+
+.currencys {
     display: flex;
     width: 110px;
     justify-content: space-between;
     height: 60px;
     align-items: center;
-margin-right: 100px;
-position: absolute;
-left: 0;
+    margin-right: 100px;
+    position: absolute;
+    left: 0;
 }
-.addto{
+
+.addto {
     display: flex;
     align-items: center;
     height: 60px;
     margin-top: 20px;
 }
-.addto img{
+
+.addto img {
     margin-top: 15px;
     margin-left: 10px;
 }
-.info button{
+
+.info button {
     background-color: black;
     color: white;
     border: none;
@@ -300,17 +417,19 @@ left: 0;
     margin-top: 20px;
     padding: 10px 20px;
 }
-.qurrency{
+
+.qurrency {
     width: 50px;
     height: 50px;
     border-radius: 50px;
-    border:1px solid black;
+    border: 1px solid black;
     font-size: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.usd{
+
+.usd {
     color: white;
     background-color: black;
 }
@@ -318,7 +437,9 @@ left: 0;
 @keyframes dropAnimation {
     from {
         right: -150px;
-    } to {
+    }
+
+    to {
         right: 0;
     }
 }
@@ -350,6 +471,3 @@ left: 0;
     }
 
 }
-
-
-

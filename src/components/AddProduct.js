@@ -37,7 +37,7 @@ const AddProduct = ({ toggleShowAdd, method, info }) => {
       description_ge: desc_ge,
       featured: featured,
     };
-    info.setProduct(product);
+    info?.setProduct(product);
     const response = await fetch(link, {
       method: method,
       headers: {
