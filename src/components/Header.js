@@ -429,7 +429,7 @@ const Header = () => {
             {cartSize !== 0 && <div className="cart-number">{cartSize}</div>}
             <BsCart size={30} />
           </a>
-          <Link to="orders" className="text-link">
+          <Link to="/orders" className="text-link">
             orders
           </Link>
         </div>

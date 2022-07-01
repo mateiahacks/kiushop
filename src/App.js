@@ -300,7 +300,7 @@ const App = () => {
               element={<Verify />}
             />
             <Route path="/order_success" element={<SuccessOrder />} />
-            <Route path="/orders" element={<Orders />}/>
+            <Route path="/orders" exact element={<Orders />} />
           </Routes>
         </div>
       </UserContext.Provider>
