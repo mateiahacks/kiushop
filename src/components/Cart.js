@@ -113,7 +113,7 @@ const Cart = () => {
             basket.products.map((x) => (
               <CartProduct
                 key={x.id}
-                img={x.images?.filter((e) => e.main)[0].img_url}
+                img={x.images?.filter((e) => e.main)[0]?.img_url}
                 name={x.title_en}
                 price={x.price}
                 amount={x.quantity}
