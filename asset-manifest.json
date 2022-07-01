@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/kiushop/static/css/main.4383b5e1.css",
-    "main.js": "/kiushop/static/js/main.43320f8f.js",
+    "main.js": "/kiushop/static/js/main.22098d45.js",
     "static/js/787.8fca5046.chunk.js": "/kiushop/static/js/787.8fca5046.chunk.js",
     "static/media/carousel1.png": "/kiushop/static/media/carousel1.bbee9a648e4238b5c241.png",
     "static/media/carousel2.png": "/kiushop/static/media/carousel2.0959d706c187a9e9083f.png",
@@ -10,11 +10,11 @@
     "static/media/vector404.png": "/kiushop/static/media/vector404.e00355f49cf06c736bae.png",
     "index.html": "/kiushop/index.html",
     "main.4383b5e1.css.map": "/kiushop/static/css/main.4383b5e1.css.map",
-    "main.43320f8f.js.map": "/kiushop/static/js/main.43320f8f.js.map",
+    "main.22098d45.js.map": "/kiushop/static/js/main.22098d45.js.map",
     "787.8fca5046.chunk.js.map": "/kiushop/static/js/787.8fca5046.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4383b5e1.css",
-    "static/js/main.43320f8f.js"
+    "static/js/main.22098d45.js"
   ]
 }
