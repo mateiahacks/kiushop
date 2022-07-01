@@ -19,6 +19,7 @@ import Favourites from "./components/Favourites.js";
 import Cart from "./components/Cart.js";
 import { UserContext } from "./UserContext.js";
 import SuccessOrder from "./components/SuccessOrder.js";
+import Orders from "./Orders.js";
 
 const App = () => {
   const [logged_in, set_logged_in] = useState(false);
@@ -299,6 +300,7 @@ const App = () => {
               element={<Verify />}
             />
             <Route path="/order_success" element={<SuccessOrder />} />
+            <Route path="/orders" element={<Orders />}/>
           </Routes>
         </div>
       </UserContext.Provider>

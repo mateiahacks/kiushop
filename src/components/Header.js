@@ -221,6 +221,7 @@ const Header = () => {
             {cartSize !== 0 && <div className="cart-number">{cartSize}</div>}
             <BsCart size={30} />
           </a>
+          <Link to='/orders' className="text-link"><p>Orders</p></Link>
         </div>
         {logged_in ? (
           <div className="header__right__resp">
