@@ -263,9 +263,11 @@ const ProductDetail = () => {
             </div>
             <div className="back"></div>
           </div>
-          <button id="edit" onClick={() => setEditing(!editing)}>
-            {lang === "ka" ? "პროდუქტის რედაქტირება" : "Edit Product"}
-          </button>
+          {userData?.permission === "admin" && logged_in && (
+            <button id="edit" onClick={() => setEditing(!editing)}>
+              {lang === "ka" ? "პროდუქტის რედაქტირება" : "Edit Product"}
+            </button>
+          )}
         </div>
       </div>
 

@@ -90,7 +90,7 @@ const App = () => {
     const data = await res.json();
     console.log(data);
     set_basket(data.basket);
-    setCartSize(data.basket.products.length);
+    //setCartSize(data.basket?.products.length);
   };
 
   const addToBasket = async (prod_id, product) => {
